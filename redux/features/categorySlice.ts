@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-type CounterState = {
+type CategoryState = {
   categories: []
 };
 
 const initialState = {
     categories: [],
-} as CounterState
+} as CategoryState
 
 export const category = createSlice({
   name: "category",
