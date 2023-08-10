@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { Providers } from "@/redux/provider"
+import Header from './components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
-      <body className={inter.className}>
+    <html lang="fr" className='h-full'>
+      <body className={inter.className + ' h-full'}>
         <Providers>
           {children}  
         </Providers>

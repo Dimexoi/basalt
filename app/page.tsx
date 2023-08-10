@@ -3,6 +3,7 @@ import { getCategories } from '@/redux/features/categorySlice'
 import { useAppDispatch } from '@/redux/hooks'
 import Image from 'next/image'
 import { useEffect } from 'react'
+import Welcome from './components/Welcome'
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -12,10 +13,8 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="">
-      <div>
-        test
-      </div>
+    <main className="h-full">
+      <Welcome/>
     </main>
   )
 }
