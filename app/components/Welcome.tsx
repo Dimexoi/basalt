@@ -1,3 +1,4 @@
+import Carousel from "./Carousel";
 import Header from "./Header";
 
 export default function Welcome() {
@@ -23,7 +24,7 @@ export default function Welcome() {
             </div>
 
             <div>
-              caroussel
+              <Carousel/>
             </div>
             
           </div>

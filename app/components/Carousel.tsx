@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+'use client'
+
+import React, { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
-import { nextSlide, prevSlide, setCarouselCurentIndex } from '@/redux/features/displaySlice'
+import { getCarouselProjects, nextSlide, prevSlide, setCarouselCurentIndex } from '@/redux/features/displaySlice'
 
 const Carousel: React.FC = () => {
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCarouselProjects())
+  }, [dispatch])
+
   const projects = useAppSelector((state) => state.display.carousel.projects);
   const currentIndex = useAppSelector((state) => state.display.carousel.currentIndex);
 
@@ -19,14 +26,14 @@ const Carousel: React.FC = () => {
 
   return (
     <div className="relative">
-      {projects.map((image, index) => (
+      {projects.map((project, index) => (
         <div
           key={index}
           className={`absolute transition-opacity duration-500 ${
             index === currentIndex ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <img src={image} alt={`Slide ${index}`} className="w-full h-auto" />
+          <img src={'/images/projects/'+project.name+'/'+project.coverImage} alt={`Slide ${index}`} className="w-full h-auto" />
         </div>
       ))}
 

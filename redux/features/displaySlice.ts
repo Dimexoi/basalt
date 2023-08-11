@@ -1,8 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+type Project = {
+  name: string
+  description: string
+  slug: string
+  coverImage: string
+  categoryId: number
+}
+
 type DisplayState = {
   carousel: {
-    projects: [],
+    projects: Project[],
     currentIndex: number
   }
 };
@@ -29,6 +37,10 @@ export const display = createSlice({
     }
   },
   extraReducers: (builder) => {
+    builder
+      .addCase(getCarouselProjects.fulfilled, (state, action) => {
+        state.carousel.projects = action.payload
+      })
       
   }
 });
@@ -39,5 +51,12 @@ export const {
   prevSlide
 } = display.actions
 
+export const getCarouselProjects = createAsyncThunk(
+  'display/getCarouselProjects',
+  async (_, thunkAPI) => {
+    const carouselProjects = await fetch('/api/project/carousel')
+    return carouselProjects.json()
+  }
+)
 
 export default display.reducer;
