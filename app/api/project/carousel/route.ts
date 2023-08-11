@@ -10,8 +10,6 @@ export async function GET() {
         project: true
       }
     })
-
-    console.log(results);
     
     return NextResponse.json(results)
 

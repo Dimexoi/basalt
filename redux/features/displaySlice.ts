@@ -8,6 +8,10 @@ type Project = {
   categoryId: number
 }
 
+type CarouselProject = {
+  project: Project
+}
+
 type DisplayState = {
   carousel: {
     projects: Project[],
@@ -39,7 +43,9 @@ export const display = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCarouselProjects.fulfilled, (state, action) => {
-        state.carousel.projects = action.payload
+        action.payload.forEach((carouselProject: CarouselProject) => {
+          state.carousel.projects.push(carouselProject.project)
+        })
       })
       
   }

@@ -3,6 +3,9 @@
 import React, { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { getCarouselProjects, nextSlide, prevSlide, setCarouselCurentIndex } from '@/redux/features/displaySlice'
+import Image from 'next/image';
+
+import arrow from '@/public/images/icons/rightarrow.svg'
 
 const Carousel: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -11,38 +14,63 @@ const Carousel: React.FC = () => {
     dispatch(getCarouselProjects())
   }, [dispatch])
 
-  const projects = useAppSelector((state) => state.display.carousel.projects);
-  const currentIndex = useAppSelector((state) => state.display.carousel.currentIndex);
+  const projects = useAppSelector((state) => state.display.carousel.projects)
+  const currentIndex = useAppSelector((state) => state.display.carousel.currentIndex)
 
   const handlePrevSlide = () => {
-    dispatch(prevSlide());
-    dispatch(setCarouselCurentIndex((prevIndex: number) => (prevIndex === 0 ? projects.length - 1 : prevIndex - 1)))
+    dispatch(prevSlide())
   };
 
   const handleNextSlide = () => {
-    dispatch(nextSlide());
-    dispatch(setCarouselCurentIndex((prevIndex: number) => (prevIndex === projects.length - 1 ? 0 : prevIndex + 1)));
+    dispatch(nextSlide())
   };
 
   return (
-    <div className="relative">
+    <div className="relative h-full" >
+        
       {projects.map((project, index) => (
+        
         <div
+        
           key={index}
-          className={`absolute transition-opacity duration-500 ${
+          className={`absolute transition-opacity duration-500 h-full ${
             index === currentIndex ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <img src={'/images/projects/'+project.name+'/'+project.coverImage} alt={`Slide ${index}`} className="w-full h-auto" />
+          <div className='h-full overflow-hidden flex items-center'>
+
+            <Image src={'/images/projects/'+project.slug+'/'+project.coverImage} alt={`Slide ${index}`} width={0} height={0} sizes='100vw' className='w-auto h-full' />
+          </div>
+
+
+          
         </div>
       ))}
+      <div onClick={handlePrevSlide} className="flex items-center justify-start absolute left-0 h-full w-[15%] top-0 transition duration-1000 hover:cursor-pointer hover:bg-gradient-to-r hover:from-black/80 hover:to-black/0 ">
 
-      <button onClick={handlePrevSlide} className="absolute left-0 top-1/2 transform -translate-y-1/2">
-        Previous
-      </button>
-      <button onClick={handleNextSlide} className="absolute right-0 top-1/2 transform -translate-y-1/2">
-        Next
-      </button>
+        <Image
+          src={arrow}
+          alt='fleche gauche'
+          width={50}
+          height={50}
+          className='rotate-180'
+        />
+
+      </div>
+
+      <div onClick={handleNextSlide} className="flex items-center justify-end absolute right-0 h-full top-0 w-[15%] transition duration-1000 hover:cursor-pointer hover:bg-gradient-to-l hover:from-black/40 hover:to-black/0">
+            
+        <Image
+          src={arrow}
+          alt='fleche droite'
+          width={50}
+          height={50}
+        />
+
+      </div>
+
+      
+      
     </div>
   );
 };
