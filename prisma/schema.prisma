@@ -38,6 +38,7 @@ model Project {
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   images Image[]
+  carousels Carousel[]
 }
 
 model Image {
@@ -45,8 +46,16 @@ model Image {
   name          String @unique
   description         String?
   slug String @unique
-  coverImage String  
-  category    Project?   @relation(fields: [projectId], references: [id])
+  coverImage String 
+  project    Project?   @relation(fields: [projectId], references: [id])
+  projectId  Int?
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+}
+
+model Carousel {
+  id      Int      @id @default(autoincrement())  
+  project    Project?   @relation(fields: [projectId], references: [id])
   projectId  Int?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")

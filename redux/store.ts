@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
 import categoryReducer from '@/redux/features/categorySlice'
+import displayReducer from '@/redux/features/displaySlice'
 
 export const store = configureStore({
   reducer: {
-    category: categoryReducer
+    category: categoryReducer,
+    display: displayReducer
   },
   devTools: process.env.NODE_ENV !== "production",
 });
