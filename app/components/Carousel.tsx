@@ -37,16 +37,16 @@ const Carousel: React.FC = () => {
             index === currentIndex ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <div className='h-full overflow-hidden flex items-center'>
+          <div className='h-full  flex items-center'>
 
-            <Image src={'/images/projects/'+project.slug+'/'+project.coverImage} alt={`Slide ${index}`} width={0} height={0} sizes='100vw' className='w-auto h-full' />
+            <Image src={'/images/projects/'+project.slug+'/'+project.coverImage} alt={`Slide ${index}`} width={0} height={0} sizes='100vw'  className='w-auto h-full' />
           </div>
 
 
           
         </div>
       ))}
-      <div onClick={handlePrevSlide} className="flex items-center justify-start absolute left-0 h-full w-[15%] top-0 transition duration-1000 hover:cursor-pointer hover:bg-gradient-to-r hover:from-black/80 hover:to-black/0 ">
+      <div onClick={handlePrevSlide} className="flex items-center justify-start absolute left-0 h-full w-[15%] top-0 transition duration-1000 hover:cursor-pointer hover:bg-gradient-to-r hover:from-black/40 hover:to-black/0 ">
 
         <Image
           src={arrow}
