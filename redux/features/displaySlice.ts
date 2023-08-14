@@ -16,6 +16,9 @@ type DisplayState = {
   carousel: {
     projects: Project[],
     currentIndex: number
+  },
+  header: {
+    isScrolled: boolean
   }
 };
 
@@ -23,6 +26,9 @@ const initialState = {
   carousel: {
     projects: [],
     currentIndex: 0
+  },
+  header: {
+    isScrolled: false
   }
 } as DisplayState
 
@@ -38,6 +44,9 @@ export const display = createSlice({
     },
     setCarouselCurentIndex (state, action)  {
       state.carousel.currentIndex = action.payload
+    },
+    setHeaderIsScrolled (state, action) {
+      state.header.isScrolled = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -54,7 +63,8 @@ export const display = createSlice({
 export const {
   setCarouselCurentIndex,
   nextSlide,
-  prevSlide
+  prevSlide,
+  setHeaderIsScrolled
 } = display.actions
 
 export const getCarouselProjects = createAsyncThunk(
