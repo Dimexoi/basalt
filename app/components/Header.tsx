@@ -34,7 +34,7 @@ export default function Header({welcome}: Props) {
       <Image
         src={isScrolled ? logogreen : logowhite}
         alt="Logo Basalt"
-        width={isScrolled ? 175 : 250}
+        width={isScrolled ? 200 : 250}
 
       />
       <nav className={`${isScrolled ? 'text-black' : ''}`}>
@@ -43,13 +43,13 @@ export default function Header({welcome}: Props) {
             <a className="mr-2">
               Accueil
             </a>
-            <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? "bg-green-[#3D6367]" : "bg-white"}`}></span>
+            <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? "bg-[#3D6367]" : "bg-white"}`}></span>
           </li>
           <li className="relative">
             <a className="mr-2">
               Portfolio
             </a>
-            <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? "bg-green-[#3D6367]" : "bg-white"}`}></span>
+            <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? "bg-[#3D6367]" : "bg-white"}`}></span>
           </li>
           <li className="relative">
             <a>

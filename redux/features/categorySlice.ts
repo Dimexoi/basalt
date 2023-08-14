@@ -1,7 +1,17 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+type Category = {
+  id: number
+  name:string
+  description:string
+  slug:string
+  coverImage:string
+  createdAt:string
+  updatedAt:string
+}
+
 type CategoryState = {
-  categories: []
+  categories: Category[]
 };
 
 const initialState = {

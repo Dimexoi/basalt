@@ -33,14 +33,14 @@ const Carousel: React.FC = () => {
         <div
         
           key={index}
-          className={`absolute transition-opacity duration-500 h-full ${
+          className={` transition-opacity duration-500 h-full ${
             index === currentIndex ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <div className='h-full  flex items-center'>
 
-            <Image src={'/images/projects/'+project.slug+'/'+project.coverImage} alt={`Slide ${index}`} width={0} height={0} sizes='100vw'  className='w-auto h-full' />
-          </div>
+
+            <Image fill src={'/images/projects/'+project.slug+'/'+project.coverImage} alt={`Slide ${index}`}  sizes='100vw'  className='' />
+
 
 
           
