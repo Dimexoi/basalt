@@ -15,7 +15,7 @@ export default function Header({welcome}: Props) {
   const { isScrolled } = useAppSelector(state => state.display.header)
 
   const handleScroll = () => {
-    const isScrolled = window.scrollY > 100
+    const isScrolled = window.scrollY > 50
     dispatch(setHeaderIsScrolled(isScrolled))
   }
 
@@ -27,15 +27,15 @@ export default function Header({welcome}: Props) {
   }, [dispatch])
 
   return (
-    <header className={`flex sticky top-0 gap-4 items-center transition-all z-50 ${isScrolled ? " bg-white p-2" : "bg-transparent p-8"}`}>
-      <div>
+    <header className={`flex sticky top-0 gap-4 items-center justify-around transition-all z-50 ${isScrolled ? " bg-white p-2" : "bg-transparent p-3"}`}>
+      <div className="hidden sm:block">
 
       </div>
       <Image
         src={isScrolled ? logogreen : logowhite}
         alt="Logo Basalt"
-        width={isScrolled ? 200 : 250}
-
+        sizes="100vw"
+        className={`w-auto ${isScrolled ? "h-10 " : "h-12"}`}
       />
       <nav className={`${isScrolled ? 'text-black' : ''}`}>
         <ul className="flex gap-2">

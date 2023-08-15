@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getCategories())
-  }, [])
+  }, [dispatch])
 
   return (
     <main className="h-full">
@@ -21,14 +21,19 @@ export default function Home() {
         <h2>Découvrez nos projets</h2>
 
         {categories.map(category => (
-          <div key={category.id} className='flex relative h-[200px]'>   
+          <div key={category.id} className='flex max-h-40'>
+            <div className=''>
+
               <Image
-                fill
                 src='/images/categories/restaurants/cover.png'
                 alt='Image restaurant'
+                width={0}
+                height={0}
                 sizes='100vw'
+                className='h-full w-auto'
               />
-              <div className='flex-1'>
+            </div>
+              <div className=''>
                 <p>{category.name}</p>
                 <p>{category.description}</p>
               </div>
