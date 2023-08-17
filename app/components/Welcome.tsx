@@ -15,7 +15,7 @@ export default function Welcome() {
             <div className="flex-1 flex items-center">
 
               <p className="md:text-lg md:tracking-wide md:leading-10 text-justify">
-                Bienvenue sur notre site dédié aux professionnels de la restauration et de l&apos;hôtellerie. Nous sommes spécialisés dans la vente de mobilier professionnel de qualité supérieure pour répondre aux besoins spécifiques de votre entreprise. Nous savons à quel point il est important d&apos;avoir un mobilier fonctionnel, confortable et esthétique pour garantir le succès de votre établissement.
+                Bienvenue sur notre site dédié aux professionnels. Nous sommes spécialisés dans la vente de mobilier professionnel de qualité supérieure pour répondre aux besoins de votre entreprise. Nous savons à quel point il est important d&apos;avoir un mobilier confortable et esthétique pour garantir le succès de votre établissement.
               </p>
               
             </div>
