@@ -23,7 +23,6 @@ export default function Home() {
         {categories.map(category => (
           <div key={category.id} className='flex max-h-40'>
             <div className=''>
-
               <Image
                 src='/images/categories/restaurants/cover.png'
                 alt='Image restaurant'
@@ -33,10 +32,10 @@ export default function Home() {
                 className='h-full w-auto'
               />
             </div>
-              <div className=''>
-                <p>{category.name}</p>
-                <p>{category.description}</p>
-              </div>
+            <div className=''>
+              <p>{category.name}</p>
+              <p>{category.description}</p>
+            </div>
           </div>
         ))}
         </div>
