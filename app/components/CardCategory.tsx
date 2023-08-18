@@ -18,7 +18,7 @@ export default function CardCategory({category}: PropsType) {
     >
       
       <Image
-        src='/images/categories/restaurants/cover.png'
+        src={`/images/categories/${category.slug}/${category.coverImage}`}
         alt='Image restaurant'
         width="0"
         height="0"
@@ -26,9 +26,9 @@ export default function CardCategory({category}: PropsType) {
         className='h-100 w-auto'
       />
 
-      <div className='p-2 text-center flex flex-col justify-around'>
-        <h3 className='bg-[#315858] text-white mb-2 p-2'>{category.name}</h3>
-        <p className='text-black'>{category.description}</p>
+      <div className='group w-full p-2 text-center flex flex-col justify-around hover:bg-[#315858] duration-300'>
+        <h3 className='bg-[#315858] text-white mb-2 p-2 group-hover:bg-white group-hover:text-[#315858] duration-300'>{category.name}</h3>
+        <p className='text-black group-hover:text-white'>{category.description}</p>
       </div>
     </Link>
 

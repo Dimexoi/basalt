@@ -35,12 +35,14 @@ export default function Header({welcome}: Props) {
       <div className="hidden sm:block">
 
       </div>
-      <Image
-        src={isScrolled ? logogreen : welcome ? logowhite : logogreen}
-        alt="Logo Basalt"
-        sizes="100vw"
-        className={`w-auto ${isScrolled ? "h-10 " : "h-12"}`}
-      />
+      <Link href='/'>
+        <Image
+          src={isScrolled ? logogreen : welcome ? logowhite : logogreen}
+          alt="Logo Basalt"
+          sizes="100vw"
+          className={`w-auto ${isScrolled ? "h-10 " : "h-12"}`}
+        />
+      </Link>
       <nav className={`${isScrolled ? 'text-black' : ''}`}>
         <ul className="flex gap-2">
           <li className="relative">
