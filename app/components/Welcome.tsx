@@ -6,7 +6,7 @@ export default function Welcome() {
 
   return (
     <div className="bg-[url('/images/imgbg.jpg')] bg-[no-repeat] bg-[center] h-full bg-cover text-white">
-      <div className="flex flex-col h-full bg-gradient-to-b from-black/80 to-black/20">
+      <div className="flex flex-col h-full bg-gradient-to-b from-black/60 to-black/20">
 
         <Header welcome={true}/>
         <div className="h-100 flex-1 flex md:gap-20 flex-col md:w-[80%] mx-auto md:p-10 p-2">

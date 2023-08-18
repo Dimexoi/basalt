@@ -3,10 +3,14 @@ import { NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 
 
-export async function GET() {
+export async function POST(req: Request) {
   try {
-    const results = await prisma.project.findMany()
-
+    const id = await req.json()
+    const results = await prisma.project.findMany({
+      where: {
+        categoryId: Number(id)
+      }
+    })
     
     return NextResponse.json(results)
 

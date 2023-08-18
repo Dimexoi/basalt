@@ -75,4 +75,4 @@ export const getCarouselProjects = createAsyncThunk(
   }
 )
 
-export default display.reducer;
+export default display.reducer

@@ -27,12 +27,15 @@ export default function Header({welcome}: Props) {
   }, [dispatch])
 
   return (
-    <header className={`flex sticky top-0 gap-4 items-center justify-around transition-all z-50 ${isScrolled ? " bg-white p-2" : "bg-transparent p-3"}`}>
+    <header className={`flex sticky top-0 gap-4 items-center justify-around transition-all z-50 ${isScrolled ?
+    " bg-white p-2 border border-b shadow-lg"
+    : welcome ? " bg-transparent p-3" : " bg-white p-3"}`
+    }>
       <div className="hidden sm:block">
 
       </div>
       <Image
-        src={isScrolled ? logogreen : logowhite}
+        src={isScrolled ? logogreen : welcome ? logowhite : logogreen}
         alt="Logo Basalt"
         sizes="100vw"
         className={`w-auto ${isScrolled ? "h-10 " : "h-12"}`}
@@ -43,13 +46,13 @@ export default function Header({welcome}: Props) {
             <a className="mr-2">
               Accueil
             </a>
-            <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? "bg-[#3D6367]" : "bg-white"}`}></span>
+            <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? " bg-[#3D6367]" : welcome ? " bg-white" : " bg-[#3D6367]"}`}></span>
           </li>
           <li className="relative">
             <a className="mr-2">
               Portfolio
             </a>
-            <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? "bg-[#3D6367]" : "bg-white"}`}></span>
+            <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? " bg-[#3D6367]" : welcome ? " bg-white" : " bg-[#3D6367]"}`}></span>
           </li>
           <li className="relative">
             <a>

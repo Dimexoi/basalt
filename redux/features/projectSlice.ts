@@ -1,7 +1,17 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+export type ProjectType = {
+  id: number
+  name:string
+  description:string
+  slug:string
+  coverImage:string
+  createdAt:string
+  updatedAt:string
+}
+
 type ProjectState = {
-  projects: []
+  projects: ProjectType[]
 };
 
 const initialState = {
@@ -29,9 +39,12 @@ export const {
 
 export const getProjects = createAsyncThunk(
   'project/getProjects',
-  async (_, thunkAPI) => {
-    const categories = await fetch('/api/project')
-    return categories.json()
+  async (id: number, thunkAPI) => {
+    const projects = await fetch('/api/project', {
+      method: 'POST',
+      body: JSON.stringify(id)
+    })
+    return projects.json()
   }
 )
 export default project.reducer;
