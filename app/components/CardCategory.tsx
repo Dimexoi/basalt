@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import { CategoryType } from '@/redux/features/categorySlice'
+import Link from 'next/link'
 
 type PropsType = {
   category: CategoryType
@@ -10,8 +11,12 @@ export default function CardCategory({category}: PropsType) {
 
   return (
 
-    <div key={category.id} className='flex h-32 border border-silver rounded-lg overflow-hidden'>
-
+    <Link 
+      key={category.id}
+      className='flex h-32 border border-silver rounded-lg overflow-hidden'
+      href={`/category/${category.id}/${category.slug}`}
+    >
+      
       <Image
         src='/images/categories/restaurants/cover.png'
         alt='Image restaurant'
@@ -25,7 +30,7 @@ export default function CardCategory({category}: PropsType) {
         <h3 className='bg-[#315858] text-white mb-2 p-2'>{category.name}</h3>
         <p className='text-black'>{category.description}</p>
       </div>
-    </div>
+    </Link>
 
   )
 }
