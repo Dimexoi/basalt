@@ -6,9 +6,9 @@ import prisma from "@/lib/prisma"
 export async function POST(req: Request) {
   try {
     const id = await req.json()
-    const results = await prisma.project.findMany({
+    const results = await prisma.project.findUnique({
       where: {
-        categoryId: Number(id)
+        id: Number(id)
       }
     })
     

@@ -40,7 +40,7 @@ export default function Header({welcome}: Props) {
           src={isScrolled ? logogreen : welcome ? logowhite : logogreen}
           alt="Logo Basalt"
           sizes="100vw"
-          className={`w-auto ${isScrolled ? "h-10 " : "h-12"}`}
+          className={`w-auto ${isScrolled ? "h-12 " : "h-12"}`}
         />
       </Link>
       <nav className={`${isScrolled ? 'text-black' : ''}`}>
