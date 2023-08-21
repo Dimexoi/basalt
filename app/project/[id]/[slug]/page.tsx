@@ -14,7 +14,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
 
   useEffect(() => {
     if (projects.length > 0) {
-      dispatch(setProject(projects.find(project => project.id === params.id)))
+      dispatch(setProject(projects.find(project => project.id === Number(params.id))))
     } else {
       dispatch(getOneProject(params.id))
     }
