@@ -25,7 +25,30 @@ export default function Category({ params }: { params: { id: number, slug: strin
       <Header welcome={false}/>
       <div>
         <h2>{project.name}</h2>
-          <div>{project.name}</div>
+        <p>{project.description}</p>
+
+        <div>
+          <h3>Gallerie</h3>
+          {project.images.map(image => (
+            <div key={image.id}>
+              <p>
+                {image.name}
+              </p>
+              <Image
+                src={`/images/projects/${project.slug}/${image.coverImage}`}
+                alt={`Image ${image.name}`}
+                width="0"
+                height="0"
+                sizes='100vw'
+                className='h-50 w-auto'
+              />
+              <p>
+                {image.description}
+              </p>
+              
+            </div>
+          ))}
+        </div>
       </div>
     </main>
   )

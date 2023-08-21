@@ -9,6 +9,9 @@ export async function POST(req: Request) {
     const results = await prisma.project.findUnique({
       where: {
         id: Number(id)
+      },
+      include: {
+        images: true
       }
     })
     

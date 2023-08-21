@@ -9,6 +9,9 @@ export async function POST(req: Request) {
     const results = await prisma.project.findMany({
       where: {
         categoryId: Number(id)
+      },
+      include: {
+        images: true
       }
     })
     

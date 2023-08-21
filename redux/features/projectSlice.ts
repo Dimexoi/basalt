@@ -8,6 +8,16 @@ export type ProjectType = {
   coverImage:string
   createdAt:string
   updatedAt:string
+  images: {
+    id: number
+    name: string
+    description: string
+    slug: string
+    coverImage: string
+    projectId: number
+    createdAt: string
+    updatedAt: string
+  }[]
 }
 
 type ProjectState = {
@@ -24,7 +34,8 @@ const initialState = {
     slug: '',
     coverImage: '',
     createdAt: '',
-    updatedAt: ''
+    updatedAt: '',
+    images: []
   }
 } as ProjectState
 
