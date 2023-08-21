@@ -40,7 +40,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
                 width="0"
                 height="0"
                 sizes='100vw'
-                className='h-50 w-auto'
+                className='h-50 w-full overflow-hidden'
               />
               <p>
                 {image.description}
