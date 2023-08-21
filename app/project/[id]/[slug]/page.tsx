@@ -23,15 +23,15 @@ export default function Category({ params }: { params: { id: number, slug: strin
   return (
     <main className="h-full">
       <Header welcome={false}/>
-      <div>
-        <h2>{project.name}</h2>
-        <p>{project.description}</p>
+      <div className='flex flex-col gap-2'>
+        <h2 className='font-bold text-center text-xl text-[#3D6367]'>{project.name}</h2>
+        <p className='text-justify p-3'>{project.description} {project.description}  {project.description} {project.description} {project.description}{project.description}  {project.description} {project.description}</p>
 
         <div>
-          <h3>Gallerie</h3>
+          <h3 className='text-center font-semibold'>Gallerie</h3>
           {project.images.map(image => (
             <div key={image.id}>
-              <p>
+              <p className='mb-3 p-3'>
                 {image.name}
               </p>
               <Image
@@ -40,9 +40,9 @@ export default function Category({ params }: { params: { id: number, slug: strin
                 width="0"
                 height="0"
                 sizes='100vw'
-                className='h-50 w-full overflow-hidden'
+                className='h-auto w-full mb-1'
               />
-              <p>
+              <p className='text-justify p-3 italic'>
                 {image.description}
               </p>
               
