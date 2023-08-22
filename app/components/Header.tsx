@@ -55,9 +55,12 @@ export default function Header({welcome}: Props) {
             <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? " bg-[#3D6367]" : welcome ? " bg-white" : " bg-[#3D6367]"}`}></span>
           </li>
           <li className="relative">
-            <a className="mr-2">
+            <Link
+              className="mr-2"
+              href='/#test'
+            >
               Portfolio
-            </a>
+            </Link>
             <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? " bg-[#3D6367]" : welcome ? " bg-white" : " bg-[#3D6367]"}`}></span>
           </li>
           <li className="relative">
