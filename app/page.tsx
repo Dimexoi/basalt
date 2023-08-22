@@ -17,12 +17,14 @@ export default function Home() {
   return (
     <main className="h-full">
       <Welcome/>
-      <div>
-        <h2>Découvrez nos projets</h2>
+      <div className='mt-3'>
+        <h2 className='font-bold text-center text-xl text-[#3D6367]'>Découvrez nos projets</h2>
 
-        {categories.map(category => (
-          <CardCategory category={category} key={category.id}/>
-        ))}
+        <div className='flex flex-col gap-3 p-3'>
+          {categories.map(category => (
+              <CardCategory category={category} key={category.id}/>
+          ))}
+        </div>
       </div>
       
     </main>

@@ -13,8 +13,8 @@ export default function CardCategory({category}: PropsType) {
 
     <Link 
       key={category.id}
-      className='flex h-32 border border-silver rounded-lg overflow-hidden'
-      href={`/category/${category.id}/${category.slug}`}
+      className='flex h-32 border rounded-lg overflow-hidden shadow-md hover:shadow-xl'
+      href={`/category/${category.id}/${category.slug}`}      
     >
       
       <Image

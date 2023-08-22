@@ -11,10 +11,11 @@ export async function POST(req: Request) {
         categoryId: Number(id)
       },
       include: {
-        images: true
+        images: true,
+        category: true
       }
     })
-    
+  
     return NextResponse.json(results)
 
   } catch (err) {

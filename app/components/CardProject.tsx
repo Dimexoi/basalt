@@ -12,7 +12,7 @@ export default function CardProject({project}: PropsType) {
   return (
     <Link 
       key={project.id}
-      className='block relative border border-silver rounded-lg overflow-hidden'
+      className='block relative border rounded-lg overflow-hidden shadow-lg hover:shadow-xl'
       href={`/project/${project.id}/${project.slug}`}
     >     
       <Image

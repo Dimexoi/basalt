@@ -10,11 +10,13 @@ export default function Category({ params }: { params: { id: number, slug: strin
   const dispatch = useAppDispatch()
 
   const {projects} = useAppSelector(state => state.project)
+  const {category} = useAppSelector(state => state.category)
   const {project} = useAppSelector(state => state.project)
 
   useEffect(() => {
-    if (projects.length > 0) {
-      dispatch(setProject(projects.find(project => project.id === Number(params.id))))
+    if (category.projects!.length > 0) {
+      console.log('ici');
+      dispatch(setProject(category.projects!.find(project => project.id === Number(params.id))))
     } else {
       dispatch(getOneProject(params.id))
     }
@@ -24,7 +26,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
     <main className="h-full">
       <Header welcome={false}/>
       <div className='flex flex-col gap-2'>
-        <h2 className='font-bold text-center text-xl text-[#3D6367]'>{project.name}</h2>
+        <h1 className='font-bold text-center text-xl text-[#3D6367]'>{project.name}</h1>
         <p className='text-justify p-3'>{project.description} {project.description}  {project.description} {project.description} {project.description}{project.description}  {project.description} {project.description}</p>
 
         <div>
