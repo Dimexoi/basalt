@@ -9,7 +9,7 @@ export default function Welcome() {
 
         <Header welcome={true}/>
 
-        <div className="h-100 flex-1 flex flex-col p-2">
+        <div className="h-100 flex-1 flex flex-col p-2 mt-20">
           <h1 className="font-semibold text-lg text-center">Le mobilier professionnel pour la restauration et l&apos;hôtellerie</h1>
           <div className="flex flex-col justify-around h-full ">
             <div className="flex items-center">
