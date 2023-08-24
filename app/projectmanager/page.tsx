@@ -1,7 +1,7 @@
 'use client'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setProjectFormName, setProjectFormDesc, setProjectFormSlug, setProjectFormCategoryId, setProjectFormImages, setProjectFormDragIndex, setProjectFormImageDesc, setProjectFormImageSlug, addOneProject } from '@/redux/features/projectSlice'
+import { setProjectFormName, setProjectFormDesc, setProjectFormSlug, setProjectFormCategoryId, setProjectFormImages, setProjectFormDragIndex, setProjectFormImageDesc, setProjectFormImageSlug, addOneProject, setProjectFormImageName } from '@/redux/features/projectSlice'
 // import { setShowMessageModal } from '@/redux/actions/conf'
 
 import styles from './ManageProject.module.scss'
@@ -40,17 +40,21 @@ const ProjectManager = () => {
     dispatch(setProjectFormDesc(value))
   }
 
-  const handleInputChangeImgDesc = (e: React.FormEvent<HTMLInputElement>, index: number) => {
+  const handleInputChangeImgDesc = (e: React.FormEvent<HTMLTextAreaElement>, index: number) => {
+    const { name, value } = e.currentTarget
+    dispatch(setProjectFormImageDesc({index, value}))
+  }
+
+  const handleInputChangeImgName = (e: React.FormEvent<HTMLInputElement>, index: number) => {
     const { name, value } = e.currentTarget
     let newSlug = value.toLowerCase().replace(/ /g, '-')
-    dispatch(setProjectFormImageDesc({index, value}))
+    dispatch(setProjectFormImageName({index, value}))
     dispatch(setProjectFormImageSlug({index, value: newSlug}))
   }
 
   const buildImageName = (index : number, extension: string) => {
     if(String(index).length == 1) return "00" + (index + 1) + '.' + extension
     if(String(index).length == 2) return "0" + (index + 1) + '.' + extension
-
   }
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,11 +67,11 @@ const ProjectManager = () => {
           newPhotos.push({
             file: file,
             id: Number(Math.random().toString(36).substring(7)),
-            name: buildImageName(i, file.name.split('.')[file.name.split('.').length - 1])!,
+            name: '',
             description: '',
             slug: '',
             projectId: 0,
-            coverImage: '',
+            coverImage: buildImageName(i, file.name.split('.')[file.name.split('.').length - 1])!,
             createdAt: '',
             updatedAt: '',
             originY: 0,
@@ -306,7 +310,10 @@ const ProjectManager = () => {
               </div>
 
               <label className={styles.manageproject__secondrow__thumbnailcontainer__label}>
-                <input name="imagedesc" type="text" value={image.description} placeholder="Description de la photo" onChange={(e) => handleInputChangeImgDesc(e, index)} />
+                <input name="imagetitle" type="text" value={image.name} placeholder="Titre de la photo" onChange={(e) => handleInputChangeImgName(e, index)} />
+              </label>
+              <label className={styles.manageproject__secondrow__thumbnailcontainer__label}>
+                <textarea name="imagedesc" value={image.description} placeholder="Description de la photo" onChange={(e) => handleInputChangeImgDesc(e, index)} />
               </label>
 
 

@@ -116,6 +116,9 @@ export const project = createSlice({
    setProjectFormImages(state, action) {
     state.projectForm.images = action.payload
    },
+   setProjectFormImageName(state, action) {
+    state.projectForm.images[action.payload.index].name = action.payload.value
+   },
    setProjectFormImageDesc(state, action) {
     state.projectForm.images[action.payload.index].description = action.payload.value
    },
@@ -150,7 +153,8 @@ export const {
   setProjectFormImages,
   setProjectFormDragIndex,
   setProjectFormImageDesc,
-  setProjectFormImageSlug
+  setProjectFormImageSlug,
+  setProjectFormImageName
 } = project.actions
 
 export const getProjects = createAsyncThunk(
