@@ -29,10 +29,37 @@ export type ProjectType = {
   }
 }
 
+export interface ProjectForm {
+  id: number
+  name: string
+  description: string
+  slug: string
+  coverImage: string
+  categoryId: string
+  dragIndex: number
+  images: {
+    id: number
+    name: string
+    description: string
+    slug: string
+    coverImage: string
+    projectId: number
+    createdAt: string
+    updatedAt: string
+    file: File
+    originY: number
+    currentY: number
+    extension: string
+  }[],
+}
+
+
 type ProjectState = {
   projects: ProjectType[]
   project: ProjectType
-};
+  projectForm: ProjectForm
+}
+
 
 const initialState = {
   projects: [],
@@ -54,6 +81,16 @@ const initialState = {
       createdAt: '',
       updatedAt: ''
     }
+  },
+  projectForm: {
+    id: 0,
+    name: '',
+    description: '',
+    slug: '',
+    coverImage: '',
+    categoryId: '',
+    dragIndex: 0,
+    images: []
   }
 } as ProjectState
 
@@ -63,7 +100,31 @@ export const project = createSlice({
   reducers: {
     setProject(state, action) {
       state.project = action.payload
-    }
+    },
+   setProjectFormName(state, action) {
+    state.projectForm.name = action.payload
+   },
+   setProjectFormDesc(state, action) {
+    state.projectForm.description = action.payload
+   },
+   setProjectFormSlug(state, action) {
+    state.projectForm.slug = action.payload
+   },
+   setProjectFormCategoryId(state, action) {
+    state.projectForm.categoryId = action.payload
+   },
+   setProjectFormImages(state, action) {
+    state.projectForm.images = action.payload
+   },
+   setProjectFormImageDesc(state, action) {
+    state.projectForm.images[action.payload.index].description = action.payload.value
+   },
+   setProjectFormImageSlug(state, action) {
+    state.projectForm.images[action.payload.index].slug = action.payload.value
+   },
+   setProjectFormDragIndex(state, action) {
+    state.projectForm.dragIndex = action.payload
+   }
   },
   extraReducers: (builder) => {
     builder
@@ -73,12 +134,23 @@ export const project = createSlice({
       .addCase(getOneProject.fulfilled, (state, action) => {
         state.project = action.payload
       })
+      .addCase(addOneProject.fulfilled, (state, action) => {
+        state.projects.push(action.payload)
+      })
       
   }
 });
 
 export const {
-  setProject
+  setProject,
+  setProjectFormName,
+  setProjectFormDesc,
+  setProjectFormSlug,
+  setProjectFormCategoryId,
+  setProjectFormImages,
+  setProjectFormDragIndex,
+  setProjectFormImageDesc,
+  setProjectFormImageSlug
 } = project.actions
 
 export const getProjects = createAsyncThunk(
@@ -98,6 +170,17 @@ export const getOneProject = createAsyncThunk(
     const project = await fetch('/api/project/findOne', {
       method: 'POST',
       body: JSON.stringify(id)
+    })
+    return project.json()
+  }
+)
+
+export const addOneProject = createAsyncThunk(
+  'project/addOneProject',
+  async (projectFromForm: ProjectForm, thunkAPI) => {
+    const project = await fetch('/api/project/addOne', {
+      method: 'POST',
+      body: JSON.stringify(projectFromForm)
     })
     return project.json()
   }

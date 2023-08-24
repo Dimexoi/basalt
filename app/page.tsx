@@ -25,8 +25,7 @@ export default function Home() {
               <CardCategory category={category} key={category.id}/>
           ))}
         </div>
-      </div>
-      
+      </div> 
     </main>
   )
 }
