@@ -209,9 +209,9 @@ const ProjectManager = () => {
     e.preventDefault()
     await dispatch(addOneProject(projectForm))
 
-    // images.forEach((image) => {
-    //   uploadToServer(image.file!, slug, image.name)
-    // })
+    images.forEach((image) => {
+      uploadToServer(image.file!, slug, image.name)
+    })
     // dispatch(setShowMessageModal(true))
   }
 
