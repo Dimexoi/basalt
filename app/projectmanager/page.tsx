@@ -273,13 +273,12 @@ const ProjectManager = () => {
 
       <div className={styles.manageproject__secondrow}>
         {images.map((image, index) => (
-          <div className={styles.manageproject__secondrow__thumbnailcontainer}>
+          <div className={styles.manageproject__secondrow__thumbnailcontainer} key={image.id}>
             <Image
               className={`
                 ${styles.manageproject__secondrow__thumbnailcontainer__arrow}
               `}
               alt='Image'
-              key={image.id}
               src={''}
               width={50}
               height={50}
