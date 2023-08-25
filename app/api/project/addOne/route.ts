@@ -2,6 +2,12 @@ import { NextResponse } from "next/server"
 
 import prisma from "@/lib/prisma"
 
+type ImageType = {
+  name: string,
+  description: string
+  slug: string
+  coverImage: string
+}
 
 export async function POST(req: Request) {
   try {
@@ -16,7 +22,7 @@ export async function POST(req: Request) {
         categoryId: Number(body.categoryId),
         images: {
             createMany: {
-                data: body.images.map((image) => (
+                data: body.images.map((image: ImageType) => (
                     {
                         name: image.name,
                         description: image.description,
