@@ -1,8 +1,8 @@
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(request: NextRequest) {
-  const data = await request.formData()
+export async function POST(req: NextRequest) {
+  const data = await req.formData()
   const file: File | null = data.get('file') as unknown as File
 	const slug: String | null = data.get('slug') as unknown as String
 	const name: String | null = data.get('name') as unknown as String
