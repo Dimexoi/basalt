@@ -9,12 +9,16 @@ import Image from 'next/image'
 
 // import ModalMessage from '../ModalMessage'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { setShowMessageModal } from '@/redux/features/displaySlice'
+import ModalMessage from '../components/ModalMessage'
 
 const ProjectManager = () => {
 
   const dispatch = useAppDispatch()
 
   const {projectForm} = useAppSelector(state => state.project)
+  const {showMessageModal} = useAppSelector(state => state.display.project)
+
   const { name, description, slug, coverImage, categoryId, images, dragIndex  } = projectForm
   //  const showMessageModal = useSelector(state => state.conf.showMessageModal)
 
@@ -98,7 +102,7 @@ const ProjectManager = () => {
     const copyNewPhotos = newPhotos.map((image, index) => ({
       ...image
     }))
-    copyNewPhotos.forEach((image, index) => image.name = buildImageName(index, image.extension)!)
+    copyNewPhotos.forEach((image, index) => image.coverImage = buildImageName(index, image.extension)!)
     dispatch(setProjectFormImages(copyNewPhotos))
   }
 
@@ -123,7 +127,7 @@ const ProjectManager = () => {
     }
     
     const newPhotos = test(images)
-    newPhotos.forEach((image, index) => image.name = buildImageName(index, image.extension)!)
+    newPhotos.forEach((image, index) => image.coverImage = buildImageName(index, image.extension)!)
 
     dispatch(setProjectFormImages(newPhotos))
   }
@@ -139,7 +143,7 @@ const ProjectManager = () => {
       return newPhotos
     }
     const newPhotos = test(images)
-    newPhotos.forEach((image, index) => image.name = buildImageName(index, image.extension)!)
+    newPhotos.forEach((image, index) => image.coverImage = buildImageName(index, image.extension)!)
 
     dispatch(setProjectFormImages(newPhotos))
   }
@@ -160,7 +164,7 @@ const ProjectManager = () => {
     }
 
     const newPhotos = test(images)
-    newPhotos.forEach((image, index) => image.name = buildImageName(index, image.extension)!)
+    newPhotos.forEach((image, index) => image.coverImage = buildImageName(index, image.extension)!)
 
     dispatch(setProjectFormImages(newPhotos))
     dispatch(setProjectFormDragIndex(null))
@@ -186,7 +190,7 @@ const ProjectManager = () => {
     const copyNewPhotos = newPhotos.map((image, index) => ({
       ...image
     }))
-    copyNewPhotos.forEach((image, index) => image.name = buildImageName(index, image.extension)!)
+    copyNewPhotos.forEach((image, index) => image.coverImage = buildImageName(index, image.extension)!)
     dispatch(setProjectFormImages(copyNewPhotos))
   }
 
@@ -210,9 +214,9 @@ const ProjectManager = () => {
     await dispatch(addOneProject(projectForm))
 
     images.forEach((image) => {
-      uploadToServer(image.file!, slug, image.name)
+      uploadToServer(image.file!, slug, image.coverImage)
     })
-    // dispatch(setShowMessageModal(true))
+    dispatch(setShowMessageModal(true))
   }
 
   return (
@@ -332,9 +336,9 @@ const ProjectManager = () => {
           </div>
         ))}
       </div>
-      {/* {showMessageModal && 
+      { showMessageModal && 
         <ModalMessage/>
-      } */}
+      }
     </form>
   )
 
