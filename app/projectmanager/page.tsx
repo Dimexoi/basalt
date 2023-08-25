@@ -279,6 +279,7 @@ const ProjectManager = () => {
                 ${styles.manageproject__secondrow__thumbnailcontainer__arrow}
               `}
               alt='Image'
+              key={image.id}
               src={''}
               width={50}
               height={50}
