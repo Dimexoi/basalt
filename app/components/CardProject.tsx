@@ -26,7 +26,7 @@ export default function CardProject({project}: PropsType) {
 
       <div className='absolute bottom-0 left-0 w-full text-center bg-black bg-opacity-50 text-white py-2'>
         <h3 className='text-white'>{project.name}</h3>
-        
+    
       </div>
     </Link>
   )

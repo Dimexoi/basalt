@@ -9,21 +9,24 @@ export default function Welcome() {
 
         <Header welcome={true}/>
 
-        <div className=" flex-1 h-full flex flex-col p-2 mt-16">
-          <div className="flex h-full flex-col justify-around ">
+        <div className="flex-1 h-full flex flex-col p-2 mt-16 md:p-10">
+            <h1 className="font-semibold text-lg md:text-2xl text-center">Le mobilier professionnel pour la restauration et l&apos;hôtellerie</h1>
+          <div className="flex lg:items-center h-full">
+            <div className="flex h-full lg:h-auto lg:gap-10 flex-col lg:flex-row justify-around">
+
+              <div className="flex justify-around items-center md:flex-1">
+
+                <p className="md:text-xl md:tracking-wide md:leading-10 text-justify">
+                  Bienvenue sur notre site dédié aux professionnels. Nous sommes spécialisés dans la vente de mobilier professionnel de qualité supérieure pour répondre aux besoins de votre entreprise. Nous savons à quel point il est important d&apos;avoir un mobilier confortable et esthétique pour garantir le succès de votre établissement.
+                </p>
+                
+              </div>
+
+              <div className="border md:flex-1">
+                  <Carousel/>
+              </div>
+            </div>
             
-            <h1 className="font-semibold text-lg text-center">Le mobilier professionnel pour la restauration et l&apos;hôtellerie</h1>
-            <div className="flex justify-around items-center">
-
-              <p className="md:text-lg md:tracking-wide md:leading-10 text-justify">
-                Bienvenue sur notre site dédié aux professionnels. Nous sommes spécialisés dans la vente de mobilier professionnel de qualité supérieure pour répondre aux besoins de votre entreprise. Nous savons à quel point il est important d&apos;avoir un mobilier confortable et esthétique pour garantir le succès de votre établissement.
-              </p>
-              
-            </div>
-
-            <div className="border">
-                <Carousel/>
-            </div>
             
           </div>
         </div>

@@ -26,7 +26,7 @@ const Carousel: React.FC = () => {
   };
 
   return (
-    <div className="relative h-full" >
+    <div className="relative h-full lg:h-auto " >
         
       {projects.map((project, index) => (
         
@@ -43,7 +43,7 @@ const Carousel: React.FC = () => {
             sizes='100vw'
             height='0'
             width='0'
-            className='h-full w-auto'
+            className='h-auto w-full'
           />
           
         </div>
