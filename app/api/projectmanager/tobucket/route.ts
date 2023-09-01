@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const s3Client = new S3Client({
-  region: process.env.REGION as string,
+  region: process.env.AWS_REGION as string,
   credentials: {
-    accessKeyId: process.env.ACCESS_KEY as string,
-    secretAccessKey: process.env.SECRET_KEY as string,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
   },
 });
 
@@ -14,21 +14,20 @@ async function uploadImageToS3(
   fileName: string
 ): Promise<string> {
   const params = {
-    Bucket: process.env.BUCKET_NAME as string,
-    Key: `${Date.now()}-${fileName}`,
+    Bucket: process.env.AWS_BUCKET_NAME as string,
+    Key: fileName,
     Body: file,
-    ContentType: "image/jpeg", // Change the content type accordingly
+    ContentType: "image", // Change the content type accordingly
   };
 
   const command = new PutObjectCommand(params);
-  await s3Client.send(command);
-
-  return fileName;
+  const s3Data = await s3Client.send(command);
+  return params.Key;
 }
 
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
-    const formData = await request.formData();
+    const formData = await request.formData()
     const file = formData.get("file") as Blob | null
     const name: string | null = formData.get('name') as unknown as string
     if (!file) {

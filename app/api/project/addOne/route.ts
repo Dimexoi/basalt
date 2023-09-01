@@ -7,12 +7,12 @@ type ImageType = {
   description: string
   slug: string
   coverImage: string
+  link: string
 }
 
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    console.log(body);
     const results = await prisma.project.create({
       data: {
         name: body.name,
@@ -27,7 +27,8 @@ export async function POST(req: Request) {
                         name: image.name,
                         description: image.description,
                         slug: image.slug,
-                        coverImage: image.coverImage
+                        coverImage: image.coverImage,
+                        link: `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${image.coverImage}`
                     }
                 ))
             }

@@ -30,16 +30,15 @@ const Carousel: React.FC = () => {
         
       {projects.map((project, index) => (
         
-        <div
-        
+        <div    
           key={index}
-          className={`flex items-center justify-center transition-opacity duration-500 h-full overflow-hidden ${
+          className={`flex items-center justify-center transition-opacity duration-500 w-full overflow-hidden ${
             index === currentIndex ? 'block opacity-100' : 'hidden opacity-0'
           }`}
         >
 
           <Image
-            src={'/images/projects/'+project.slug+'/'+project.coverImage}
+            src={'/images/projects/restaurant-1/001.jpg'}
             alt={`Slide ${index}`} 
             sizes='100vw'
             height='0'

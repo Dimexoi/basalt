@@ -17,6 +17,7 @@ export type ProjectType = {
     projectId: number
     createdAt: string
     updatedAt: string
+    link: string
   }[],
   category: {
     id: number
@@ -50,6 +51,7 @@ export interface ProjectForm {
     originY: number
     currentY: number
     extension: string
+    link: string
   }[],
 }
 
@@ -127,6 +129,9 @@ export const project = createSlice({
    },
    setProjectFormDragIndex(state, action) {
     state.projectForm.dragIndex = action.payload
+   },
+   setProjectImageLink(state, action) {
+    state.projectForm.images[action.payload.index].link = action.payload.link
    }
   },
   extraReducers: (builder) => {
@@ -136,6 +141,10 @@ export const project = createSlice({
       })
       .addCase(getOneProject.fulfilled, (state, action) => {
         state.project = action.payload
+      })
+      .addCase(uploadImageToServer.fulfilled, (state, action) => {
+        // state.projectForm.images[action.payload.index].link = action.payload.link
+        console.log("ok");
       })
       .addCase(addOneProject.fulfilled, (state, action) => {
         state.projects.push(action.payload)
@@ -154,7 +163,8 @@ export const {
   setProjectFormDragIndex,
   setProjectFormImageDesc,
   setProjectFormImageSlug,
-  setProjectFormImageName
+  setProjectFormImageName,
+  setProjectImageLink
 } = project.actions
 
 export const getProjects = createAsyncThunk(
@@ -176,6 +186,23 @@ export const getOneProject = createAsyncThunk(
       body: JSON.stringify(id)
     })
     return project.json()
+  }
+)
+
+export const uploadImageToServer = createAsyncThunk(
+  'project/uploadImageToServer',
+  async (imageObj: {image: ProjectForm['images'][0], index: number}, thunkAPI) => {
+    const body = new FormData()
+    body.set("file", imageObj.image.file)
+    body.set("slug", imageObj.image.slug)
+    body.set("name", imageObj.image.coverImage)
+    const imageUploaded = await fetch('/api/projectmanager/tobucket', {
+      method: 'POST',
+      body
+    })
+    const imageData = await imageUploaded.json()
+    const link = `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${imageData.fileName}`
+    return {link, index: imageObj.index}
   }
 )
 

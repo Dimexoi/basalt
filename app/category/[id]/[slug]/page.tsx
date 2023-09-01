@@ -23,7 +23,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
       <div>
         <h1 className='font-bold text-center text-xl text-[#3D6367] mb-3 p-3'>Découvrez nos projets de {category.name}</h1>
 
-        <div className='flex flex-col gap-2 p-2'>
+        <div className='flex flex-col gap-2 p-2 w-full aspect-square'>
           {category.projects!.map(project => (
             <CardProject project={project} key={project.id}/>
           ))}

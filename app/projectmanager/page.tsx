@@ -1,7 +1,7 @@
 'use client'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setProjectFormName, setProjectFormDesc, setProjectFormSlug, setProjectFormCategoryId, setProjectFormImages, setProjectFormDragIndex, setProjectFormImageDesc, setProjectFormImageSlug, addOneProject, setProjectFormImageName } from '@/redux/features/projectSlice'
+import { setProjectFormName, setProjectFormDesc, setProjectFormSlug, setProjectFormCategoryId, setProjectFormImages, setProjectFormDragIndex, setProjectFormImageDesc, setProjectFormImageSlug, addOneProject, setProjectFormImageName, setProjectImageLink, uploadImageToServer } from '@/redux/features/projectSlice'
 // import { setShowMessageModal } from '@/redux/actions/conf'
 
 import styles from './ManageProject.module.scss'
@@ -57,8 +57,8 @@ const ProjectManager = () => {
   }
 
   const buildImageName = (index : number, extension: string) => {
-    if(String(index).length == 1) return "00" + (index + 1) + '.' + extension
-    if(String(index).length == 2) return "0" + (index + 1) + '.' + extension
+    if(String(index).length == 1) return  categoryId + "_" + projectForm.slug + "_00" + (index + 1) + '.' + extension
+    if(String(index).length == 2) return categoryId + "_" + projectForm.slug + "_0" + (index + 1) + '.' + extension
   }
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +80,8 @@ const ProjectManager = () => {
             updatedAt: '',
             originY: 0,
             currentY: 0,
-            extension: file.name.split('.')[file.name.split('.').length - 1]
+            extension: file.name.split('.')[file.name.split('.').length - 1],
+            link: ''
           })
         }
         dispatch(setProjectFormImages(newPhotos))
@@ -194,34 +195,41 @@ const ProjectManager = () => {
     dispatch(setProjectFormImages(copyNewPhotos))
   }
 
-  const uploadToServer = async (image: File, slug: string, name: string) => {  
-    console.log('la aussi');   
-    const body = new FormData()
-    body.set("file", image)
-    body.set("slug", slug)
-    body.set("name", name)
+  // const uploadToServer = async (image: File, slug: string, name: string) => {  
+  //   const body = new FormData()
+  //   body.set("file", image)
+  //   body.set("slug", slug)
+  //   body.set("name", name)
 
-    const response = await fetch("/api/projectmanager/uploadimages", {
-      method: "POST",
-      body
-    })
+  //   const response = await fetch("/api/projectmanager/tobucket", {
+  //     method: "POST",
+  //     body
+  //   })
 
-    return response
-  }
+  //   return response.json()
+  // }
+
+  // const updateImageLink = async (indexNumber: number, fileName: string) => {
+  //   await dispatch(setProjectImageLink({index: indexNumber, link : `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${fileName}`}))
+  // }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await dispatch(addOneProject(projectForm))
-
-    images.forEach((image) => {
-      uploadToServer(image.file!, slug, image.coverImage)
+    
+    images.forEach(async (image, index) => {
+      await dispatch(uploadImageToServer({image, index})) 
     })
+    
+    // await images.forEach(async (image, index) => {
+    //   const bucketimage = await uploadToServer(image.file!, slug, image.coverImage)
+    //   await updateImageLink(index, bucketimage.fileName)
+    // })
+    await dispatch(addOneProject(projectForm))
     dispatch(setShowMessageModal(true))
   }
 
   return (
     <form className={styles.manageproject} onSubmit={handleSubmit}>
-
 
       <div className={styles.manageproject__firstrow}>
         <div className={styles.manageproject__firstrow__container}>
@@ -277,8 +285,8 @@ const ProjectManager = () => {
 
       <div className={styles.manageproject__secondrow}>
         {images.map((image, index) => (
-          <div className={styles.manageproject__secondrow__thumbnailcontainer} key={image.id}>
-            <Image
+          <div className={styles.manageproject__secondrow__thumbnailcontainer} key={index}>
+            {/* <Image
               className={`
                 ${styles.manageproject__secondrow__thumbnailcontainer__arrow}
               `}
@@ -287,7 +295,7 @@ const ProjectManager = () => {
               width={50}
               height={50}
               onClick={(e) => handleClickArrow(e, String(index), 'pos')}
-            />
+            /> */}
             
             <div className={styles.manageproject__secondrow__thumbnailcontainer__imgcontainer}>
 
@@ -322,7 +330,7 @@ const ProjectManager = () => {
 
 
             </div>
-            <Image
+            {/* <Image
               className={`
                 ${styles.manageproject__secondrow__thumbnailcontainer__arrow}
                 ${styles.manageproject__secondrow__thumbnailcontainer__lastarrow}
@@ -332,7 +340,7 @@ const ProjectManager = () => {
               width={50}
               height={50}
               onClick={(e) => handleClickArrow(e, String(index), 'neg')}
-            />
+            /> */}
           </div>
         ))}
       </div>
