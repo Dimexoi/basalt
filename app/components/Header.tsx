@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 import { setHeaderIsScrolled } from "@/redux/features/displaySlice"
 import Link from "next/link"
+import SigninButton from "./SigninButton"
 
 interface Props {
   welcome: boolean
@@ -70,6 +71,7 @@ export default function Header({welcome}: Props) {
           </li>
         </ul>
       </nav>
+      <SigninButton/>
     </header>
   )
 }

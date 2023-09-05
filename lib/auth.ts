@@ -1,25 +1,48 @@
-import type { NextAuthOptions } from "next-auth"
+import type { NextAuthOptions  } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
-export const authOptions: NextAuthOptions = {
-  session: {
-    strategy: "jwt",
-  },
+export const authOptions: NextAuthOptions  = {
   providers: [
     CredentialsProvider({
-      name: "Sign in",
+      name: 'Credentials',
       credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "example@example.com",
-        },
-        password: { label: "Password", type: "password" },
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" }
       },
-      async authorize(credentials) {
-        const user = { id: "1", name: "Admin", email: "admin@admin.com" };
-        return user;
-      },
-    }),
+      async authorize (credentials, req) {
+        if (typeof credentials !== "undefined") {
+          const res = await fetch(process.env.NEXTAUTH_URL!+'/api/login', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body:JSON.stringify({
+              username: credentials?.username,
+              password: credentials?.password
+            })
+          })
+
+          const user = await res.json();
+
+          if (typeof user !== "undefined") {
+            return user
+          } else {
+            return null
+          }
+        } else {
+          return null
+        }
+      }
+    })
   ],
-};
+  callbacks: {
+    async jwt({token, user}) {
+      return {...token, ...user}
+    },
+
+    async session({session, token}) {
+      session.user = token as any
+      return session
+    }
+  }
+}
