@@ -13,7 +13,7 @@ export default function CardCategory({category}: PropsType) {
 
     <Link 
       key={category.id}
-      className='flex h-32 md:h-44 border rounded-lg overflow-hidden shadow-md hover:shadow-xl'
+      className='group flex h-32 hover:h-36 md:h-44 md:hover:h-48 border rounded-lg overflow-hidden shadow-md hover:shadow-2xl duration-200'
       href={`/category/${category.id}/${category.slug}`}      
     >
       
@@ -26,8 +26,8 @@ export default function CardCategory({category}: PropsType) {
         className='h-100 w-auto'
       />
 
-      <div className='group w-full p-2 text-center flex flex-col justify-around hover:bg-[#315858] duration-300'>
-        <h3 className='bg-[#315858] text-white mb-2 p-2 group-hover:bg-white group-hover:text-[#315858] duration-300'>{category.name}</h3>
+      <div className='w-full p-2 md:px-5 text-center flex flex-col justify-around group-hover:bg-[#315858] duration-200'>
+        <h3 className='bg-[#315858] text-white md:text-lg p-2 group-hover:bg-white group-hover:text-[#315858] duration-300'>{category.name}</h3>
         <p className='text-black group-hover:text-white'>{category.description}</p>
       </div>
     </Link>
