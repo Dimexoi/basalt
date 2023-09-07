@@ -12,7 +12,7 @@ export default function Welcome() {
         <div className="flex-1 h-full flex flex-col p-2 mt-16 md:p-10">
             <h1 className="font-semibold text-lg md:text-2xl text-center">Le mobilier professionnel pour la restauration et l&apos;hôtellerie</h1>
           <div className="flex lg:items-center h-full">
-            <div className="flex h-full lg:h-auto lg:gap-10 flex-col lg:flex-row justify-around">
+            <div className="flex h-full lg:h-auto lg:gap-10 xl:w-[70%] lg:mx-auto flex-col lg:flex-row justify-around">
 
               <div className="flex justify-around items-center md:flex-1">
 
@@ -23,10 +23,9 @@ export default function Welcome() {
               </div>
 
               <div className="border md:flex-1">
-                  <Carousel/>
+                <Carousel/>
               </div>
             </div>
-            
             
           </div>
         </div>

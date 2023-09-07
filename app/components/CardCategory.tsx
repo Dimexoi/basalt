@@ -27,8 +27,8 @@ export default function CardCategory({category}: PropsType) {
       />
 
       <div className='w-full p-2 md:px-5 text-center flex flex-col justify-around group-hover:bg-[#315858] duration-200'>
-        <h3 className='bg-[#315858] text-white md:text-lg p-2 group-hover:bg-white group-hover:text-[#315858] duration-300'>{category.name}</h3>
-        <p className='text-black group-hover:text-white'>{category.description}</p>
+        <h3 className='bg-[#315858] text-white md:text-lg md:group-hover:text-xl p-2 group-hover:bg-white group-hover:text-[#315858] duration-300'>{category.name}</h3>
+        <p className='text-black group-hover:text-white md:group-hover:text-lg'>{category.description}</p>
       </div>
     </Link>
 
