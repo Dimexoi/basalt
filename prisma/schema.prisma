@@ -49,6 +49,7 @@ model Image {
   coverImage String 
   project    Project?   @relation(fields: [projectId], references: [id])
   projectId  Int?
+  link String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
 }

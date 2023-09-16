@@ -26,23 +26,25 @@ const Carousel: React.FC = () => {
   };
 
   return (
-    <div className="relative h-full" >
+    <div className="relative h-full lg:h-auto " >
         
       {projects.map((project, index) => (
         
-        <div
-        
+        <div    
           key={index}
-          className={` transition-opacity duration-500 h-full ${
-            index === currentIndex ? 'opacity-100' : 'opacity-0'
+          className={`flex items-center justify-center transition-opacity duration-500 w-full overflow-hidden ${
+            index === currentIndex ? 'block opacity-100' : 'hidden opacity-0'
           }`}
         >
 
-
-            <Image fill src={'/images/projects/'+project.slug+'/'+project.coverImage} alt={`Slide ${index}`}  sizes='100vw'  className='' />
-
-
-
+          <Image
+            src={'/images/projects/restaurant-1/001.jpg'}
+            alt={`Slide ${index}`} 
+            sizes='100vw'
+            height='0'
+            width='0'
+            className='h-auto w-full'
+          />
           
         </div>
       ))}

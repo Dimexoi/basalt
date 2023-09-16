@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 
 import { Providers } from "@/redux/provider"
 import Header from './components/Header'
+import SessionProviders from './components/SessionsProviders'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,12 +19,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className='h-full'>
-      <body className={inter.className + ' h-full'}>
-        <Providers>
-          {children}  
-        </Providers>
+
+    <html lang="fr" className='min-h-full'>
+      
+    <body className={inter.className + ' min-h-full bg-white'}>
+      <Providers>
+        <SessionProviders>
+          {children}
+        </SessionProviders>
+      </Providers>
       </body>
-    </html>
+  </html>
   )
 }

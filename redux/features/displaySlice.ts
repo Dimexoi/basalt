@@ -19,6 +19,9 @@ type DisplayState = {
   },
   header: {
     isScrolled: boolean
+  },
+  project: {
+    showMessageModal: boolean
   }
 };
 
@@ -29,6 +32,9 @@ const initialState = {
   },
   header: {
     isScrolled: false
+  },
+  project: {
+    showMessageModal: false
   }
 } as DisplayState
 
@@ -47,6 +53,9 @@ export const display = createSlice({
     },
     setHeaderIsScrolled (state, action) {
       state.header.isScrolled = action.payload
+    },
+    setShowMessageModal (state, action) {
+      state.project.showMessageModal = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -64,7 +73,8 @@ export const {
   setCarouselCurentIndex,
   nextSlide,
   prevSlide,
-  setHeaderIsScrolled
+  setHeaderIsScrolled,
+  setShowMessageModal
 } = display.actions
 
 export const getCarouselProjects = createAsyncThunk(
@@ -75,4 +85,4 @@ export const getCarouselProjects = createAsyncThunk(
   }
 )
 
-export default display.reducer;
+export default display.reducer

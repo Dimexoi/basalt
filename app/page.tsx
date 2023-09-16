@@ -1,9 +1,9 @@
 'use client'
 import { getCategories } from '@/redux/features/categorySlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import Image from 'next/image'
 import { useEffect } from 'react'
 import Welcome from './components/Welcome'
+import CardCategory from './components/CardCategory'
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -17,29 +17,15 @@ export default function Home() {
   return (
     <main className="h-full">
       <Welcome/>
-      <div>
-        <h2>Découvrez nos projets</h2>
+      <div className='mt-3 md:px-10 lg:w-[80%] lg:mx-auto' id='test'>
+        <h2 className='font-bold text-center text-xl text-[#3D6367]'>Découvrez nos projets</h2>
 
-        {categories.map(category => (
-          <div key={category.id} className='flex max-h-40'>
-            <div className=''>
-
-              <Image
-                src='/images/categories/restaurants/cover.png'
-                alt='Image restaurant'
-                width={0}
-                height={0}
-                sizes='100vw'
-                className='h-full w-auto'
-              />
-            </div>
-              <div className=''>
-                <p>{category.name}</p>
-                <p>{category.description}</p>
-              </div>
-          </div>
-        ))}
+        <div className='flex flex-col gap-3 p-3 lg:grid xl:grid-cols-2'>
+          {categories.map(category => (
+              <CardCategory category={category} key={category.id}/>
+          ))}
         </div>
+      </div> 
     </main>
   )
 }
