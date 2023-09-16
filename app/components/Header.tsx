@@ -14,12 +14,13 @@ export default function Header({welcome}: Props) {
   const dispatch = useAppDispatch()
   const { isScrolled } = useAppSelector(state => state.display.header)
 
-  const handleScroll = () => {
-    const isScrolled = window.scrollY > 50
-    dispatch(setHeaderIsScrolled(isScrolled))
-  }
-
   useEffect(() => {
+
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50
+      dispatch(setHeaderIsScrolled(isScrolled))
+    }
+
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
