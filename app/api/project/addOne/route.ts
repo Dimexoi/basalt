@@ -28,7 +28,7 @@ export async function POST(req: Request) {
                         description: image.description,
                         slug: image.slug,
                         coverImage: image.coverImage,
-                        link: `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${image.coverImage}`
+                        link: image.link
                     }
                 ))
             }

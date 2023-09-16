@@ -1,7 +1,21 @@
 'use client'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setProjectFormName, setProjectFormDesc, setProjectFormSlug, setProjectFormCategoryId, setProjectFormImages, setProjectFormDragIndex, setProjectFormImageDesc, setProjectFormImageSlug, addOneProject, setProjectFormImageName, setProjectImageLink, uploadImageToServer } from '@/redux/features/projectSlice'
+import { type PutBlobResult } from '@vercel/blob'
+import { upload } from '@vercel/blob/client'
+import { setProjectFormName,
+  setProjectFormDesc,
+  setProjectFormSlug,
+  setProjectFormCategoryId,
+  setProjectFormImages,
+  setProjectFormDragIndex,
+  setProjectFormImageDesc,
+  setProjectFormImageSlug,
+  addOneProject,
+  setProjectFormImageName,
+  setProjectImageLink,
+  uploadImageToServer
+} from '@/redux/features/projectSlice'
 // import { setShowMessageModal } from '@/redux/actions/conf'
 
 import styles from './ManageProject.module.scss'
@@ -216,8 +230,17 @@ const ProjectManager = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
-    images.forEach(async (image, index) => {
-      await dispatch(uploadImageToServer({image, index})) 
+    await images.forEach(async (image, index) => {
+      // await dispatch(uploadImageToServer({image, index})) 
+      const newBlob: {url: string}|void = await upload(image.coverImage, image.file, {
+        access: 'public',
+        handleUploadUrl: '/api/image/upload',
+      }).then(async ()=> {
+
+        await dispatch(setProjectImageLink({index, link: newBlob!.url}))
+      });
+
+
     })
     
     // await images.forEach(async (image, index) => {
