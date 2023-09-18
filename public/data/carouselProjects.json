@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Restaurant 1",
+    "description": "desc projet 1",
+    "slug": "restaurant-1",
+    "coverImage": "001.jpg",
+    "categoryId": 1
+  },
+  {
+    "id": 2,
+    "name": "Hotel 1",
+    "description": "desc projet 2",
+    "slug": "hotel-1",
+    "coverImage": "001.jpg",
+    "categoryId": 1
+  },
+  {
+    "id": 3,
+    "name": "Restaurant 2",
+    "description": "desc projet 3",
+    "slug": "restaurant-2",
+    "coverImage": "001.jpg",
+    "categoryId": 1
+  }
+]

@@ -2,16 +2,18 @@
 
 import React, { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
-import { getCarouselProjects, nextSlide, prevSlide, setCarouselCurentIndex } from '@/redux/features/displaySlice'
+import { getCarouselProjects, nextSlide, prevSlide, setCarouselCurentIndex, setCarouselProjects } from '@/redux/features/displaySlice'
 import Image from 'next/image';
 
+import carouselProjects from '@/public/data/carouselProjects.json'
 import arrow from '@/public/images/icons/rightarrow.svg'
 
 const Carousel: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCarouselProjects())
+    // dispatch(getCarouselProjects())
+    dispatch(setCarouselProjects(carouselProjects))
   }, [dispatch])
 
   const projects = useAppSelector((state) => state.display.carousel.projects)
@@ -38,7 +40,7 @@ const Carousel: React.FC = () => {
         >
 
           <Image
-            src={'/images/projects/restaurant-1/001.jpg'}
+            src={`/images/projects/${project.slug}/${project.coverImage}`}
             alt={`Slide ${index}`} 
             sizes='100vw'
             height='0'

@@ -78,7 +78,6 @@ const ProjectManager = () => {
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPhotos = [...images]
     const files = e.target.files
-    console.log(files);
     if (files) {
         for (let i = 0; i < files.length; i++) {
           const file = files[i]

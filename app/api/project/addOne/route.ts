@@ -18,20 +18,20 @@ export async function POST(req: Request) {
         name: body.name,
         description: body.description,
         slug: body.slug,
-        coverImage: body.images[0].coverImage,
+        coverImage: body.images[0].link,
         categoryId: Number(body.categoryId),
         images: {
-            createMany: {
-                data: body.images.map((image: ImageType) => (
-                    {
-                        name: image.name,
-                        description: image.description,
-                        slug: image.slug,
-                        coverImage: image.coverImage,
-                        link: image.link
-                    }
-                ))
-            }
+          createMany: {
+            data: body.images.map((image: ImageType) => (
+              {
+                name: image.name,
+                description: image.description,
+                slug: image.slug,
+                coverImage: image.coverImage,
+                link: image.link
+              }
+            ))
+          }
         }
       }
     })

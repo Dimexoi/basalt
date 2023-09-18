@@ -13,6 +13,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
   const {category} = useAppSelector(state => state.category)
   const {project} = useAppSelector(state => state.project)
 
+
   useEffect(() => {
     if (category.projects!.length > 0) {
       console.log('ici');

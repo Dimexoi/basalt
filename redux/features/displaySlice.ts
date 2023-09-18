@@ -56,6 +56,8 @@ export const display = createSlice({
     },
     setShowMessageModal (state, action) {
       state.project.showMessageModal = action.payload
+    }, setCarouselProjects (state, action) {
+      state.carousel.projects = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -74,7 +76,8 @@ export const {
   nextSlide,
   prevSlide,
   setHeaderIsScrolled,
-  setShowMessageModal
+  setShowMessageModal,
+  setCarouselProjects
 } = display.actions
 
 export const getCarouselProjects = createAsyncThunk(

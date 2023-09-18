@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Restaurants",
+    "description": "Soyez équipés de la réception aux cuisines",
+    "slug": "restaurants",
+    "coverImage": "cover.png",
+    "createdAt": "2023-08-10T07:41:22.879Z",
+    "updatedAt": "2023-08-18T12:14:25.613Z",
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "Hôtels",
+    "description": "Offrez le meilleur confort à vos clients",
+    "slug": "hotels",
+    "coverImage": "cover.png",
+    "createdAt": "2023-08-18T12:11:52.604Z",
+    "updatedAt": "2023-08-18T12:08:07.576Z",
+    "active": true
+  },
+  {
+    "id": 3,
+    "name": "Locations",
+    "description": "Equipez vos locations en meubles durables",
+    "slug": "locations",
+    "coverImage": "cover.png",
+    "createdAt": "2023-08-18T12:11:52.604Z",
+    "updatedAt": "2023-08-18T12:08:21.698Z",
+    "active": true
+  },
+  {
+    "id": 4,
+    "name": "Salles de bains",
+    "description": "Optez pour le meilleur du teck",
+    "slug": "salles-de-bain",
+    "coverImage": "cover.png",
+    "createdAt": "2023-08-18T12:11:52.604Z",
+    "updatedAt": "2023-08-18T12:08:22.147Z",
+    "active": true
+  },
+  {
+    "id": 5,
+    "name": "Moodboards",
+    "description": "Trouvez votre inspiration",
+    "slug": "moodboards",
+    "coverImage": "cover.png",
+    "createdAt": "2023-08-18T12:11:52.604Z",
+    "updatedAt": "2023-08-18T12:08:22.503Z",
+    "active": true
+  },
+  {
+    "id": 6,
+    "name": "Tout voir",
+    "description": "Jetez un oeil à l'ensemble de nos projets",
+    "slug": "tout-voir",
+    "coverImage": "cover.png",
+    "createdAt": "2023-08-18T12:11:52.604Z",
+    "updatedAt": "2023-08-18T12:08:22.934Z",
+    "active": true
+  }
+]
