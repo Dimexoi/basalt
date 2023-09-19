@@ -18,7 +18,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
   }, [dispatch])
 
   return (
-    <main className="">
+    <main>
       <Header welcome={false}/>
       <div className='md:px-10 lg:w-[80%] lg:mx-auto'>
         <h1 className='font-bold text-center text-xl text-[#3D6367] mb-3 p-3'>Découvrez nos projets de {category.name}</h1>
