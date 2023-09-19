@@ -73,8 +73,6 @@ const Carousel: React.FC = () => {
 
       </div>
 
-      
-      
     </div>
   );
 };
