@@ -229,15 +229,15 @@ const ProjectManager = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
-    await images.forEach(async (image, index) => {
-      // await dispatch(uploadImageToServer({image, index})) 
-      const newBlob: {url: string}|void = await upload(image.coverImage, image.file, {
-        access: 'public',
-        handleUploadUrl: '/api/image/upload',
-      }).then(async ()=> {
+    images.forEach(async (image, index) => {
+      await dispatch(uploadImageToServer({image, index}))
+      // const newBlob: {url: string}|void = await upload(image.coverImage, image.file, {
+      //   access: 'public',
+      //   handleUploadUrl: '/api/image/upload',
+      // }).then(async ()=> {
 
-        await dispatch(setProjectImageLink({index, link: newBlob!.url}))
-      });
+      //   await dispatch(setProjectImageLink({index, link: newBlob!.url}))
+      // });
 
 
     })

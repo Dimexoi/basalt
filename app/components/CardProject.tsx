@@ -16,7 +16,7 @@ export default function CardProject({project}: PropsType) {
       href={`/project/${project.id}/${project.slug}`}
     >     
       <Image
-        src={project.coverImage}
+        src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${project.coverImage}`}
         alt={`Image ${project.name}`}
         width="0"
         height="0"

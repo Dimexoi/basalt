@@ -34,7 +34,7 @@ const Carousel: React.FC = () => {
         
         <div    
           key={index}
-          className={`flex items-center justify-center transition-opacity duration-500 w-full overflow-hidden ${
+          className={`flex items-center justify-center transition-opacity duration-500 w-full h-48 overflow-hidden ${
             index === currentIndex ? 'block opacity-100' : 'hidden opacity-0'
           }`}
         >
@@ -45,7 +45,7 @@ const Carousel: React.FC = () => {
             sizes='100vw'
             height='0'
             width='0'
-            className='h-auto w-full'
+            className='w-full h-auto'
           />
           
         </div>

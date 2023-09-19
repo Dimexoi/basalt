@@ -1,10 +1,26 @@
+import { useEffect } from "react";
 import Carousel from "./Carousel";
 import Header from "./Header";
 
 export default function Welcome() {
+  const adjustHeight = () => {
+    const content = document.getElementById('content')
+    const screenHeight = window.innerHeight
+    content!.style.height = screenHeight + 'px'
+  }
+
+  useEffect(() => {
+    // Appelez la fonction d'ajustement de la hauteur lorsque la page se charge et lorsque la fenêtre est redimensionnée
+    adjustHeight();
+    window.addEventListener('resize', adjustHeight);
+
+    return () => {
+      window.removeEventListener('resize', adjustHeight);
+    };
+  }, []);
 
   return (
-    <div className="h-screen bg-[url('/images/imgbg.jpg')] bg-[no-repeat] bg-[center] bg-cover text-white">
+    <div id="content" className="h-screen bg-[url('/images/imgbg.jpg')] bg-[no-repeat] bg-[center] bg-cover text-white">
       <div className="flex flex-col h-full bg-gradient-to-b from-black/60 to-black/20">
 
         <Header welcome={true}/>

@@ -27,9 +27,6 @@ export default function Category({ params }: { params: { id: number, slug: strin
           {category.projects!.map(project => (
             <CardProject project={project} key={project.id}/>
           ))}
-          {category.projects!.map(project => (
-            <CardProject project={project} key={project.id}/>
-          ))}
         </div>
       </div>
     </main>

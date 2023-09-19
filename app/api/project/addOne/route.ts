@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         name: body.name,
         description: body.description,
         slug: body.slug,
-        coverImage: body.images[0].link,
+        coverImage: body.images[0].coverImage,
         categoryId: Number(body.categoryId),
         images: {
           createMany: {

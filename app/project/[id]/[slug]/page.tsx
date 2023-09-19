@@ -38,7 +38,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
                 {image.name}
               </p>
               <Image
-                src={`${image.link}`}
+                src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${image.coverImage}`}
                 alt={`Image ${image.name}`}
                 width="0"
                 height="0"
