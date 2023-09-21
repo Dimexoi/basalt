@@ -42,6 +42,7 @@ export default function Header({welcome}: Props) {
           alt="Logo Basalt"
           sizes="100vw"
           className={`w-auto ${isScrolled ? "h-12 " : "h-12"}`}
+          priority
         />
       </Link>
       <nav className={`${isScrolled ? 'text-black' : ''}`}>

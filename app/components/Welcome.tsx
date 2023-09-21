@@ -1,6 +1,10 @@
 import { useEffect } from "react";
-import Carousel from "./Carousel";
+import dynamic from 'next/dynamic'
 import Header from "./Header";
+
+// import Carousel from "./Carousel";
+
+const Carousel = dynamic(() => import('./Carousel'), { ssr: false })
 
 export default function Welcome() {
   const adjustHeight = () => {

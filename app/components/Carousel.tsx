@@ -3,10 +3,14 @@
 import React, { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { getCarouselProjects, nextSlide, prevSlide, setCarouselCurentIndex, setCarouselProjects } from '@/redux/features/displaySlice'
-import Image from 'next/image';
+import Image from 'next/image'
 
+import imageRestaurant1 from '@/public/images/projects/restaurant-1/001.jpg'
+import imageHotel1 from '@/public/images/projects/hotel-1/001.jpg'
+import imageRestaurant2 from '@/public/images/projects/restaurant-2/001.jpg'
 import carouselProjects from '@/public/data/carouselProjects.json'
 import arrow from '@/public/images/icons/rightarrow.svg'
+
 
 const Carousel: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +31,13 @@ const Carousel: React.FC = () => {
     dispatch(nextSlide())
   };
 
+  const getImage = (index: number) => {
+    if (index === 0) return imageRestaurant1
+    else if (index === 1) return imageHotel1
+    else if (index === 2) return imageRestaurant2
+    else return imageRestaurant1
+  }
+
   return (
     <div className="relative h-full lg:h-auto " >
         
@@ -40,7 +51,7 @@ const Carousel: React.FC = () => {
         >
 
           <Image
-            src={`/images/projects/${project.slug}/${project.coverImage}`}
+            src={getImage(index)}
             alt={`Slide ${index}`} 
             sizes='100vw'
             height='0'
@@ -77,4 +88,4 @@ const Carousel: React.FC = () => {
   );
 };
 
-export default Carousel;
+export default Carousel

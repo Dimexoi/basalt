@@ -16,7 +16,6 @@ export default function Category({ params }: { params: { id: number, slug: strin
 
   useEffect(() => {
     if (category.projects!.length > 0) {
-      console.log('ici');
       dispatch(setProject(category.projects!.find(project => project.id === Number(params.id))))
     } else {
       dispatch(getOneProject(params.id))
@@ -28,13 +27,26 @@ export default function Category({ params }: { params: { id: number, slug: strin
       <Header welcome={false}/>
       <div className='flex flex-col gap-2'>
         <h1 className='font-bold text-center text-xl text-[#3D6367]'>{project.name}</h1>
-        <p className='text-justify p-3'>{project.description}</p>
+        {project.images.length > 0 && 
+          <Image
+          src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${project.images[0].coverImage}`}
+          alt={`Image ${project.images[0].name}`}
+          width="0"
+          height="0"
+          sizes='100vw'
+          className='h-auto w-full mb-1'
+        />
+        }
+        
+        <p className='text-justify ps-3'>{project.description}</p>
 
         <div>
-          <h3 className='text-center font-semibold'>Gallerie</h3>
-          {project.images.map(image => (
+          <h2 className='text-center font-semibold mb-3'>Gallerie photo</h2>
+          {project.images.filter((image, index) => (
+            index !== 0
+          )).map(image => (
             <div key={image.id}>
-              <p className='mb-3 p-3'>
+              <p className='mb-3 ps-3'>
                 {image.name}
               </p>
               <Image

@@ -27,6 +27,17 @@ export default function Home() {
               <CardCategory category={category} key={category.id}/>
           ))}
         </div>
+
+        <div>
+          <h2 className='font-bold text-center text-xl text-[#3D6367]'>Contactez-nous</h2>
+          <div>
+            adresse
+          </div>
+          <div>
+            telephone
+            email
+          </div>
+        </div>
       </div> 
     </main>
   )

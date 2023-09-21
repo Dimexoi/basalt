@@ -24,6 +24,7 @@ export default function CardCategory({category}: PropsType) {
         height="0"
         sizes='100vw'
         className='h-100 w-auto'
+        priority
       />
 
       <div className='w-full p-2 md:px-5 text-center flex flex-col justify-around group-hover:bg-[#315858] duration-200'>
