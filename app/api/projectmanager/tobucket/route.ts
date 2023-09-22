@@ -25,7 +25,7 @@ async function uploadImageToS3(
   return params.Key;
 }
 
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
     const file = formData.get("file") as Blob | null
