@@ -25,7 +25,7 @@ async function uploadImageToS3(
   return params.Key;
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest, response: NextResponse): Promise<NextResponse | undefined>{
   try {
     const formData = await request.formData()
     const file = formData.get("file") as Blob | null
@@ -45,7 +45,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, fileName });
   } catch (error) {
-    console.error("Error uploading image:", error);
     NextResponse.json({ message: "Error uploading image" });
   }
 }
