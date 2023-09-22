@@ -1,4 +1,4 @@
-'use client'
+
 import { getCategories } from '@/redux/features/categorySlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { useEffect } from 'react'
@@ -7,7 +7,7 @@ import CardCategory from './components/CardCategory'
 import categories from '@/public/data/categories.json'
 
 export default function Home() {
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
 
   // const {categories} = useAppSelector(state => state.category)
   // useEffect(() => {
