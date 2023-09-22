@@ -41,7 +41,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
         <p className='text-justify ps-3'>{project.description}</p>
 
         <div>
-          <h2 className='text-center font-semibold mb-3'>Gallerie photo</h2>
+          <h2 className='text-center font-semibold mb-3'>Galerie photo</h2>
           {project.images.filter((image, index) => (
             index !== 0
           )).map(image => (
