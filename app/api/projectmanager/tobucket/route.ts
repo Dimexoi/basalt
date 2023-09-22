@@ -45,6 +45,6 @@ export async function POST(request: Request, response: Response): Promise<Respon
 
     return NextResponse.json({ success: true, fileName });
   } catch (error) {
-    NextResponse.json({ message: "Error uploading image" });
+    throw(error)
   }
 }
