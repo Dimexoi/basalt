@@ -21,6 +21,8 @@ import { setProjectFormName,
 import styles from './ManageProject.module.scss'
 import Image from 'next/image'
 
+import arrowSvg from '@/public/icons/arrow.svg'
+
 // import ModalMessage from '../ModalMessage'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setShowMessageModal } from '@/redux/features/displaySlice'
@@ -52,7 +54,7 @@ const ProjectManager = () => {
     dispatch(setProjectFormCategoryId(value))
   }
 
-  const handleInputChangeDesc = (e: React.FormEvent<HTMLInputElement> ) => {
+  const handleInputChangeDesc = (e: React.FormEvent<HTMLTextAreaElement>,) => {
     const { name, value } = e.currentTarget
 
     dispatch(setProjectFormDesc(value))
@@ -262,7 +264,7 @@ const ProjectManager = () => {
             </h2>
             <label className={styles.manageproject__firstrow__inputs__label}>
               Catégorie:
-              <select name="category_id" value={categoryId} onChange={handleInputChangeCategoryId}>
+              <select name="category_id" value={categoryId} onChange={handleInputChangeCategoryId} required>
                 <option value="">-- Choisissez une catégorie --</option>
                 <option value="1">Restaurant</option>
                 <option value="2">Hotel</option>
@@ -270,17 +272,17 @@ const ProjectManager = () => {
             </label>
             <label className={styles.manageproject__firstrow__inputs__label}>
               Nom du projet:
-              <input name="name" type="text" value={name} onChange={handleInputChangeName} />
+              <input name="name" type="text" value={name} onChange={handleInputChangeName} required/>
             </label>
 
             <label className={styles.manageproject__firstrow__inputs__label}>
               Description du projet:
-              <input name="description" type="text" value={description} onChange={handleInputChangeDesc} />
+              <textarea name="description" value={description} placeholder="Description du projet" onChange={handleInputChangeDesc} rows={10} required/>
             </label>
 
             <label className={styles.manageproject__firstrow__inputs__label}>
               Photos:
-              <input name="images" type="file" multiple onChange={handlePhotoUpload} />
+              <input name="images" type="file" multiple onChange={handlePhotoUpload}/>
             </label>
 
             <button type="submit" className={styles.manageproject__firstrow__inputs__button}>Enregistrer</button>
@@ -308,16 +310,16 @@ const ProjectManager = () => {
       <div className={styles.manageproject__secondrow}>
         {images.map((image, index) => (
           <div className={styles.manageproject__secondrow__thumbnailcontainer} key={index}>
-            {/* <Image
+            <Image
               className={`
                 ${styles.manageproject__secondrow__thumbnailcontainer__arrow}
               `}
-              alt='Image'
-              src={''}
+              alt='arrow icon'
+              src={arrowSvg}
               width={50}
               height={50}
               onClick={(e) => handleClickArrow(e, String(index), 'pos')}
-            /> */}
+            />
             
             <div className={styles.manageproject__secondrow__thumbnailcontainer__imgcontainer}>
 
@@ -343,26 +345,26 @@ const ProjectManager = () => {
                 />
               </div>
 
-              <label className={styles.manageproject__secondrow__thumbnailcontainer__label}>
-                <input name="imagetitle" type="text" value={image.name} placeholder="Titre de la photo" onChange={(e) => handleInputChangeImgName(e, index)} />
-              </label>
-              <label className={styles.manageproject__secondrow__thumbnailcontainer__label}>
-                <textarea name="imagedesc" value={image.description} placeholder="Description de la photo" onChange={(e) => handleInputChangeImgDesc(e, index)} />
-              </label>
+              <div className='w-full'>
+                <input name="imagetitle" type="text" value={image.name} placeholder="Titre de la photo" onChange={(e) => handleInputChangeImgName(e, index)} className='w-full p-2 text-black' required/>
+              </div>
 
-
+              <div className='w-full'>
+                <textarea name="imagedesc" value={image.description} placeholder="Description de la photo" onChange={(e) => handleInputChangeImgDesc(e, index)} rows={10} className='w-full p-2 text-black' required/>
+              </div>
+          
             </div>
-            {/* <Image
+            <Image
               className={`
                 ${styles.manageproject__secondrow__thumbnailcontainer__arrow}
                 ${styles.manageproject__secondrow__thumbnailcontainer__lastarrow}
               `}
-              alt= 'image'
-              src={''}
+              alt= 'arrow icon'
+              src={arrowSvg}
               width={50}
               height={50}
               onClick={(e) => handleClickArrow(e, String(index), 'neg')}
-            /> */}
+            />
           </div>
         ))}
       </div>
