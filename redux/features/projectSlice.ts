@@ -132,6 +132,9 @@ export const project = createSlice({
    },
    setProjectImageLink(state, action) {
     state.projectForm.images[action.payload.index].link = action.payload.link
+   },
+   removeImageFromProjectForm(state, action) {
+    state.projectForm.images = action.payload
    }
   },
   extraReducers: (builder) => {
@@ -164,7 +167,8 @@ export const {
   setProjectFormImageDesc,
   setProjectFormImageSlug,
   setProjectFormImageName,
-  setProjectImageLink
+  setProjectImageLink,
+  removeImageFromProjectForm
 } = project.actions
 
 export const getProjects = createAsyncThunk(

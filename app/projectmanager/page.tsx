@@ -210,6 +210,12 @@ const ProjectManager = () => {
     dispatch(setProjectFormImages(copyNewPhotos))
   }
 
+  const handleClickDelete = (e: React.MouseEvent<HTMLDivElement>, index: string) => {
+    const newPhotos = [...images]
+    newPhotos.splice(Number(index), 1)
+    dispatch(setProjectFormImages(newPhotos))
+  }
+
   // const uploadToServer = async (image: File, slug: string, name: string) => {  
   //   const body = new FormData()
   //   body.set("file", image)
@@ -344,6 +350,7 @@ const ProjectManager = () => {
                   alt={`Photo ${index}`}
                 />
               </div>
+              <p onClick={(e) => handleClickDelete(e, String(index))} className='text-center text-red-500 border border-red-500 p-1'>Supprimer photo</p>
 
               <div className='w-full'>
                 <input name="imagetitle" type="text" value={image.name} placeholder="Titre de la photo" onChange={(e) => handleInputChangeImgName(e, index)} className='w-full p-2 text-black' required/>
