@@ -59,16 +59,19 @@ export default function Header({welcome}: Props) {
           <li className="relative">
             <Link
               className="mr-2"
-              href='/#test'
+              href='/#portfolio'
             >
               Portfolio
             </Link>
             <span className={`absolute top-1/2 -translate-y-1/2 h-4 w-[2px] ${isScrolled ? " bg-[#3D6367]" : welcome ? " bg-white" : " bg-[#3D6367]"}`}></span>
           </li>
           <li className="relative">
-            <a>
+          <Link
+              className="mr-2"
+              href='/#contact'
+            >
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
