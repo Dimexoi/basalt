@@ -29,8 +29,8 @@ export default function Header({welcome}: Props) {
   }, [dispatch])
 
   return (
-    <header className={`flex top-0 gap-4 items-center justify-around transition-all z-50 ${isScrolled ?
-      welcome ? " fixed w-full bg-white p-2 border border-b shadow-lg" : " sticky bg-white p-2 border border-b shadow-lg"
+    <header className={`flex top-0 gap-4 items-center justify-around md:justify-start md transition-all z-50 ${isScrolled ?
+      welcome ? " fixed w-full bg-white p-2 border border-b shadow-lg" : " sticky bg-white p-2 border-b drop-shadow-lg"
     : welcome ? " fixed w-full bg-transparent p-3" : " sticky bg-white p-3"}`
     }>
       <div className="hidden sm:block">

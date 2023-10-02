@@ -21,7 +21,7 @@ export default function CardProject({project}: PropsType) {
         width="0"
         height="0"
         sizes='100vw'
-        className='h-auto w-full'
+        className='h-auto w-full md:h-full md:w-auto md:min-w-full'
       />
 
       <div className='absolute bottom-0 left-0 w-full text-center bg-black bg-opacity-50 text-white py-2'>
