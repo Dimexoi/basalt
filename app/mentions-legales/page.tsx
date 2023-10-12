@@ -22,7 +22,7 @@ return (
                 N° d’identification à la TVA : FR82847947413
               </li>
               <li>
-                  Adresse : 8, rue Benjamin Hoarau 
+                  Adresse : 8, rue Benjamin Hoarau - 97410 Saint Pierre - La Réunion
               </li>
               <li>
                   Téléphone : 0262 35 06 79
