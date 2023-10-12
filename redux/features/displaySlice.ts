@@ -22,6 +22,9 @@ type DisplayState = {
   },
   project: {
     showMessageModal: boolean
+  },
+  general: {
+    currentDate: Date | null
   }
 };
 
@@ -35,6 +38,9 @@ const initialState = {
   },
   project: {
     showMessageModal: false
+  },
+  general: {
+    currentDate: null
   }
 } as DisplayState
 
@@ -56,8 +62,12 @@ export const display = createSlice({
     },
     setShowMessageModal (state, action) {
       state.project.showMessageModal = action.payload
-    }, setCarouselProjects (state, action) {
+    },
+    setCarouselProjects (state, action) {
       state.carousel.projects = action.payload
+    },
+    setCurrentDate (state, action) {
+      state.general.currentDate = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -77,7 +87,8 @@ export const {
   prevSlide,
   setHeaderIsScrolled,
   setShowMessageModal,
-  setCarouselProjects
+  setCarouselProjects,
+  setCurrentDate
 } = display.actions
 
 export const getCarouselProjects = createAsyncThunk(
