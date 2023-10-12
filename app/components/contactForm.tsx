@@ -1,5 +1,5 @@
 'use client'
-import { setEmail, setMessage, setNom, setPrenom, setSociete, setTelephone, submitEmail } from "@/redux/features/contactSlice";
+import { setEmail, setIsSubmitting, setMessage, setNom, setPrenom, setSociete, setTelephone, submitEmail } from "@/redux/features/contactSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 export default function ContactForm() {
@@ -34,7 +34,14 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    dispatch(setIsSubmitting(true))
     dispatch(submitEmail({nom, prenom, email, telephone, societe, message, isSubmitting}))
+    dispatch(setNom(''))
+    dispatch(setPrenom(''))
+    dispatch(setEmail(''))
+    dispatch(setTelephone(''))
+    dispatch(setSociete(''))
+    dispatch(setMessage(''))
   }
 
   return (
@@ -133,9 +140,11 @@ export default function ContactForm() {
           required
         />
       </div>
+      
+      {isSubmitting && <p className="text-[#3D6367] font-semibold">Votre message a bien été envoyé</p> }
 
       <button disabled={isSubmitting} className="border border-[#3D6367] text-[#3D6367] p-2 rounded-md hover:border-white hover:text-white hover:bg-[#3D6367]">
-        Submit
+        Envoyer
       </button>
     </form>
   )
