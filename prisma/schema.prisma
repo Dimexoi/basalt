@@ -29,9 +29,9 @@ model Category {
 
 model Project {
   id      Int      @id @default(autoincrement())
-  name          String @unique
+  name          String
   description         String?
-  slug String @unique
+  slug String
   coverImage String  
   category    Category?   @relation(fields: [categoryId], references: [id])
   categoryId  Int?
@@ -43,9 +43,9 @@ model Project {
 
 model Image {
   id      Int      @id @default(autoincrement())
-  name          String @unique
+  name          String
   description         String?
-  slug String @unique
+  slug String
   coverImage String 
   project    Project?   @relation(fields: [projectId], references: [id])
   projectId  Int?
