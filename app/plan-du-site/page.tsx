@@ -19,7 +19,7 @@ return (
                   Projets de restaurants
                 </li>
                 <li>
-                  Projets d'hôtels
+                  Projets d&apos;hôtels
                 </li>
                 <li>
                   Projets de locations
