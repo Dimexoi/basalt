@@ -1,20 +1,21 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-
 type ContactState = {
-  email: string
-  telephone: string
   nom: string
   prenom: string
+  email: string
+  telephone: string
+  societe: string
   message: string
   isSubmitting: boolean
 };
 
 const initialState = {
-  email: "",
-  telephone: "",
   nom: "",
   prenom: "",
+  email: "",
+  telephone: "",
+  societe: "",
   message: "",
   isSubmitting: false
 } as ContactState
@@ -23,17 +24,20 @@ export const contact = createSlice({
   name: "contact",
   initialState,
   reducers: {
+    setNom(state, action) {
+      state.nom = action.payload
+    },
+    setPrenom(state, action) {
+      state.prenom = action.payload
+    },
     setEmail(state, action) {
       state.email = action.payload
     },
     setTelephone(state, action) {
       state.telephone = action.payload
     },
-    setNom(state, action) {
-      state.email = action.payload
-    },
-    setPrenom(state, action) {
-      state.prenom = action.payload
+    setSociete(state, action) {
+      state.societe = action.payload
     },
     setMessage(state, action) {
       state.message = action.payload
@@ -54,14 +58,24 @@ export const contact = createSlice({
 });
 
 export const {
-  setEmail,
-  setTelephone,
   setNom,
   setPrenom,
+  setEmail,
+  setTelephone,
+  setSociete,
   setMessage,
   setIsSubmitting
 } = contact.actions
 
-
+export const submitEmail = createAsyncThunk(
+  'contact/submitEmail',
+  async (contactForm: ContactState, thunkAPI) => {
+    const project = await fetch('/api/send-email', {
+      method: 'POST',
+      body: JSON.stringify(contactForm)
+    })
+    return project.json()
+  }
+)
 
 export default contact.reducer
