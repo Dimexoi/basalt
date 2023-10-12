@@ -141,9 +141,9 @@ export default function ContactForm() {
         />
       </div>
       
-      {isSubmitting && <p className="text-[#3D6367] font-semibold">Votre message a bien été envoyé</p> }
+      {isSubmitting && <p className="text-[#3D6367] font-semibold mb-4 text-center">Votre message a bien été envoyé</p> }
 
-      <button disabled={isSubmitting} className="border border-[#3D6367] text-[#3D6367] p-2 rounded-md hover:border-white hover:text-white hover:bg-[#3D6367]">
+      <button disabled={isSubmitting} className="border border-[#3D6367] text-[#3D6367] p-2 rounded-md hover:border-white hover:text-white hover:bg-[#3D6367] disabled:bg-gray-500 disabled:text-gray-800">
         Envoyer
       </button>
     </form>
