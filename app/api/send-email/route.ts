@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
     const message = {
-      from: process.env.SENDER_EMAIL_ADDR,
+      from: body.email,
       to: process.env.RECEIVER_EMAIL_ADDR,
       subject: `Formulaire site : ${body.nom} ${body.prenom} - ${body.societe}`,
       text: body.message,
