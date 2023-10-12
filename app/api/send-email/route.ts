@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
     const message = {
-      from: body.email,
+      from: process.env.SENDER_EMAIL_ADDR,
       to: process.env.RECEIVER_EMAIL_ADDR,
       subject: `Formulaire site : ${body.nom} ${body.prenom} - ${body.societe}`,
       text: body.message,
@@ -26,12 +26,8 @@ export async function POST(req: Request) {
 
     const emailResult = transporter.sendMail(message, (err, info) => {
       if (err) {
-        console.log("error")
-        console.log(err.cause)
         return err.cause
       } else {
-        console.log('is fine !')
-        console.log(info.accepted)
         return info.accepted
       }
     })
