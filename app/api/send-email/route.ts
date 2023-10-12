@@ -24,13 +24,16 @@ export async function POST(req: Request) {
       },
     });
 
-    const emailResult = transporter.sendMail(message, (err, info) => {
-      if (err) {
-        return err.cause
-      } else {
-        return info.accepted
-      }
-    })
+    const emailResult = await new Promise((resolve, reject) => {
+      transporter.sendMail(message, (err, info) => {
+        if (err) {
+          return err.cause
+        } else {
+          return info.accepted
+        }
+      })
+    });
+    
     return NextResponse.json({
       message: emailResult
   });
