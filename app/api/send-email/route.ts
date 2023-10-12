@@ -26,8 +26,12 @@ export async function POST(req: Request) {
 
     const emailResult = transporter.sendMail(message, (err, info) => {
       if (err) {
+        console.log("error")
+        console.log(err.cause)
         return err.cause
       } else {
+        console.log('is fine !')
+        console.log(info.accepted)
         return info.accepted
       }
     })
