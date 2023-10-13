@@ -5,9 +5,9 @@ import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { getCarouselProjects, nextSlide, prevSlide, setCarouselCurentIndex, setCarouselProjects } from '@/redux/features/displaySlice'
 import Image from 'next/image'
 
-import img1 from '@/public/images/projects/carousel/img1.jpg'
-import img2 from '@/public/images/projects/carousel/img2.jpg'
-import img3 from '@/public/images/projects/carousel/img3.jpg'
+import img1 from '@/public/images/projects/carousel/img1.webp'
+import img2 from '@/public/images/projects/carousel/img2.webp'
+import img3 from '@/public/images/projects/carousel/img3.webp'
 import carouselProjects from '@/public/data/carouselProjects.json'
 import arrow from '@/public/images/icons/rightarrow.svg'
 
@@ -57,6 +57,7 @@ const Carousel: React.FC = () => {
             height='0'
             width='0'
             className='w-full h-auto'
+            priority
           />
           <p className='absolute bottom-0 bg-gradient-to-t from-black/100 to-black/1 w-full text-center p-4 text-xl'>{project.name}</p>
           
