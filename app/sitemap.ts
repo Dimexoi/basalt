@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
+      url: 'https://basalt-mobilier.fr/politique-de-confidentialite',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
       url: 'https://basalt-mobilier.fr/plan-du-site',
       lastModified: new Date(),
       changeFrequency: 'weekly',

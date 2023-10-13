@@ -6,9 +6,9 @@ export default function Footer() {
 
   return (
     <footer className="mt-2 p-2 text-sm border-t-2 border-gray-300">
-      <div className="flex mb-2">
+      <div className="flex gap-4 mb-2 md:justify-around">
 
-        <div className="flex-1">
+        <div className="">
           <p className="">Nos partenaires :</p>
           <ul className="pl-1">
             <li className="mb-3">
@@ -25,7 +25,7 @@ export default function Footer() {
             <Link href='/mentions-legales'>Mentions légales</Link>
           </li>
           <li className="mb-3">
-            <Link href='/mentions-legales'>A propos</Link>
+            <Link href='/politique-de-confidentialite'>Politique de confidentialité</Link>
           </li>
           <li>
             <Link href='/plan-du-site'>Plan du site</Link>

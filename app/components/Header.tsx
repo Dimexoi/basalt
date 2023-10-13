@@ -49,7 +49,7 @@ export default function Header({welcome}: Props) {
         <ul className="flex gap-2">
           <li className="relative">
             <Link
-              className="mr-2"
+              className="mr-2 hover:text-lg hover:font-bold hover:text-[#3D6367]"
               href='/'
             >
               Accueil
@@ -58,7 +58,7 @@ export default function Header({welcome}: Props) {
           </li>
           <li className="relative">
             <Link
-              className="mr-2"
+              className="mr-2 hover:text-lg hover:font-bold hover:text-[#3D6367]"
               href='/#portfolio'
             >
               Portfolio
@@ -67,7 +67,7 @@ export default function Header({welcome}: Props) {
           </li>
           <li className="relative">
           <Link
-              className="mr-2"
+              className="mr-2 hover:text-lg hover:font-bold hover:text-[#3D6367]"
               href='/#contact'
             >
               Contact
