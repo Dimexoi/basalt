@@ -7,7 +7,7 @@ import { getOneCategory } from '@/redux/features/categorySlice'
 import CardProject from '@/app/components/CardProject'
 import Header from '@/app/components/Header'
 import categories from '@/public/data/categories.json'
-import CategoryPage from "@/app/components/categoryPage"
+import CategoryPage from "@/app/components/CategoryPage"
 
 export const generateMetadata = ({ params }: { params: { id: number, slug: string} }): Metadata => {
   
