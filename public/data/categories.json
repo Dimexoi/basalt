@@ -4,7 +4,7 @@
     "name": "Hôtels",
     "description": "Offrez le meilleur confort à vos clients",
     "slug": "hotels",
-    "coverImage": "cover.png",
+    "coverImage": "cover.webp",
     "createdAt": "2023-08-18T12:11:52.604Z",
     "updatedAt": "2023-08-18T12:08:07.576Z",
     "active": true
@@ -14,7 +14,7 @@
     "name": "Restaurants",
     "description": "Soyez équipés de la réception aux cuisines",
     "slug": "restaurants",
-    "coverImage": "cover.png",
+    "coverImage": "cover.webp",
     "createdAt": "2023-08-10T07:41:22.879Z",
     "updatedAt": "2023-08-18T12:14:25.613Z",
     "active": true
@@ -24,7 +24,7 @@
     "name": "Locations saisonnières",
     "description": "Equipez vos locations en meubles durables",
     "slug": "locations",
-    "coverImage": "cover.png",
+    "coverImage": "cover.webp",
     "createdAt": "2023-08-18T12:11:52.604Z",
     "updatedAt": "2023-08-18T12:08:21.698Z",
     "active": true
@@ -34,7 +34,7 @@
     "name": "Moodboards",
     "description": "Trouvez votre inspiration",
     "slug": "moodboards",
-    "coverImage": "cover.png",
+    "coverImage": "cover.webp",
     "createdAt": "2023-08-18T12:11:52.604Z",
     "updatedAt": "2023-08-18T12:08:22.503Z",
     "active": true
@@ -44,7 +44,7 @@
     "name": "Tout voir",
     "description": "Jetez un oeil à l'ensemble de nos projets",
     "slug": "tout-voir",
-    "coverImage": "cover.png",
+    "coverImage": "cover.webp",
     "createdAt": "2023-08-18T12:11:52.604Z",
     "updatedAt": "2023-08-18T12:08:22.934Z",
     "active": true
