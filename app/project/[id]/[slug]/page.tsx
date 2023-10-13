@@ -45,12 +45,12 @@ export default function Category({ params }: { params: { id: number, slug: strin
 
         <div>
           <h2 className='text-center font-semibold text-lg mb-3'>Galerie photo</h2>
-          <div className='flex gap-4'>
+          <div className='flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-0 md:justify-between'>
 
             {project.images.filter((image, index) => (
               index !== 0
             )).map(image => (
-              <div key={image.id}>
+              <div key={image.id} className='md:w-[48%]'>
                 <p className='mb-3 ps-3'>
                   {image.name}
                 </p>
