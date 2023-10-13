@@ -5,14 +5,14 @@ import FooterDate from "./FooterDate"
 export default function Footer() {
 
   return (
-    <footer className="mt-2 p-2 bg-gray-400 text-white text-sm">
+    <footer className="mt-2 p-2 text-sm border-t-2 border-gray-300">
       <div className="flex mb-2">
 
         <div className="flex-1">
           <p className="">Nos partenaires :</p>
           <ul className="pl-1">
             <li>
-              <Link href='https://www.dimexoi.fr'> <strong>- Dimexoi</strong> : Mobilier en teck</Link>
+              <Link href='https://www.dimexoi.fr'> <strong>- Dimexoi</strong> : Mobilier en teck pour particulier</Link>
             </li>
             <li>
               <Link href='https://www.chr-discount-reunion.fr/'><strong>- CHR Discount OI</strong> : Matériel professionnel de Restauration</Link>
@@ -20,7 +20,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <ul className=" gap-1">
+        <ul className="gap-1">
           <li>
             <Link href='/mentions-legales'>Mentions légales</Link>
           </li>

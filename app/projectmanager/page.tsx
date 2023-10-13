@@ -274,11 +274,13 @@ const ProjectManager = () => {
                 <option value="">-- Choisissez une catégorie --</option>
                 <option value="1">Restaurant</option>
                 <option value="2">Hotel</option>
+                <option value="3">Locations saisonnières</option>
+                <option value="5">Moodboards</option>
               </select>
             </label>
             <label className={styles.manageproject__firstrow__inputs__label}>
               Nom du projet:
-              <input name="name" type="text" value={name} onChange={handleInputChangeName} required/>
+              <input name="name" type="text" value={name} placeholder='Nom du projet - Obligatoire' onChange={handleInputChangeName} required/>
             </label>
 
             <label className={styles.manageproject__firstrow__inputs__label}>
@@ -288,7 +290,7 @@ const ProjectManager = () => {
 
             <label className={styles.manageproject__firstrow__inputs__label}>
               Photos:
-              <input name="images" type="file" multiple onChange={handlePhotoUpload}/>
+              <input name="images" type="file" multiple onChange={handlePhotoUpload} required/>
             </label>
 
             <button type="submit" className={styles.manageproject__firstrow__inputs__button}>Enregistrer</button>
@@ -353,11 +355,11 @@ const ProjectManager = () => {
               <p onClick={(e) => handleClickDelete(e, String(index))} className='text-center text-red-500 border border-red-500 p-1'>Supprimer photo</p>
 
               <div className='w-full'>
-                <input name="imagetitle" type="text" value={image.name} placeholder="Titre de la photo" onChange={(e) => handleInputChangeImgName(e, index)} className='w-full p-2 text-black' required/>
+                <input name="imagetitle" type="text" value={image.name} placeholder="Titre de la photo - obligatoire" onChange={(e) => handleInputChangeImgName(e, index)} className='w-full p-2 text-black' required/>
               </div>
 
               <div className='w-full'>
-                <textarea name="imagedesc" value={image.description} placeholder="Description de la photo" onChange={(e) => handleInputChangeImgDesc(e, index)} rows={10} className='w-full p-2 text-black' required/>
+                <textarea name="imagedesc" value={image.description} placeholder="Description de la photo - facultatif" onChange={(e) => handleInputChangeImgDesc(e, index)} rows={10} className='w-full p-2 text-black'/>
               </div>
           
             </div>

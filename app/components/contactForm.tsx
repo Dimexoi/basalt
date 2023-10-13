@@ -46,71 +46,76 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <div className="mb-4">
-        <label htmlFor="lastName" className="block text-sm font-medium text-gray-600">
-          Nom
-        </label>
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          minLength={2}
-          maxLength={26}
-          value={nom}
-          onChange={handleChangeNom}
-          className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
-          required
-        />
-      </div>
+      <div className="lg:flex md:gap-2">
+        <div className="mb-4">
+          <label htmlFor="lastName" className="block text-sm font-medium text-gray-600">
+            Nom
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            minLength={2}
+            maxLength={26}
+            value={nom}
+            onChange={handleChangeNom}
+            className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
+            required
+          />
+        </div>
 
-      <div className="mb-4">
-        <label htmlFor="firstName" className="block text-sm font-medium text-gray-600">
-          Prénom
-        </label>
-        
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          minLength={2}
-          maxLength={26}
-          value={prenom}
-          onChange={handleChangePrenom}
-          className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
-          required
-        />
+        <div className="mb-4">
+          <label htmlFor="firstName" className="block text-sm font-medium text-gray-600">
+            Prénom
+          </label>
+          
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            minLength={2}
+            maxLength={26}
+            value={prenom}
+            onChange={handleChangePrenom}
+            className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
+            required
+          />
+        </div>
       </div>
+      
+      <div className="lg:flex md:gap-2">
 
-      <div className="mb-4">
-        <label htmlFor="email" className="block text-sm font-medium text-gray-600 ">
-          Email
-        </label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          pattern="^[a-zA-Z0-9._%+\-\@]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{1,}$"
-          value={email}
-          onChange={handleChangeEmail}
-          className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
-          required
-        />
-      </div>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-600 ">
+            Email
+          </label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            pattern="^[a-zA-Z0-9._%+\-\@]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{1,}$"
+            value={email}
+            onChange={handleChangeEmail}
+            className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
+            required
+          />
+        </div>
 
-      <div className="mb-4">
-        <label htmlFor="telephone" className="block text-sm font-medium text-gray-600">
-          Téléphone
-        </label>
-        <input
-          type="text"
-          minLength={10}
-          id="telephone"
-          name="telephone"
-          value={telephone}
-          onChange={handleChangeTelephone}
-          className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
-          required
-        />
+        <div className="mb-4">
+          <label htmlFor="telephone" className="block text-sm font-medium text-gray-600">
+            Téléphone
+          </label>
+          <input
+            type="text"
+            minLength={10}
+            id="telephone"
+            name="telephone"
+            value={telephone}
+            onChange={handleChangeTelephone}
+            className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
+            required
+          />
+        </div>
       </div>
 
       <div className="mb-4">
@@ -119,11 +124,12 @@ export default function ContactForm() {
         </label>
         <input
           type="text"
+          minLength={3}
           id="societe"
           name="societe"
           value={societe}
           onChange={handleChangeSociete}
-          className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
+          className="mt-1 p-2 w-full border rounded-md"
         />
       </div>
 
