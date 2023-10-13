@@ -62,7 +62,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
                   sizes='100vw'
                   className='h-auto w-full mb-1'
                 />
-                <p className='text-justify ps-3 md:ps-0 italic'>
+                <p className='text-justify px-4 md:ps-0 italic'>
                   {image.description}
                 </p>
                 
