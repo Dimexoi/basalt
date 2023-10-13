@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="flex-1">
           <p className="">Nos partenaires :</p>
           <ul className="pl-1">
-            <li>
+            <li className="mb-2">
               <Link href='https://www.dimexoi.fr'> <strong>- Dimexoi</strong> : Mobilier en teck pour particulier</Link>
             </li>
             <li>
@@ -20,11 +20,11 @@ export default function Footer() {
           </ul>
         </div>
 
-        <ul className="gap-1">
-          <li>
+        <ul className="">
+          <li className="mb-2">
             <Link href='/mentions-legales'>Mentions légales</Link>
           </li>
-          <li>
+          <li className="mb-2">
             <Link href='/mentions-legales'>A propos</Link>
           </li>
           <li>
