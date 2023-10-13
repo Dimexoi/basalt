@@ -14,12 +14,14 @@ export const generateMetadata = ({ params }: { params: { id: number, slug: strin
   if (params.id == 6 ) {
     return {
       title: `Tous nos projets`,
+      description: "Accéder à l&apos;ensemble des projets que nous avons réalisés chez Basalt Mobilier Pro"
     };
   } else {
     const category = categories.find(category => category.id === Number(params.id))
     if (category) {
       return {
         title: `Les ${category.name}`,
+        description: `Découvrez les projets réalisés pour les ${category.name}. Ces professionnels nous ont fait confiance pour équiper leur ${category.name} avec notre mobilier en teck, ou nos appareils de restauration. Ils ont pu profiter d&apos;un service sur-mesure allant de la réflexion, à la décoration, jusqu&apos;à l&apos;installation des différents mobiliers.`
       };
     } else {
       return {

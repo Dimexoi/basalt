@@ -15,8 +15,6 @@ export default function Home() {
   //   dispatch(getCategories())
   // }, [dispatch])
 
-
-
   return (
     <main className="h-full">
       <Welcome/>
