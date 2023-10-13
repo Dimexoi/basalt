@@ -25,12 +25,12 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div id="content" className="h-screen bg-[url('/images/bg-img/bg10.jpg')] bg-[no-repeat] bg-[bottom_right_-6rem] md:bg-[center] bg-cover text-white">
+    <div id="content" className="h-screen bg-[url('/images/bg-img/bg10.webp')] bg-[no-repeat] bg-[bottom_right_-6rem] md:bg-[center] bg-cover text-white">
       <div className="flex flex-col h-full bg-gradient-to-b from-black/60 to-black/20">
         <Header welcome={true}/>
 
 
-          <div className="flex-1 h-full flex flex-col p-2 mt-16 md:p-10 z-40">
+          <div className="flex-1 h-full flex flex-col p-4 mt-16 md:p-10 z-40">
               <h1 className="font-semibold text-lg md:text-2xl text-center">Le mobilier professionnel pour la restauration et l&apos;hôtellerie</h1>
             <div className="flex lg:items-center h-full">
               <div className="flex h-full lg:h-auto lg:gap-10 xl:w-[70%] lg:mx-auto flex-col lg:flex-row justify-around">

@@ -142,6 +142,9 @@ export const project = createSlice({
       .addCase(getProjects.fulfilled, (state, action) => {
         state.projects = action.payload
       })
+      .addCase(getAllProjects.fulfilled, (state, action) => {
+        state.projects = action.payload
+      })
       .addCase(getOneProject.fulfilled, (state, action) => {
         state.project = action.payload
       })
@@ -177,6 +180,16 @@ export const getProjects = createAsyncThunk(
     const projects = await fetch('/api/project', {
       method: 'POST',
       body: JSON.stringify(id)
+    })
+    return projects.json()
+  }
+)
+
+export const getAllProjects = createAsyncThunk(
+  'project/getAllProjects',
+  async (_, thunkAPI) => {
+    const projects = await fetch('/api/project/findAll', {
+      method: 'POST'
     })
     return projects.json()
   }

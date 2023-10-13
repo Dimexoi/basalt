@@ -5,9 +5,9 @@ import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { getCarouselProjects, nextSlide, prevSlide, setCarouselCurentIndex, setCarouselProjects } from '@/redux/features/displaySlice'
 import Image from 'next/image'
 
-import imageRestaurant1 from '@/public/images/projects/restaurant-1/001.jpg'
-import imageHotel1 from '@/public/images/projects/hotel-1/001.jpg'
-import imageRestaurant2 from '@/public/images/projects/restaurant-2/001.jpg'
+import img1 from '@/public/images/projects/carousel/img1.jpg'
+import img2 from '@/public/images/projects/carousel/img2.jpg'
+import img3 from '@/public/images/projects/carousel/img3.jpg'
 import carouselProjects from '@/public/data/carouselProjects.json'
 import arrow from '@/public/images/icons/rightarrow.svg'
 
@@ -32,10 +32,10 @@ const Carousel: React.FC = () => {
   };
 
   const getImage = (index: number) => {
-    if (index === 0) return imageRestaurant1
-    else if (index === 1) return imageHotel1
-    else if (index === 2) return imageRestaurant2
-    else return imageRestaurant1
+    if (index === 0) return img1
+    else if (index === 1) return img2
+    else if (index === 2) return img3
+    else return img1
   }
 
   return (
@@ -45,7 +45,7 @@ const Carousel: React.FC = () => {
         
         <div    
           key={index}
-          className={`flex items-center justify-center transition-opacity duration-500 w-full h-48 overflow-hidden ${
+          className={`flex items-center justify-center transition-opacity duration-500 w-full h-auto overflow-hidden ${
             index === currentIndex ? 'block opacity-100' : 'hidden opacity-0'
           }`}
         >
@@ -58,6 +58,7 @@ const Carousel: React.FC = () => {
             width='0'
             className='w-full h-auto'
           />
+          <p className='absolute bottom-0 bg-gradient-to-t from-black/100 to-black/1 w-full text-center p-4 text-xl'>{project.name}</p>
           
         </div>
       ))}
