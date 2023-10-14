@@ -38,7 +38,7 @@ export default function Welcome() {
                 <div className="flex justify-around items-center md:flex-1">
 
                   <p className="md:text-xl md:tracking-wide md:leading-10 text-justify">
-                    Bienvenue sur notre site dédié aux professionnels. Nous sommes spécialisés dans la vente de mobilier professionnel de qualité supérieure pour répondre aux besoins de votre entreprise. Nous savons à quel point il est important d&apos;avoir un mobilier confortable et esthétique pour garantir le succès de votre établissement.
+                    Bienvenue sur notre site dédié aux <strong>professionnels</strong>. <strong>Basalt mobilier pro</strong> est spécialisé dans la vente de <em>mobilier professionnel de qualité supérieure</em> pour répondre aux besoins de votre entreprise. Nous savons à quel point il est important d&apos;avoir un mobilier confortable et esthétique pour garantir le <em>succès</em> de votre établissement. C&apos;est dans ce but que nous vous accompagnons dans la <strong>conception</strong>, l&apos;<strong>équipement</strong>, la <strong>décoration</strong>, et l&apos;<strong>ameublement</strong> de votre projet. 
                   </p>
                   
                 </div>
