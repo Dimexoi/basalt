@@ -33,10 +33,8 @@ export const generateMetadata = ({ params }: { params: { id: number, slug: strin
 };
 
 export default function Category({ params }: { params: { id: number, slug: string} }) {
-
-
   return (
-    <main>
+    <main className="">
       <CategoryPage id={Number(params.id)}/>
     </main>
   )

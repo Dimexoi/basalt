@@ -22,13 +22,17 @@ export default function RootLayout({
 }) {
   return (
 
-    <html lang="fr" className='min-h-full'>
+    <html lang="fr" className='h-full'>
       
-    <body className={inter.className + ' ' + 'min-h-full bg-white'}>
+    <body className={'h-[100%] bg-white flex flex-col'}>
       <Providers>
         <SessionProviders>
-          {children}
-          <Footer/>
+          <div className='flex-1'>
+            {children}
+          </div>
+          <div>
+            <Footer/>
+          </div>
         </SessionProviders>
       </Providers>
       <Analytics />
