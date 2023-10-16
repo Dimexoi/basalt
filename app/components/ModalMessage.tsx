@@ -3,19 +3,24 @@ import Image from 'next/image'
 
 import { setShowMessageModal } from "@/redux/features/displaySlice"
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
+import { setProjectFormCategoryId, setProjectFormDesc, setProjectFormImages, setProjectFormName } from '@/redux/features/projectSlice'
 
 const ModalMessage = () => {
 
   const dispatch = useAppDispatch()
 
   const { projectForm } = useAppSelector(state => state.project)
+  const { name, description, slug, coverImage, categoryId, images, dragIndex  } = projectForm
   const { projects } = useAppSelector(state => state.project)
   const lastProject = projects[projects.length -  1]
 
-  const { images } = projectForm
 
   const handleClickClose = () => {
-    dispatch(setShowMessageModal(false));
+    dispatch(setProjectFormCategoryId(0))
+    dispatch(setProjectFormName(''))
+    dispatch(setProjectFormDesc(''))
+    dispatch(setProjectFormImages([]))
+    dispatch(setShowMessageModal(false))
   }
 
   return (

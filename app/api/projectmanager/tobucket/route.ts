@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
+
+
 const s3Client = new S3Client({
   region: process.env.AWS_REGION as string,
   credentials: {
@@ -27,7 +31,9 @@ async function uploadImageToS3(
 
 export async function POST(request: Request, response: Response): Promise<Response>{
   try {
-    const formData = await request.formData()
+    const session = await getServerSession(authOptions)
+    if (session) {
+      const formData = await request.formData()
     const file = formData.get("file") as Blob | null
     const name: string | null = formData.get('name') as unknown as string
     if (!file) {
@@ -43,7 +49,13 @@ export async function POST(request: Request, response: Response): Promise<Respon
       name
     );
 
-    return NextResponse.json({ success: true, fileName });
+    return NextResponse.json({ success: true, message: "Done", fileName }, {status: 200});
+    } else {
+    
+
+    return NextResponse.json({ error: "Not signed in"}, {status: 401});
+    }
+    
   } catch (error) {
     throw(error)
   }

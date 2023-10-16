@@ -150,10 +150,10 @@ export const project = createSlice({
       })
       .addCase(uploadImageToServer.fulfilled, (state, action) => {
         // state.projectForm.images[action.payload.index].link = action.payload.link
-        console.log("ok");
+
       })
       .addCase(addOneProject.fulfilled, (state, action) => {
-        state.projects.push(action.payload)
+        state.projects.push(action.payload.results)
       })
       
   }
@@ -230,7 +230,8 @@ export const addOneProject = createAsyncThunk(
       method: 'POST',
       body: JSON.stringify(projectFromForm)
     })
-    return project.json()
+    const projectData = await project.json()
+    return projectData
   }
 )
 
