@@ -43,8 +43,10 @@ export default function Welcome() {
                   
                 </div>
 
-                <div className="border md:flex-1">
-                  <Carousel/>
+                <div className="md:flex-1 flex items-center">
+                  <div className="border h-auto">
+                    <Carousel/>
+                  </div>
                 </div>
               </div>
               
