@@ -4,6 +4,11 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+}
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION as string,
