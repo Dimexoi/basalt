@@ -1,41 +1,75 @@
 
 import { Metadata } from "next"
 import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { getAllProjects, getProjects } from '@/redux/features/projectSlice'
-import { getOneCategory } from '@/redux/features/categorySlice'
+
 import CardProject from '@/app/components/CardProject'
 import Header from '@/app/components/Header'
 import categories from '@/public/data/categories.json'
 import CategoryPage from "@/app/components/CategoryPage"
 
-export const generateMetadata = ({ params }: { params: { id: number, slug: string} }): Metadata => {
-  
-  if (params.id == 6 ) {
-    return {
-      title: `Tous nos projets`,
-      description: "Accéder à l&apos;ensemble des projets que nous avons réalisés chez Basalt Mobilier Pro"
-    };
+import { ProjectType } from "@/redux/features/projectSlice"
+
+async function getCategory({ params }: { params: { id: number, slug: string} }) {
+  if (params.id == 6) {
+    return
   } else {
-    const category = categories.find(category => category.id === Number(params.id))
-    if (category) {
-      return {
-        title: `Les ${category.name}`,
-        description: `Découvrez les projets réalisés pour les ${category.name}. Ces professionnels nous ont fait confiance pour équiper leur ${category.name} avec notre mobilier en teck, ou nos appareils de restauration. Ils ont pu profiter d&apos;un service sur-mesure allant de la réflexion, à la décoration, jusqu&apos;à l&apos;installation des différents mobiliers.`
-      };
-    } else {
-      return {
-        title: 'Nos projets',
-      };
-    }
+    const res = await fetch('http://localhost:3000/api/category/findOne', {
+      method: 'POST',
+      body: JSON.stringify(String(params.id))
+    })
+    return res.json()
+  }
+  // console.log('-------------**-----------**-------');
+  // console.log(res);
+  // console.log('-------------**-----------**-------');
+
+  // if (res.ok) {
+  //   throw new Error('Failed to fetch data')
+  // }
+
+}
+
+async function getProjects({ params }: { params: { id: number, slug: string} }) {
+
+  if (params.id == 6) {
+    const res = await fetch('http://localhost:3000/api/project/findAll', {
+      method: 'POST'
+    })
+    const test = res.json()
+    return test
+  } else {
+    const res = await fetch('http://localhost:3000/api/project', {
+      method: 'POST',
+      body: JSON.stringify(params.id)
+    })
+    return res.json()
   }
   
-};
+  // console.log('-------------**-----------**-------');
+  // console.log(res);
+  // console.log('-------------**-----------**-------');
 
-export default function Category({ params }: { params: { id: number, slug: string} }) {
+  // if (res.ok) {
+  //   throw new Error('Failed to fetch data')
+  // }
+
+}
+
+export default async function Category({ params }: { params: { id: number, slug: string} }) {
+
+  const category = params.id == 6 ? 'Tout voir' : await getCategory({params})
+  const projects = await getProjects({ params })
   return (
     <main className="">
-      <CategoryPage id={Number(params.id)}/>
+      <Header welcome={false}/>
+      <div className='md:px-10 lg:w-[80%] lg:mx-auto'>
+      <h1 className='font-bold text-center text-xl text-[#3D6367] mb-3 p-3'>{params.id == 6 ? 'Découvrez tous nos projets' : `Découvrez nos projets ${category.name}`}</h1>
+        <div className='flex flex-col md:grid md:grid-cols-2 md:gap-5 lg:grid xl:grid-cols-3 gap-4 p-4 w-full'>
+          {projects.map((project: ProjectType) => (
+            <CardProject project={project} key={project.id}/>
+          ))}
+        </div>
+      </div>
     </main>
   )
 }

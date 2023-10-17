@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image"
 
 import logowhite from '@/public/images/logo_white.png'

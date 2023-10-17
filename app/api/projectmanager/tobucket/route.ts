@@ -29,31 +29,37 @@ async function uploadImageToS3(
   return params.Key;
 }
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '20mb',
+    },
+  },
+}
+
 export async function POST(request: Request, response: Response): Promise<Response>{
   try {
     const session = await getServerSession(authOptions)
     if (session) {
       const formData = await request.formData()
-    const file = formData.get("file") as Blob | null
-    const name: string | null = formData.get('name') as unknown as string
-    if (!file) {
-      return NextResponse.json(
-        { error: "File blob is required." },
-        { status: 400 }
+      const file = formData.get("file") as Blob | null
+      const name: string | null = formData.get('name') as unknown as string
+      if (!file) {
+        return NextResponse.json(
+          { error: "File blob is required." },
+          { status: 400 }
+        );
+      }
+
+      const buffer = Buffer.from(await file.arrayBuffer());
+      const fileName = await uploadImageToS3(
+        buffer,
+        name
       );
-    }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const fileName = await uploadImageToS3(
-      buffer,
-      name
-    );
-
-    return NextResponse.json({ success: true, message: "Done", fileName }, {status: 200});
+      return NextResponse.json({ success: true, message: "Done", fileName }, {status: 200});
     } else {
-    
-
-    return NextResponse.json({ error: "Not signed in"}, {status: 401});
+      return NextResponse.json({ error: "Not signed in"}, {status: 401});
     }
     
   } catch (error) {
