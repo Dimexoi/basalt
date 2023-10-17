@@ -26,7 +26,6 @@ async function getCategory({ params }: { params: { id: number, slug: string} }) 
   // if (res.ok) {
   //   throw new Error('Failed to fetch data')
   // }
-
 }
 
 async function getProjects({ params }: { params: { id: number, slug: string} }) {
