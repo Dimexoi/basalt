@@ -13,7 +13,7 @@ async function getCategory({ params }: { params: { id: number, slug: string} }) 
   if (params.id == 6) {
     return
   } else {
-    const res = await fetch('http://localhost:3000/api/category/findOne', {
+    const res = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
       method: 'POST',
       body: JSON.stringify(String(params.id))
     })
@@ -32,13 +32,13 @@ async function getCategory({ params }: { params: { id: number, slug: string} }) 
 async function getProjects({ params }: { params: { id: number, slug: string} }) {
 
   if (params.id == 6) {
-    const res = await fetch('http://localhost:3000/api/project/findAll', {
+    const res = await fetch(`${process.env.BASE_URL}api/project/findAll`, {
       method: 'POST'
     })
     const test = res.json()
     return test
   } else {
-    const res = await fetch('http://localhost:3000/api/project', {
+    const res = await fetch(`${process.env.BASE_URL}api/project`, {
       method: 'POST',
       body: JSON.stringify(params.id)
     })
