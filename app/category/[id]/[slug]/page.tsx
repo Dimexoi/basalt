@@ -62,8 +62,8 @@ export default async function Category({ params }: { params: { id: number, slug:
     <main className="">
       <Header welcome={false}/>
       <div className='md:px-10 lg:w-[80%] lg:mx-auto'>
-      <h1 className='font-bold text-center text-xl text-[#3D6367] mb-3 p-3'>{params.id == 6 ? 'Découvrez tous nos projets' : `Découvrez nos projets ${category.name}`}</h1>
-        <div className='flex flex-col md:grid md:grid-cols-2 md:gap-5 lg:grid xl:grid-cols-3 gap-4 p-4 w-full'>
+      <h1 className='font-bold text-center text-3xl text-[#3D6367] mb-4 p-3'>{params.id == 6 ? 'Découvrez tous nos projets' : `Découvrez nos projets ${category.name}`}</h1>
+        <div className='flex flex-col md:grid md:grid-cols-2 md:gap-5 lg:grid xl:grid-cols-3 gap-4 px-4 w-full'>
           {projects.map((project: ProjectType) => (
             <CardProject project={project} key={project.id}/>
           ))}
