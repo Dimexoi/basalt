@@ -29,14 +29,6 @@ async function uploadImageToS3(
   return params.Key;
 }
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '20mb',
-    },
-  },
-}
-
 export async function POST(request: Request, response: Response): Promise<Response>{
   try {
     const session = await getServerSession(authOptions)
