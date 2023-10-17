@@ -4,7 +4,6 @@ import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
 
 import { Providers } from "@/redux/provider"
-import Header from './components/Header'
 import Footer from './components/Footer'
 import SessionProviders from './components/SessionsProviders'
 
