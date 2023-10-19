@@ -33,7 +33,7 @@ async function getProjects({ params }: { params: { id: number, slug: string} }) 
   if (params.id == 6) {
     const res = await fetch(`${process.env.BASE_URL}api/project/findAll`, {
       method: 'POST',
-      cache: 'no-store'
+      next: { revalidate: 3600 }
     })
     const test = res.json()
     return test
