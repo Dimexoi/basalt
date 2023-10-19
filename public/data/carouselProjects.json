@@ -1,26 +1,26 @@
 [
   {
-    "id": 1,
+    "id": 115,
     "name": "Le Blue Margouillat",
     "description": "",
-    "slug": "le-blue-margouillat",
+    "slug": "blue-margouillat",
     "coverImage": "001.jpg",
-    "categoryId": 1
+    "categoryId": 2
   },
   {
-    "id": 2,
+    "id": 125,
     "name": "Les Géraniums",
     "description": "",
-    "slug": "les-geraniums",
+    "slug": "les-géraniums",
     "coverImage": "001.jpg",
-    "categoryId": 1
+    "categoryId": 2
   },
   {
-    "id": 3,
+    "id": 115,
     "name": "Le Blue Margouillat",
     "description": "",
-    "slug": "le-blue-margouillat",
+    "slug": "blue-margouillat",
     "coverImage": "001.jpg",
-    "categoryId": 1
+    "categoryId": 2
   }
 ]

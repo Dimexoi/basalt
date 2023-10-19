@@ -10,6 +10,7 @@ import img2 from '@/public/images/projects/carousel/img2.webp'
 import img3 from '@/public/images/projects/carousel/img3.webp'
 import carouselProjects from '@/public/data/carouselProjects.json'
 import arrow from '@/public/images/icons/rightarrow.svg'
+import Link from 'next/link'
 
 
 const Carousel: React.FC = () => {
@@ -43,8 +44,9 @@ const Carousel: React.FC = () => {
         
       {projects.map((project, index) => (
         
-        <div    
+        <Link    
           key={index}
+          href={`/project/${project.id}/${project.slug}`}
           className={`flex items-center justify-center transition-opacity duration-500 w-full h-auto overflow-hidden ${
             index === currentIndex ? 'block opacity-100' : 'hidden opacity-0'
           }`}
@@ -61,7 +63,7 @@ const Carousel: React.FC = () => {
           />
           <p className='absolute bottom-0 bg-gradient-to-t from-black/100 to-black/1 w-full text-center p-4 text-xl'>{project.name}</p>
           
-        </div>
+        </Link>
       ))}
       <div onClick={handlePrevSlide} className="flex items-center justify-start absolute left-0 h-full w-[15%] top-0 transition duration-1000 hover:cursor-pointer hover:bg-gradient-to-r hover:from-black/40 hover:to-black/0 ">
 

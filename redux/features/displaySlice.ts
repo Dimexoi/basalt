@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 type Project = {
+  id: number
   name: string
   description: string
   slug: string
