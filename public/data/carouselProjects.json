@@ -8,19 +8,19 @@
     "categoryId": 2
   },
   {
-    "id": 125,
+    "id": 123,
     "name": "Les Géraniums",
     "description": "",
     "slug": "les-géraniums",
     "coverImage": "001.jpg",
-    "categoryId": 2
+    "categoryId": 1
   },
   {
-    "id": 115,
-    "name": "Le Blue Margouillat",
+    "id": 121,
+    "name": "Clos Marie",
     "description": "",
-    "slug": "blue-margouillat",
+    "slug": "clos-marie",
     "coverImage": "001.jpg",
-    "categoryId": 2
+    "categoryId": 3
   }
 ]
