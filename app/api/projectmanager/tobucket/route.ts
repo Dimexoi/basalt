@@ -33,6 +33,7 @@ export async function POST(request: Request, response: Response): Promise<Respon
   try {
     const session = await getServerSession(authOptions)
     if (session) {
+      console.log('session ok');
       const formData = await request.formData()
       const file = formData.get("file") as Blob | null
       const name: string | null = formData.get('name') as unknown as string
@@ -48,9 +49,10 @@ export async function POST(request: Request, response: Response): Promise<Respon
         buffer,
         name
       );
-
+      console.log(fileName);
       return NextResponse.json({ success: true, message: "Done", fileName }, {status: 200});
     } else {
+      console.log('not session');
       return NextResponse.json({ error: "Not signed in"}, {status: 401});
     }
     

@@ -254,8 +254,8 @@ const ProjectManager = () => {
     //   const bucketimage = await uploadToServer(image.file!, slug, image.coverImage)
     //   await updateImageLink(index, bucketimage.fileName)
     // })
-    await dispatch(addOneProject(projectForm))
-    dispatch(setShowMessageModal(true))
+    // await dispatch(addOneProject(projectForm))
+    // dispatch(setShowMessageModal(true))
   }
 
   return (

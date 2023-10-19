@@ -209,17 +209,43 @@ export const getOneProject = createAsyncThunk(
 export const uploadImageToServer = createAsyncThunk(
   'project/uploadImageToServer',
   async (imageObj: {image: ProjectForm['images'][0], index: number}, thunkAPI) => {
+    const file = imageObj.image.file
+    const filename = encodeURIComponent(file.name)
+    const fileType = encodeURIComponent(file.type)
+    const res = await fetch(
+      `/api/projectmanager/s3presign?file=${filename}&fileType=${fileType}`,
+    );
+
+    const { post } = await res.json()
+
+    const {url, fields } = post
+
     const body = new FormData()
-    body.set("file", imageObj.image.file)
-    body.set("slug", imageObj.image.slug)
-    body.set("name", imageObj.image.coverImage)
-    const imageUploaded = await fetch('/api/projectmanager/tobucket', {
-      method: 'POST',
-      body
+    Object.entries({ ...fields, file }).forEach(([key, value]) => {
+      body.append(key, value as string);
     })
-    const imageData = await imageUploaded.json()
-    const link = `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${imageData.fileName}`
-    return {link, index: imageObj.index}
+
+    const upload = await fetch(url, {
+      method: 'POST',
+      body,
+    })
+
+    if (upload.ok) {
+    console.log('Uploaded successfully!')
+    console.log(upload);
+  } else {
+    console.error('Upload failed.')
+  }
+    // body.set("file", imageObj.image.file)
+    // body.set("slug", imageObj.image.slug)
+    // body.set("name", imageObj.image.coverImage)
+    // const imageUploaded = await fetch('/api/projectmanager/tobucket', {
+    //   method: 'POST',
+    //   body
+    // })
+    // const imageData = await imageUploaded.json()
+    // const link = `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${imageData.fileName}`
+    // return {link, index: imageObj.index}
   }
 )
 
