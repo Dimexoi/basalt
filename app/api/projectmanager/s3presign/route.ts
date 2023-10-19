@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
             },
             Expires: 600, // seconds
             Conditions: [
-              ['content-length-range', 0, 1048576], // up to 1 MB
+              ['content-length-range', 0, 20971520], // up to 20 MB
             ],
           });
 
