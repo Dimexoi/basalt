@@ -212,11 +212,13 @@ export const uploadImageToServer = createAsyncThunk(
     const file = imageObj.image.file
     const filename = encodeURIComponent(file.name)
     const fileType = encodeURIComponent(file.type)
+    console.log(imageObj.image);
     const res = await fetch(
-      `/api/projectmanager/s3presign?file=${imageObj.image.slug}&fileType=${fileType}`,
+      `/api/projectmanager/s3presign?file=${imageObj.image.coverImage}&fileType=${fileType}`,
     );
 
     const { post } = await res.json()
+
 
     const {url, fields } = post
 
@@ -231,11 +233,12 @@ export const uploadImageToServer = createAsyncThunk(
     })
 
     if (upload.ok) {
-    console.log('Uploaded successfully!')
-    console.log(upload);
-  } else {
-    console.error('Upload failed.')
-  }
+
+      const link = `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${imageObj.image.coverImage}`
+      return {link, index: imageObj.index}
+    } else {
+      console.error('Upload failed.')
+    }
     // body.set("file", imageObj.image.file)
     // body.set("slug", imageObj.image.slug)
     // body.set("name", imageObj.image.coverImage)
