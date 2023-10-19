@@ -213,7 +213,7 @@ export const uploadImageToServer = createAsyncThunk(
     const filename = encodeURIComponent(file.name)
     const fileType = encodeURIComponent(file.type)
     const res = await fetch(
-      `/api/projectmanager/s3presign?file=${filename}&fileType=${fileType}`,
+      `/api/projectmanager/s3presign?file=${imageObj.image.slug}&fileType=${fileType}`,
     );
 
     const { post } = await res.json()
