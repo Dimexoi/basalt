@@ -45,15 +45,15 @@ export default function Category({ params }: { params: { id: number, slug: strin
 
         <div>
           <h2 className='text-center font-semibold text-lg mb-3'>Galerie photo</h2>
-          <div className='flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-0 md:justify-between'>
+          <div className='flex flex-col gap-4 md:hidden'>
 
             {project.images.filter((image, index) => (
               index !== 0
             )).map(image => (
-              <div key={image.id} className='md:w-[48%]'>
-                <p className='mb-3 ps-3'>
+              <div key={image.id} className='md:w-[48%] mb-4'>
+                <h3 className='mb-2 text-center'>
                   {image.name}
-                </p>
+                </h3>
                 <Image
                   src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${image.coverImage}`}
                   alt={`Image ${image.name}`}
@@ -68,6 +68,70 @@ export default function Category({ params }: { params: { id: number, slug: strin
                 
               </div>
             ))}
+          </div>
+
+          <div className='hidden md:flex'>
+
+            <div className='w-[50%] p-4'>
+              {project.images.filter((image, index) => (
+                index !== 0
+              )).map((image, index) => {
+
+                if (index % 2 === 0) {
+                  
+                  return (
+      
+                    <div key={image.id} className='mb-4'>
+                      <h3 className='mb-2 text-center'>
+                        {image.name}
+                      </h3>
+                      <Image
+                        src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${image.coverImage}`}
+                        alt={`Image ${image.name}`}
+                        width="0"
+                        height="0"
+                        sizes='100vw'
+                        className='h-auto w-full'
+                      />
+                      <p className='text-justify px-4 md:ps-0 italic'>
+                        {image.description}
+                      </p>
+                      
+                    </div>
+                  )
+                }
+              })}
+            </div>
+            <div className='w-[50%] p-4'>
+              {project.images.filter((image, index) => (
+                index !== 0
+              )).map((image, index) => {
+
+                if (index % 2 !== 0) {
+                  
+                  return (
+      
+                    <div key={image.id} className='mb-4'>
+                      <h3 className='mb-2 text-center'>
+                        {image.name}
+                      </h3>
+                      <Image
+                        src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${image.coverImage}`}
+                        alt={`Image ${image.name}`}
+                        width="0"
+                        height="0"
+                        sizes='100vw'
+                        className='h-auto w-full mb-1'
+                      />
+                      <p className='text-justify px-4 md:ps-0 italic'>
+                        {image.description}
+                      </p>
+                      
+                    </div>
+                  )
+                }
+              })}
+            </div>
           </div>
           
         </div>
