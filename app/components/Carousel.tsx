@@ -40,7 +40,7 @@ const Carousel: React.FC = () => {
   }
 
   return (
-    <div className="relative h-full lg:h-auto " >
+    <div className="relative w-full lg:h-auto " >
         
       {projects.map((project, index) => (
         

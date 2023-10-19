@@ -19,7 +19,7 @@ export default function CardCategory({category}: PropsType) {
       
       <Image
         src={`/images/categories/${category.slug}/${category.coverImage}`}
-        alt='Image restaurant'
+        alt={`Image catégorie ${category.name}`}
         width="0"
         height="0"
         sizes='100vw'

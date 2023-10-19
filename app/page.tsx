@@ -49,10 +49,11 @@ export default function Home() {
               <div className='mb-4'>
                 <p className='mb-2'>Adresse</p>
                 <div className='pl-4 font-semibold'>
-                  <p>8, rue Benjamin Hoarau</p>
-                  <p>Zone Industrielle 3</p>
+                  <p>8, rue Benjamin Hoareau</p>
+                  <p>ZI 3</p>
                   <p>97410</p>
                   <p>Saint-Pierre</p>
+                  <p>La Réunion</p>
                 </div>
               </div> 
             </div>
