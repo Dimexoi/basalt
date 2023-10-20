@@ -130,6 +130,9 @@ export const project = createSlice({
    setProjectFormDragIndex(state, action) {
     state.projectForm.dragIndex = action.payload
    },
+   setProjectForm(state, action) {
+    state.projectForm = action.payload
+   },
    setProjectImageLink(state, action) {
     state.projectForm.images[action.payload.index].link = action.payload.link
    },
@@ -171,7 +174,8 @@ export const {
   setProjectFormImageSlug,
   setProjectFormImageName,
   setProjectImageLink,
-  removeImageFromProjectForm
+  removeImageFromProjectForm,
+  setProjectForm
 } = project.actions
 
 export const getProjects = createAsyncThunk(
@@ -256,6 +260,18 @@ export const addOneProject = createAsyncThunk(
   'project/addOneProject',
   async (projectFromForm: ProjectForm, thunkAPI) => {
     const project = await fetch('/api/project/addOne', {
+      method: 'POST',
+      body: JSON.stringify(projectFromForm)
+    })
+    const projectData = await project.json()
+    return projectData
+  }
+)
+
+export const editOneProject = createAsyncThunk(
+  'project/editOneProject',
+  async (projectFromForm: ProjectForm, thunkAPI) => {
+    const project = await fetch('/api/project/editOne', {
       method: 'POST',
       body: JSON.stringify(projectFromForm)
     })
