@@ -1,6 +1,9 @@
 'use client'
 
-import { editOneProject, getAllProjects, setProject, setProjectForm, setProjectFormCategoryId, setProjectFormDesc, setProjectFormImageName, setProjectFormImageSlug, setProjectFormName, setProjectFormSlug } from '@/redux/features/projectSlice'
+import ModalMessage from '@/app/components/ModalMessage'
+import SignOut from '@/app/components/SignOut'
+import { setShowErrorModal, setShowMessageModal } from '@/redux/features/displaySlice'
+import { editOneProject, getAllProjects, setProject, setProjectForm, setProjectFormCategoryId, setProjectFormDesc, setProjectFormImageName, setProjectFormImageSlug, setProjectFormImages, setProjectFormName, setProjectFormSlug } from '@/redux/features/projectSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import Image from 'next/image'
 import { FormEvent, useEffect } from 'react'
@@ -9,13 +12,23 @@ const UpdateProject = () => {
 
   const dispatch = useAppDispatch()
   
-  useEffect(() => {
-    dispatch(getAllProjects())
-  }, [])
-  
   const { projects } = useAppSelector(state => state.project)
   const {projectForm} = useAppSelector(state => state.project)
+  const {result} = useAppSelector(state => state.project)
   const { name, description, slug, coverImage, categoryId, images, dragIndex  } = projectForm
+  const {showMessageModal} = useAppSelector(state => state.display.project)
+
+  useEffect(() => {
+    dispatch(getAllProjects())
+  }, [dispatch])
+
+  useEffect(() => {
+    if (result.success === true) {
+      dispatch(setShowMessageModal(true))
+    } else if (result.success === false && result.message !== "") {
+      dispatch(setShowErrorModal(true))
+    }
+  }, [result, dispatch])
 
   const handleInputChangeName = (e: React.FormEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget
@@ -40,8 +53,16 @@ const UpdateProject = () => {
   }
 
   const handleChangeProject = (e: React.FormEvent<HTMLSelectElement>) => {
-    const projectToEdit = projects.find(project => project.id === Number(e.currentTarget.value))
-    dispatch(setProjectForm(projectToEdit))
+    if (Number(e.currentTarget.value) !== 0) {
+      const projectToEdit = projects.find(project => project.id === Number(e.currentTarget.value))
+      dispatch(setProjectForm(projectToEdit))
+    } else {
+      dispatch(setProjectFormSlug(''))
+      dispatch(setProjectFormName(''))
+      dispatch(setProjectFormCategoryId('0'))
+      dispatch(setProjectFormDesc(''))
+      dispatch(setProjectFormImages([]))
+    }
   }
 
   const handleInputChangeImgName = (e: React.FormEvent<HTMLInputElement>, index: number) => {
@@ -50,12 +71,16 @@ const UpdateProject = () => {
     dispatch(setProjectFormImageName({index, value}))
     dispatch(setProjectFormImageSlug({index, value: newSlug}))
   }
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    dispatch(editOneProject(projectForm))
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    if (Number(categoryId) !== 0) {
+      e.preventDefault()
+      await dispatch(editOneProject(projectForm))
+    }
   }
+
   return (
     <div className='p-4 bg-blue-200'>
+      <SignOut/>
       <h1 className='text-[#3D6367] text-xl text-center font-semibold mb-4'>Modifier un projet existant</h1>
       <form action="submit" onSubmit={handleSubmit}>
         <div className='text-center mb-4'>
@@ -68,7 +93,7 @@ const UpdateProject = () => {
               className='border border-[#3D6367] ml-2 p-2'
             >
               
-              <option value="">-- Sélectionner un projet --</option>
+              <option value='0'>-- Sélectionner un projet --</option>
               {projects.map(project => (
                 <option key={project.id} value={project.id}>{project.name} ({project.category.name})</option>
               ))}
@@ -103,7 +128,7 @@ const UpdateProject = () => {
                   required
                   className='border border-[#3D6367] p-2'
                 >
-                  <option value="">-- Choisissez une catégorie --</option>
+                  <option value="0">-- Choisissez une catégorie --</option>
                   <option value="1">Restaurant</option>
                   <option value="2">Hotel</option>
                   <option value="3">Locations saisonnières</option>
@@ -167,6 +192,9 @@ const UpdateProject = () => {
       </div>
               
       </form>
+      { showMessageModal && 
+        <ModalMessage crudAction='update'/>
+      }
     </div>
   )
 

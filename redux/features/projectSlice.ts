@@ -55,11 +55,16 @@ export interface ProjectForm {
   }[],
 }
 
+export interface Result {
+  success: boolean
+  message: string
+}
 
 type ProjectState = {
   projects: ProjectType[]
   project: ProjectType
   projectForm: ProjectForm
+  result: Result
 }
 
 
@@ -93,6 +98,10 @@ const initialState = {
     categoryId: '',
     dragIndex: 0,
     images: []
+  },
+  result: {
+    success: false,
+    message: ''
   }
 } as ProjectState
 
@@ -157,6 +166,10 @@ export const project = createSlice({
       })
       .addCase(addOneProject.fulfilled, (state, action) => {
         state.projects.push(action.payload.results)
+      })
+      .addCase(editOneProject.fulfilled, (state, action) => {
+        state.result.success = action.payload.success
+        state.result.message = action.payload.message
       })
       
   }
@@ -276,6 +289,7 @@ export const editOneProject = createAsyncThunk(
       body: JSON.stringify(projectFromForm)
     })
     const projectData = await project.json()
+    console.log(projectData)
     return projectData
   }
 )

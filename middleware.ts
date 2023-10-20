@@ -1,5 +1,5 @@
 export { default } from "next-auth/middleware"
 
 export const config = {
-  matcher: ['/projectmanager']
+  matcher: ['/projectmanager','/projectmanager/updateproject']
 }

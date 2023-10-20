@@ -378,7 +378,7 @@ const ProjectManager = () => {
         ))}
       </div>
       { showMessageModal && 
-        <ModalMessage/>
+        <ModalMessage crudAction='create'/>
       }
     </form>
   )

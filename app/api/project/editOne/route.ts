@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     if (session) {
 
         const body = await req.json()
-        const results = await prisma.project.update({
+        const updateProject = prisma.project.update({
           where: {
             id: body.id
           },
@@ -29,29 +29,39 @@ export async function POST(req: Request) {
             description: body.description,
             slug: body.slug,
             coverImage: body.images[0].coverImage,
-            categoryId: Number(body.categoryId),
-            images: {
-              update: body.images.map((image: ImageType) => ({
-                where: image.id,
-                data: {
-                  name: image.name,
-                  description: image.description,
-                  slug: image.slug,
-                  coverImage: image.coverImage,
-                  link: image.link
-                }
-              }))
-            }
+            categoryId: Number(body.categoryId)
           }
         })
-        return NextResponse.json({ success: true, message: "Done", results }, {status: 200});
+
+        const operations = []
+
+        operations.push(updateProject)
+
+        for (const image of body.images) {
+          operations.push(prisma.image.update({
+            where: {
+              id: image.id
+            }, 
+            data: {
+              name: image.name,
+              description: image.description,
+              slug: image.slug,
+              coverImage: image.coverImage,
+              link: image.link
+            }
+          }))
+        }
+
+        const update = await prisma.$transaction(operations)
+
+        return NextResponse.json({ success: true, message: "Done", update }, {status: 200});
     } else {
-      return NextResponse.json({ error: "Not signed in"}, {status: 401});
+      return NextResponse.json({ success: false, message: "Not signed in"}, {status: 401});
     }
     
 
   } catch (err) {
     console.log(err)
-    return NextResponse.json({error: err})
+    return NextResponse.json({success: false, error: err})
   }
 }

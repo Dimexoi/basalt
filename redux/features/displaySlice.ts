@@ -22,7 +22,8 @@ type DisplayState = {
     isScrolled: boolean
   },
   project: {
-    showMessageModal: boolean
+    showMessageModal: boolean,
+    showErrorModal: boolean
   },
   general: {
     currentDate: Date | null
@@ -38,7 +39,8 @@ const initialState = {
     isScrolled: false
   },
   project: {
-    showMessageModal: false
+    showMessageModal: false,
+    showErrorModal: false
   },
   general: {
     currentDate: null
@@ -63,6 +65,9 @@ export const display = createSlice({
     },
     setShowMessageModal (state, action) {
       state.project.showMessageModal = action.payload
+    },
+    setShowErrorModal (state, action) {
+      state.project.showErrorModal = action.payload
     },
     setCarouselProjects (state, action) {
       state.carousel.projects = action.payload
@@ -89,7 +94,8 @@ export const {
   setHeaderIsScrolled,
   setShowMessageModal,
   setCarouselProjects,
-  setCurrentDate
+  setCurrentDate,
+  setShowErrorModal
 } = display.actions
 
 export const getCarouselProjects = createAsyncThunk(
