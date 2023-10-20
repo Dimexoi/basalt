@@ -30,15 +30,17 @@ export default function Welcome() {
         <Header welcome={true}/>
 
 
-          <div className="flex-1 h-full flex flex-col p-4 mt-16 md:p-10 z-40">
-              <h1 className="font-semibold text-xl md:text-3xl text-center">Le mobilier professionnel pour la restauration et l&apos;hôtellerie</h1>
+          <div className="flex-1 h-full flex flex-col p-4 mt-14 md:p-10 z-40">
+
+            <h1 className="font-semibold text-xl md:text-3xl text-center">Basalt Mobilier Pro : Mobilier Professionnel et Aménagement à La Réunion</h1>
+
             <div className="flex lg:items-center h-full flex-col">
               <div className="flex h-full lg:h-auto lg:gap-10 xl:w-[70%] lg:mx-auto flex-col lg:flex-row justify-around flex-1">
 
                 <div className="flex justify-around items-center md:flex-1">
 
                   <p className="md:text-xl md:tracking-wide md:leading-8 text-justify">
-                    Bienvenue sur notre site dédié aux <strong>professionnels</strong>. <strong>Basalt mobilier pro</strong> est spécialisé dans la vente de <em>mobilier professionnel de qualité supérieure</em> pour répondre aux besoins de votre entreprise. Nous savons à quel point il est important d&apos;avoir un mobilier confortable et esthétique pour garantir le <em>succès</em> de votre établissement. C&apos;est dans ce but que nous vous accompagnons dans la <strong>conception</strong>, l&apos;<strong>équipement</strong>, la <strong>décoration</strong>, et l&apos;<strong>ameublement</strong> de votre projet. 
+                    Bienvenue chez Basalt Mobilier Pro, spécialiste du <strong>mobilier professionnel</strong> à La Réunion. Nous vous accompagnons dans la conception, l'équipement, et l'ameublement de votre projet en <em>teck de qualité supérieure</em>. Experts en aménagement d'intérieur, nous créons des espaces exceptionnels pour <strong>restaurants</strong>, <strong>boutiques</strong>, ou <strong>tiny houses</strong>. Basalt Mobilier Pro à Saint-Pierre est votre architecte de rêves, offrant une expérience complète pour faire de votre établissement un lieu exceptionnel.
                   </p>
                   
                 </div>
