@@ -32,19 +32,19 @@ export default function Welcome() {
 
           <div className="flex-1 h-full flex flex-col p-4 mt-16 md:p-10 z-40">
               <h1 className="font-semibold text-xl md:text-3xl text-center">Le mobilier professionnel pour la restauration et l&apos;hôtellerie</h1>
-            <div className="flex lg:items-center h-full">
-              <div className="flex h-full lg:h-auto lg:gap-10 xl:w-[70%] lg:mx-auto flex-col lg:flex-row justify-around">
+            <div className="flex lg:items-center h-full flex-col">
+              <div className="flex h-full lg:h-auto lg:gap-10 xl:w-[70%] lg:mx-auto flex-col lg:flex-row justify-around flex-1">
 
                 <div className="flex justify-around items-center md:flex-1">
 
-                  <p className="md:text-xl md:tracking-wide md:leading-10 text-justify">
+                  <p className="md:text-xl md:tracking-wide md:leading-8 text-justify">
                     Bienvenue sur notre site dédié aux <strong>professionnels</strong>. <strong>Basalt mobilier pro</strong> est spécialisé dans la vente de <em>mobilier professionnel de qualité supérieure</em> pour répondre aux besoins de votre entreprise. Nous savons à quel point il est important d&apos;avoir un mobilier confortable et esthétique pour garantir le <em>succès</em> de votre établissement. C&apos;est dans ce but que nous vous accompagnons dans la <strong>conception</strong>, l&apos;<strong>équipement</strong>, la <strong>décoration</strong>, et l&apos;<strong>ameublement</strong> de votre projet. 
                   </p>
                   
                 </div>
 
-                <div className="md:flex-1 flex items-center">
-                  <div className="border h-auto">
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="border w-full h-full lg:h-[70%]">
                     <Carousel/>
                   </div>
                 </div>

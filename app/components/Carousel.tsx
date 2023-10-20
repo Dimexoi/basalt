@@ -40,29 +40,26 @@ const Carousel: React.FC = () => {
   }
 
   return (
-    <div className="relative w-full lg:h-auto " >
+    <div className="relative w-full h-full flex justify-center" >
         
       {projects.map((project, index) => (
         
         <Link    
           key={index}
           href={`/project/${project.id}/${project.slug}`}
-          className={`flex items-center justify-center transition-opacity duration-500 w-full h-auto overflow-hidden ${
+          className={`flex items-center justify-center transition-opacity duration-500 h-full w-full ${
             index === currentIndex ? 'block opacity-100' : 'hidden opacity-0'
           }`}
         >
 
           <Image
             src={getImage(index)}
-            alt={`Slide ${index}`} 
-            sizes='100vw'
-            height='0'
-            width='0'
-            className='w-full h-auto'
+            alt={`Slide ${index}`}
+            fill={true}
+            objectFit='cover'
             priority
           />
           <p className='absolute bottom-0 bg-gradient-to-t from-black/100 to-black/1 w-full text-center p-4 text-xl'>{project.name}</p>
-          
         </Link>
       ))}
       <div onClick={handlePrevSlide} className="flex items-center justify-start absolute left-0 h-full w-[15%] top-0 transition duration-1000 hover:cursor-pointer hover:bg-gradient-to-r hover:from-black/40 hover:to-black/0 ">
