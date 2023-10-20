@@ -44,7 +44,7 @@ export default function Welcome() {
                 </div>
 
                 <div className="flex-1 flex items-center justify-center">
-                  <div className="border w-full h-full lg:h-[70%]">
+                  <div className="border w-full h-[70%] md:h-full lg:h-[70%]">
                     <Carousel/>
                   </div>
                 </div>
