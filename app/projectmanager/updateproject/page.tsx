@@ -83,25 +83,26 @@ const UpdateProject = () => {
       <SignOut/>
       <h1 className='text-[#3D6367] text-xl text-center font-semibold mb-4'>Modifier un projet existant</h1>
       <form action="submit" onSubmit={handleSubmit}>
-        <div className='text-center mb-4'>
-          <label>
-            Projet à modifier : 
-            <select
-              name="project_name"
-              id="projectname"
-              onChange={handleChangeProject}
-              className='border border-[#3D6367] ml-2 p-2'
-            >
-              
-              <option value='0'>-- Sélectionner un projet --</option>
-              {projects.map(project => (
-                <option key={project.id} value={project.id}>{project.name} ({project.category.name})</option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div className='flex justify-around'>
-          <div className='w-[40%] flex flex-col gap-4'>
+        <label className='flex flex-col md:flex-row gap-2 items-center justify-center mb-4'>
+          <span>
+          Projet à modifier : 
+          </span>
+          <select
+            name="project_name"
+            id="projectname"
+            onChange={handleChangeProject}
+            className='border border-[#3D6367] p-2'
+          >
+            
+            <option value='0'>-- Sélectionner un projet --</option>
+            {projects.map(project => (
+              <option key={project.id} value={project.id}>{project.name} ({project.category.name})</option>
+            ))}
+          </select>
+        </label>
+
+        <div className='flex flex-col md:flex-row justify-around'>
+          <div className='w-full md:w-[45%] lg:w-[40%] flex flex-col gap-4 '>
             <div className='flex flex-col gap-4 w-full'>
               <label className='flex flex-col'>
                 <span>
@@ -152,13 +153,13 @@ const UpdateProject = () => {
             </label>
             <button
               type='submit'
-              className='p-4 bg-orange-200 w-full border border-gray-100'
+              className='p-4 bg-orange-200 w-full border border-gray-100 mb-4 md:mb-0'
             >
               Enregistrer
             </button>
           </div>
 
-          <div className='w-[40%]'>
+          <div className='w-full md:w-[45%] lg:w-[40%]'>
           {images.map((image, index) => (
             <div className='mb-4 bg-gray-300 p-4 border border-gray-200' key={image.id}>
 
