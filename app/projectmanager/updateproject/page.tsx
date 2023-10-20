@@ -135,7 +135,7 @@ const UpdateProject = () => {
 
           <div className='w-[40%]'>
           {images.map((image, index) => (
-            <div className='mb-4 bg-gray-300 p-4 border border-gray-200'>
+            <div className='mb-4 bg-gray-300 p-4 border border-gray-200' key={image.id}>
 
               <Image
                 src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${image.coverImage}`}
@@ -148,7 +148,7 @@ const UpdateProject = () => {
               
               <label className='w-full flex flex-col'>
                 <span>
-                  Nom de l'image :
+                  Nom de l&apos;image :
                 </span>
                 
                 <input
