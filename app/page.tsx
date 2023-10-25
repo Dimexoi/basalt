@@ -21,7 +21,7 @@ export default function Home() {
       <div className='mt-4 md:px-10 lg:w-[80%] lg:mx-auto' id='portfolio'>
         <h2 className='font-bold text-center text-xl text-[#3D6367]'>Découvrez nos projets</h2>
 
-        <div className='flex flex-col gap-4 p-4 lg:grid xl:grid-cols-2'>
+        <div className='flex flex-col gap-4 mt-2 p-4 lg:grid xl:grid-cols-2'>
           {categories.filter(category => (
             category.active === true
           )).map(category => (
@@ -29,8 +29,8 @@ export default function Home() {
           ))}
         </div>
 
-        <div id='contact'>
-          <h2 className='font-bold text-center text-xl text-[#3D6367]'>Contactez-nous</h2>
+        <div id='contact' className='mt-4'>
+          <h2 className='mb-2 font-bold text-center text-xl text-[#3D6367]'>Contactez-nous</h2>
           <div className='flex flex-col md:flex-row md:gap-5 md:justify-around'>
 
             <div className='p-4 '>
