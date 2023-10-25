@@ -40,7 +40,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
           />
           }
           
-          <p className='text-justify ps-3 md:ps-0'>{project.description}</p>
+          <p className='text-justify px-3 md:ps-0'>{project.description}</p>
         </div>
 
         <div>
