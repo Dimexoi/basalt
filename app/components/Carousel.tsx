@@ -47,16 +47,17 @@ const Carousel: React.FC = () => {
         <Link    
           key={index}
           href={`/project/${project.id}/${project.slug}`}
-          className={`flex items-center justify-center transition-opacity duration-500 h-full w-full ${
+          className={`absolute flex items-center justify-center transition-opacity duration-500 h-full w-full overflow-hidden ${
             index === currentIndex ? 'block opacity-100' : 'hidden opacity-0'
           }`}
         >
 
           <Image
             src={getImage(index)}
-            alt={`Slide ${index}`}
-            fill={true}
-            objectFit='cover'
+            alt={`Image de ${project.name}`}
+            sizes={'100vw'}
+            fill
+            style={{objectFit:"cover"}}
             priority
           />
           <p className='absolute bottom-0 bg-gradient-to-t from-black/100 to-black/1 w-full text-center p-4 text-xl'>{project.name}</p>
