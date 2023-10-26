@@ -25,8 +25,8 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div id="content" className="h-screen bg-[url('/images/bg-img/bg.webp')] bg-[no-repeat] bg-[bottom_right_-6rem] md:bg-[center] bg-cover text-white">
-      <div className="flex flex-col h-full bg-gradient-to-b from-black/60 to-black/20">
+    <div id="content" className="h-screen bg-[url('/images/bg-img/bg3.webp')] bg-[no-repeat] bg-[bottom_right_-6rem] md:bg-[top] bg-cover text-white">
+      <div className="flex flex-col h-full bg-gradient-to-b from-black/90 to-black/1">
         <Header welcome={true}/>
 
 
