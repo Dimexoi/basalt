@@ -48,7 +48,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <div className="lg:flex md:gap-2">
         <div className="mb-4">
-          <label htmlFor="lastName" className="block text-sm font-medium text-gray-600">
+          <label htmlFor="lastName" className="block text-sm font-medium text-white">
             Nom
           </label>
           <input
@@ -59,13 +59,14 @@ export default function ContactForm() {
             maxLength={26}
             value={nom}
             onChange={handleChangeNom}
+            placeholder="Votre nom"
             className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
             required
           />
         </div>
 
         <div className="mb-4">
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-600">
+          <label htmlFor="firstName" className="block text-sm font-medium text-white">
             Prénom
           </label>
           
@@ -77,7 +78,8 @@ export default function ContactForm() {
             maxLength={26}
             value={prenom}
             onChange={handleChangePrenom}
-            className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
+            placeholder="Votre prénom"
+            className="mt-1 p-2 w-full  rounded-md  "
             required
           />
         </div>
@@ -86,7 +88,7 @@ export default function ContactForm() {
       <div className="lg:flex md:gap-2">
 
         <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-600 ">
+          <label htmlFor="email" className="block text-sm font-medium text-white ">
             Email
           </label>
           <input
@@ -97,12 +99,13 @@ export default function ContactForm() {
             value={email}
             onChange={handleChangeEmail}
             className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
+            placeholder="abc@xyz.com"
             required
           />
         </div>
 
         <div className="mb-4">
-          <label htmlFor="telephone" className="block text-sm font-medium text-gray-600">
+          <label htmlFor="telephone" className="block text-sm font-medium text-white">
             Téléphone
           </label>
           <input
@@ -113,13 +116,14 @@ export default function ContactForm() {
             value={telephone}
             onChange={handleChangeTelephone}
             className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
+            placeholder="0692123456"
             required
           />
         </div>
       </div>
 
       <div className="mb-4">
-        <label htmlFor="societe" className="block text-sm font-medium text-gray-600">
+        <label htmlFor="societe" className="block text-sm font-medium text-white">
           Société
         </label>
         <input
@@ -129,12 +133,13 @@ export default function ContactForm() {
           name="societe"
           value={societe}
           onChange={handleChangeSociete}
+          placeholder="Votre société"
           className="mt-1 p-2 w-full border rounded-md"
         />
       </div>
 
       <div className="mb-4">
-        <label htmlFor="message" className="block text-sm font-medium text-gray-600">
+        <label htmlFor="message" className="block text-sm font-medium text-white">
           Message
         </label>
         <textarea
@@ -143,13 +148,14 @@ export default function ContactForm() {
           value={message}
           onChange={handleChangeMessage}
           className="mt-1 p-2 w-full border rounded-md valid:border-[#3D6367]"
+          placeholder="Votre message"
           required
         />
       </div>
       
-      {isSubmitting && <p className="text-[#3D6367] font-semibold mb-4 text-center">Votre message a bien été envoyé</p> }
+      {isSubmitting && <p className="text-white p-2 font-semibold mb-4 text-center">Votre message a bien été envoyé</p> }
 
-      <button disabled={isSubmitting} className="border border-[#3D6367] text-[#3D6367] p-2 rounded-md hover:border-white hover:text-white hover:bg-[#3D6367] disabled:bg-gray-500 disabled:text-gray-800">
+      <button disabled={isSubmitting} className="w-full border border-white text-white p-2 rounded-md hover:border-white hover:text-[#3D6367] hover:bg-white disabled:bg-gray-500 disabled:text-gray-800 duration-300">
         Envoyer
       </button>
     </form>

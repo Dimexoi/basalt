@@ -23,7 +23,7 @@ export default function Category({ params }: { params: { id: number, slug: strin
   }, [dispatch])
 
   return (
-    <main className="h-full ">
+    <main className="h-full mb-8">
       <Header welcome={false}/>
       <div className='flex flex-col gap-4 md:px-10 lg:w-[70%] lg:mx-auto lg:px-0'>
         <h1 className='font-bold text-center text-xl text-[#3D6367]'>{project.name}</h1>
