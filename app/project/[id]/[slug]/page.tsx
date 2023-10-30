@@ -31,13 +31,13 @@ export default function Category({ params }: { params: { id: number, slug: strin
 
           {project.images.length > 0 && 
             <Image
-            src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${project.images[0].coverImage}`}
-            alt={`Image ${project.images[0].name}`}
-            width="0"
-            height="0"
-            sizes='100vw'
-            className='h-auto w-full mb-1'
-          />
+              src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${project.images[0].coverImage}`}
+              alt={`Image ${project.images[0].name}`}
+              width="0"
+              height="0"
+              sizes='100vw'
+              className='h-auto w-full mb-1'
+            />
           }
           
           <p className='text-justify px-3 md:ps-0'>{project.description}</p>
