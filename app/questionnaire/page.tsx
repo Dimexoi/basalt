@@ -113,10 +113,11 @@ export default function Questionnaire() {
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                   required
                 >
-                  <option value="1">Restaurant</option>
-                  <option value="2">Hotel</option>
-                  <option value="3">Location saisonnière</option>
-                  <option value="5">Réalisation de moodboards</option>
+                  <option value="Restaurant">Restaurant</option>
+                  <option value="Hotel">Hotel</option>
+                  <option value="Location saisonnière">Location saisonnière</option>
+                  <option value="Réalisation de moodboards">Réalisation de moodboards</option>
+                  <option value="Autre">Autre</option>
                 </select>
               </div>
 
