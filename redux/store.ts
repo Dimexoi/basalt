@@ -3,6 +3,7 @@ import categoryReducer from '@/redux/features/categorySlice'
 import projectReducer from '@/redux/features/projectSlice'
 import displayReducer from '@/redux/features/displaySlice'
 import contactReducer from '@/redux/features/contactSlice'
+import questionnaireReducer from '@/redux/features/questionnaireSlice'
 
 const defaultMiddlewareConfig = {
   serializableCheck: false
@@ -13,7 +14,8 @@ export const store = configureStore({
     category: categoryReducer,
     project: projectReducer,
     display: displayReducer,
-    contact: contactReducer
+    contact: contactReducer,
+    questionnaire: questionnaireReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(defaultMiddlewareConfig),
   devTools: process.env.NODE_ENV !== "production",
