@@ -1,5 +1,5 @@
 import Header from '@/app/components/Header'
-import QuestionnaireForm from '../components/QuestionnaireForm'
+import QuestionnaireForm from '../components/QuestionnaireForms'
 
 export default function Questionnaire() {
 
