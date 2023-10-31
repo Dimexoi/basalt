@@ -1,3 +1,4 @@
+import { sendQuestionnaire } from "@/app/actions/sendQuestionnaire"
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface CheckBoxObj {
@@ -317,11 +318,12 @@ export const submitEmail = createAsyncThunk(
         body.append(file.name, file)
       })
     }
-    const project = await fetch('/api/send-email/questionnaire', {
-      method: 'POST',
-      body
-    })
-    return project.json()
+    // const project = await fetch('/api/send-email/questionnaire', {
+    //   method: 'POST',
+    //   body
+    // })
+    const project = await sendQuestionnaire(body)
+    return project
   }
 )
 
