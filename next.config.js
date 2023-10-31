@@ -17,11 +17,11 @@ const nextConfig = {
         ],
       },
 
-      experimental: {
-        serverActions: {
-          bodySizeLimit: '1024mb',
-        },
-      },
+      // experimental: {
+      //   serverActions: {
+      //     bodySizeLimit: '1024mb',
+      //   },
+      // },
 
 }
 
