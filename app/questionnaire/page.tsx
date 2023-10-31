@@ -1,14 +1,7 @@
-'use client'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import Image from 'next/image'
-import { useEffect } from 'react'
-import { getOneProject, getProjects, setProject } from '@/redux/features/projectSlice'
-import CardProject from '@/app/components/CardProject'
 import Header from '@/app/components/Header'
-import QuestionnaireForm from '../components/questionnaireForm'
+import QuestionnaireForm from '../components/QuestionnaireForm'
 
 export default function Questionnaire() {
-  const dispatch = useAppDispatch()
 
   return (
     <main className="h-full mb-8">

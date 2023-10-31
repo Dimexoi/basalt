@@ -1,10 +1,13 @@
 'use client'
 
+import { setAime, setAmbianceSouhaiter, setAnneeConstruction, setAutreAmbiance, setAutreElement, setAutreModification, setBudget, setContraintes, setDescriptionPieces, setElementAModifier, setEmail, setHabitudesVie, setImageExemple, setIsSubmitting, setNbPiece, setNom, setOrientation, setPasAime, setPhotos, setPlans, setPrenom, setPrestation, setSociete, setSurfaceTotale, setTelephone, setTypeModification, setTypeProjet, submitEmail } from "@/redux/features/questionnaireSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 export default function QuestionnaireForm() {
 
   const dispatch = useAppDispatch()
+
+  const questionnaire = useAppSelector(state => state.questionnaire)
 
   const {
     nom,
@@ -34,10 +37,129 @@ export default function QuestionnaireForm() {
     photos,
     imageExemples,
     isSubmitting
-  } = useAppSelector(state => state.questionnaire)
+  } = questionnaire
 
+  const handleChangeNom = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNom(e.target.value))
+  }
+
+  const handleChangePrenom = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setPrenom(e.target.value))
+  }
+
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setEmail(e.target.value))
+  }
+
+  const handleChangeTelephone = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setTelephone(e.target.value))
+  }
+
+  const handleChangeTypeProjet = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setTypeProjet(e.target.value))
+  }
+
+  const handleChangeSociete = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSociete(e.target.value))
+  }
+
+  const handleChangeAnneeConstruction = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setAnneeConstruction(e.target.value))
+  }
+
+  const handleChangeSurfaceTotale = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSurfaceTotale(e.target.value))
+  }
+
+  const handleChangeNbPiece = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNbPiece(e.target.value))
+  }
+
+  const handleChangeOrientation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setOrientation(e.target.value))
+  }
+
+  const handleChangeDescriptionPieces = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setDescriptionPieces(e.target.value))
+  }
+
+  const handleCheckTypeModification = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setTypeModification(e.target.id))
+  }
+
+  const handleChangeAutreModification = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setAutreModification(e.target.value))
+  }
+
+  const handleCheckElementAModifier = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setElementAModifier(e.target.id))
+  }
+
+  const handleChangeAutreElement = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setAutreElement(e.target.value))
+  }
+
+  const handleCheckAmbianceSouhaiter = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setAmbianceSouhaiter(e.target.id))
+  }
+
+  const handleChangeAutreAmbiance = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setAutreAmbiance(e.target.value))
+  }
+
+  const handleChangeContraintes = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setContraintes(e.target.value))
+  }
+
+  const handleChangeAime = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setAime(e.target.value))
+  }
+
+  const handleChangePasAime = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setPasAime(e.target.value))
+  }
+
+  const handleChangeBudget= (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setBudget(e.target.value))
+  }
+
+  const handleChangeHabitudesVie = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setHabitudesVie(e.target.value))
+  }
+
+  const handleChangePrestation = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setPrestation(e.target.value))
+  }
+
+  const handleChangePlans = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.files) {
+      const allFiles = Array.from(e.target.files)
+      dispatch(setPlans(allFiles))
+    }
+  }
+
+  const handleChangePhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.files) {
+      const allFiles = Array.from(e.target.files)
+      dispatch(setPhotos(allFiles))
+    }
+  }
+
+  const handleChangeImageExemple = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.files) {
+      const allFiles = Array.from(e.target.files)
+      dispatch(setImageExemple(allFiles))
+    }
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    dispatch(setIsSubmitting(true))
+    dispatch(submitEmail(questionnaire))
+
+  }
   return (
-    <form action="submit" className='flex flex-col gap-8'>
+    <form action="submit" onSubmit={handleSubmit} className='flex flex-col gap-8'>
 
     <h3 className='text-xl font-semibold'>Vos informations et caractéristiques du projet</h3>
 
@@ -55,7 +177,7 @@ export default function QuestionnaireForm() {
             minLength={2}
             maxLength={26}
             value={nom}
-            onChange={() => console.log('cvhanged')}
+            onChange={handleChangeNom}
             placeholder="Votre nom"
             className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             required
@@ -74,7 +196,7 @@ export default function QuestionnaireForm() {
             minLength={2}
             maxLength={26}
             value={prenom}
-            onChange={() => console.log('cvhanged')}
+            onChange={handleChangePrenom}
             placeholder="Votre prénom"
             className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             required
@@ -91,7 +213,7 @@ export default function QuestionnaireForm() {
             name="email"
             pattern="^[a-zA-Z0-9._%+\-\@]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{1,}$"
             value={email}
-            onChange={() => console.log('cvhanged')}
+            onChange={handleChangeEmail}
             className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             placeholder="abc@xyz.com"
             required
@@ -108,7 +230,7 @@ export default function QuestionnaireForm() {
             id="telephone"
             name="telephone"
             value={telephone}
-            onChange={() => console.log('cvhanged')}
+            onChange={handleChangeTelephone}
             className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             placeholder="0692123456"
             required
@@ -130,7 +252,7 @@ export default function QuestionnaireForm() {
             id="projectType"
             name="projectType"
             value={typeProjet}
-            onChange={() => console.log('cvhanged')}
+            onChange={handleChangeTypeProjet}
             className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             required
           >
@@ -151,7 +273,7 @@ export default function QuestionnaireForm() {
             id="society"
             name="society"
             value={societe}
-            onChange={() => console.log('cvhanged')}
+            onChange={handleChangeSociete}
             className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             placeholder="Nom de votre société"
             required
@@ -169,7 +291,7 @@ export default function QuestionnaireForm() {
               id="yearOfConstruction"
               name="yearOfConstruction"
               value={anneeConstruction}
-              onChange={() => console.log('cvhanged')}
+              onChange={handleChangeAnneeConstruction}
               placeholder="Année de construction"
               className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             />
@@ -184,7 +306,7 @@ export default function QuestionnaireForm() {
               id="totaleSurface"
               name="totaleSurface"
               value={surfaceTotale}
-              onChange={() => console.log('cvhanged')}
+              onChange={handleChangeSurfaceTotale}
               placeholder="Surface totale du lieu"
               className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             />
@@ -202,7 +324,7 @@ export default function QuestionnaireForm() {
               id="numberOfRoom"
               name="numberOfRoom"
               value={nbPiece}
-              onChange={() => console.log('cvhanged')}
+              onChange={handleChangeNbPiece}
               placeholder="Nombre de pièces"
               className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             />
@@ -217,7 +339,7 @@ export default function QuestionnaireForm() {
               id="orientation"
               name="orientation"
               value={orientation}
-              onChange={() => console.log('cvhanged')}
+              onChange={handleChangeOrientation}
               placeholder="Orientation du lieu"
               className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             />
@@ -242,7 +364,7 @@ export default function QuestionnaireForm() {
             name="roomDescription"
             rows={5}
             value={descriptionPieces}
-            onChange={() => console.log('cvhanged')}
+            onChange={handleChangeDescriptionPieces}
             placeholder="Détails des pièces à travailler"
             className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
           />
@@ -267,7 +389,7 @@ export default function QuestionnaireForm() {
                 id="mood"
                 name="modificationType"
                 checked={typeModification.mood.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckTypeModification}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
               <label htmlFor="mood">
@@ -280,7 +402,7 @@ export default function QuestionnaireForm() {
                 id="color"
                 name="modificationType"
                 checked={typeModification.color.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckTypeModification}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
               <label htmlFor="color">
@@ -293,7 +415,7 @@ export default function QuestionnaireForm() {
                 id="layout"
                 name="modificationType"
                 checked={typeModification.layout.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckTypeModification}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
               <label htmlFor="layout">
@@ -306,7 +428,7 @@ export default function QuestionnaireForm() {
                 id="storage"
                 name="modificationType"
                 checked={typeModification.storage.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckTypeModification}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
               <label htmlFor="storage">
@@ -319,7 +441,7 @@ export default function QuestionnaireForm() {
                 id="brightness"
                 name="modificationType"
                 checked={typeModification.brightness.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckTypeModification}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />      
               <label htmlFor="brightness">
@@ -337,7 +459,7 @@ export default function QuestionnaireForm() {
               id="otherModification"
               name="otherModification"
               value={autreModification}
-              onChange={() => console.log('cvhanged')}
+              onChange={handleChangeAutreModification}
               placeholder="précisions"
               className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             />
@@ -356,7 +478,7 @@ export default function QuestionnaireForm() {
                 id="floor"
                 name="modificationElement"
                 checked={elementAModifier.floor.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckElementAModifier}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
               <label htmlFor="floor">
@@ -369,7 +491,7 @@ export default function QuestionnaireForm() {
                 id="wall"
                 name="modificationElement"
                 checked={elementAModifier.wall.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckElementAModifier}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
               <label htmlFor="wall">
@@ -382,7 +504,7 @@ export default function QuestionnaireForm() {
                 id="furnitures"
                 name="modificationElement"
                 checked={elementAModifier.furnitures.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckElementAModifier}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
               <label htmlFor="furnitures">
@@ -395,7 +517,7 @@ export default function QuestionnaireForm() {
                 id="lighting"
                 name="modificationElement"
                 checked={elementAModifier.lighting.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckElementAModifier}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
               <label htmlFor="lighting">
@@ -408,7 +530,7 @@ export default function QuestionnaireForm() {
                 id="arrangement"
                 name="modificationElement"
                 checked={elementAModifier.arrangement.isChecked}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleCheckElementAModifier}
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />      
               <label htmlFor="arrangement">
@@ -426,7 +548,7 @@ export default function QuestionnaireForm() {
               id="otherElement"
               name="otherElement"
               value={autreElement}
-              onChange={() => console.log('cvhanged')}
+              onChange={handleChangeAutreElement}
               placeholder="précisions"
               className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             />
@@ -446,7 +568,7 @@ export default function QuestionnaireForm() {
                   id="contemporaine"
                   name="desiredMood"
                   checked={ambianceSouhaiter.contemporaine.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />
                 <label htmlFor="contemporaine">
@@ -459,7 +581,7 @@ export default function QuestionnaireForm() {
                   id="scandinave"
                   name="desiredMood"
                   checked={ambianceSouhaiter.scandinave.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />
                 <label htmlFor="scandinave">
@@ -472,7 +594,7 @@ export default function QuestionnaireForm() {
                   id="vintage"
                   name="desiredMood"
                   checked={ambianceSouhaiter.vintage.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />
                 <label htmlFor="vintage">
@@ -485,7 +607,7 @@ export default function QuestionnaireForm() {
                   id="industrielle"
                   name="desiredMood"
                   checked={ambianceSouhaiter.industrielle.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />
                 <label htmlFor="industrielle">
@@ -498,7 +620,7 @@ export default function QuestionnaireForm() {
                   id="boheme"
                   name="desiredMood"
                   checked={ambianceSouhaiter.boheme.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />      
                 <label htmlFor="boheme">
@@ -511,7 +633,7 @@ export default function QuestionnaireForm() {
                   id="campagne"
                   name="desiredMood"
                   checked={ambianceSouhaiter.campagne.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />
                 <label htmlFor="campagne">
@@ -524,7 +646,7 @@ export default function QuestionnaireForm() {
                   id="espbdm"
                   name="desiredMood"
                   checked={ambianceSouhaiter.espbdm.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />
                 <label htmlFor="espbdm">
@@ -537,7 +659,7 @@ export default function QuestionnaireForm() {
                   id="zen"
                   name="desiredMood"
                   checked={ambianceSouhaiter.zen.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />
                 <label htmlFor="zen">
@@ -550,7 +672,7 @@ export default function QuestionnaireForm() {
                   id="ethique"
                   name="desiredMood"
                   checked={ambianceSouhaiter.ethique.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />
                 <label htmlFor="ethique">
@@ -563,7 +685,7 @@ export default function QuestionnaireForm() {
                   id="moderne"
                   name="desiredMood"
                   checked={ambianceSouhaiter.moderne.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />      
                 <label htmlFor="moderne">
@@ -576,7 +698,7 @@ export default function QuestionnaireForm() {
                   id="baroque"
                   name="desiredMood"
                   checked={ambianceSouhaiter.baroque.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />      
                 <label htmlFor="baroque">
@@ -588,8 +710,8 @@ export default function QuestionnaireForm() {
                   type="checkbox"
                   id="orientale"
                   name="desiredMood"
-                  checked={ambianceSouhaiter.baroque.isChecked}
-                  onChange={() => console.log('cvhanged')}
+                  checked={ambianceSouhaiter.orientale.isChecked}
+                  onChange={handleCheckAmbianceSouhaiter}
                   className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
                 />      
                 <label htmlFor="orientale">
@@ -607,7 +729,7 @@ export default function QuestionnaireForm() {
                 id="otherMood"
                 name="otherMood"
                 value={autreAmbiance}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleChangeAutreAmbiance}
                 placeholder="précisions"
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
@@ -622,7 +744,7 @@ export default function QuestionnaireForm() {
                 name="roomContrainte"
                 rows={6}
                 value={contraintes}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleChangeContraintes}
                 placeholder="Liste des contraintes si il y en a"
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
@@ -637,7 +759,7 @@ export default function QuestionnaireForm() {
                 name="whatYouLike"
                 rows={6}
                 value={aime}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleChangeAime}
                 placeholder="Liste de ce que vous aimez"
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
@@ -652,7 +774,7 @@ export default function QuestionnaireForm() {
                 name="whatYouNoLike"
                 rows={6}
                 value={pasAime}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleChangePasAime}
                 placeholder="Liste de ce que vous n'aimez pas"
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
@@ -667,7 +789,7 @@ export default function QuestionnaireForm() {
                 id="budget"
                 name="budget"
                 value={budget}
-                onChange={() => console.log('cvhanged')}
+                onChange={handleChangeBudget}
                 placeholder="Votre budget"
                 className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
               />
@@ -699,7 +821,7 @@ export default function QuestionnaireForm() {
               name="livingHabits"
               rows={6}
               value={habitudesVie}
-              onChange={() => console.log('cvhanged')}
+              onChange={handleChangeHabitudesVie}
               placeholder="Liste des habitudes par pièce"
               className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             />
@@ -718,7 +840,7 @@ export default function QuestionnaireForm() {
             id="prestations"
             name="prestations"
             value={prestation}
-            onChange={() => console.log('cvhanged')}
+            onChange={handleChangePrestation}
             className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
             required
           >
@@ -745,7 +867,7 @@ export default function QuestionnaireForm() {
               id="plan"
               type="file"
               multiple
-              onChange={() => console.log('yo')}
+              onChange={handleChangePlans}
             />
           </div>
 
@@ -758,7 +880,7 @@ export default function QuestionnaireForm() {
               id="roomPicture"
               type="file"
               multiple
-              onChange={() => console.log('yo')}
+              onChange={handleChangePhotos}
             />
           </div>
 
@@ -771,7 +893,7 @@ export default function QuestionnaireForm() {
               id="likedMood"
               type="file"
               multiple
-              onChange={() => console.log('yo')}
+              onChange={handleChangeImageExemple}
               className=''
             />
           </div>

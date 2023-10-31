@@ -4,36 +4,15 @@ interface CheckBoxObj {
   isChecked: boolean
   value: string
 }
-interface TypeModification {
-  mood: CheckBoxObj
-  color: CheckBoxObj
-  layout: CheckBoxObj
-  storage: CheckBoxObj
-  brightness: CheckBoxObj
-}
 
-interface ElementAModifier {
-  floor: CheckBoxObj
-  wall: CheckBoxObj
-  furnitures: CheckBoxObj
-  lighting: CheckBoxObj
-  arrangement: CheckBoxObj
+interface CheckBoxes {
+  [key: string]: CheckBoxObj
 }
+type TypeModification = CheckBoxes
 
-interface AmbianceSouhaiter {
-  contemporaine: CheckBoxObj
-  scandinave: CheckBoxObj
-  vintage: CheckBoxObj
-  industrielle: CheckBoxObj
-  boheme: CheckBoxObj
-  campagne: CheckBoxObj
-  espbdm: CheckBoxObj
-  zen: CheckBoxObj
-  ethique: CheckBoxObj
-  moderne: CheckBoxObj
-  baroque: CheckBoxObj
-  orientale: CheckBoxObj
-}
+type ElementAModifier = CheckBoxes
+
+type AmbianceSouhaiter = CheckBoxes
 
 type QuestionnaireState = {
   nom: string
@@ -202,6 +181,9 @@ export const questionnaire = createSlice({
     setTelephone(state, action) {
       state.telephone = action.payload
     },
+    setTypeProjet(state, action) {
+      state.typeProjet = action.payload
+    },
     setSociete(state, action) {
       state.societe = action.payload
     },
@@ -221,19 +203,19 @@ export const questionnaire = createSlice({
       state.descriptionPieces = action.payload
     },
     setTypeModification(state, action) {
-      state.typeModification = action.payload
+      state.typeModification[action.payload].isChecked = !state.typeModification[action.payload].isChecked
     },
     setAutreModification(state, action) {
       state.autreModification = action.payload
     },
     setElementAModifier(state, action) {
-      state.elementAModifier = action.payload
+      state.elementAModifier[action.payload].isChecked = !state.elementAModifier[action.payload].isChecked
     },
     setAutreElement(state, action) {
       state.autreElement = action.payload
     },
     setAmbianceSouhaiter(state, action) {
-      state.ambianceSouhaiter = action.payload
+      state.ambianceSouhaiter[action.payload].isChecked = !state.ambianceSouhaiter[action.payload].isChecked
     },
     setAutreAmbiance(state, action) {
       state.autreAmbiance = action.payload
@@ -285,6 +267,7 @@ export const {
   setPrenom,
   setEmail,
   setTelephone,
+  setTypeProjet,
   setSociete,
   setAnneeConstruction,
   setSurfaceTotale,
@@ -310,11 +293,33 @@ export const {
 } = questionnaire.actions
 
 export const submitEmail = createAsyncThunk(
-  'contact/submitEmail',
+  'questionnaire/submitEmail',
   async (questionnaireForm: QuestionnaireState, thunkAPI) => {
-    const project = await fetch('/api/send-email', {
+    let allFiles: File[] = []
+    if (questionnaireForm.plans.length !== 0) {
+      allFiles = [...questionnaireForm.plans]
+    }
+
+    if (questionnaireForm.photos.length !== 0) {
+      allFiles = [...allFiles, ...questionnaireForm.photos]
+    }
+
+    if (questionnaireForm.imageExemples.length !== 0) {
+      allFiles = [...allFiles, ...questionnaireForm.imageExemples]
+    }
+
+    const body = new FormData()
+
+    body.set('form', JSON.stringify(questionnaireForm))
+    
+    if (allFiles.length !== 0) {
+      allFiles.forEach((file, i) => {
+        body.append(file.name, file)
+      })
+    }
+    const project = await fetch('/api/send-email/questionnaire', {
       method: 'POST',
-      body: JSON.stringify(questionnaireForm)
+      body
     })
     return project.json()
   }
