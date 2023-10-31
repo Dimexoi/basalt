@@ -318,11 +318,11 @@ export const submitEmail = createAsyncThunk(
         body.append(file.name, file)
       })
     }
-    // const project = await fetch('/api/send-email/questionnaire', {
-    //   method: 'POST',
-    //   body
-    // })
-    const project = await sendQuestionnaire(body)
+    const project = await fetch('/api/send-email/questionnaire', {
+      method: 'POST',
+      body
+    })
+    // const project = await sendQuestionnaire(body)
     return project
   }
 )
