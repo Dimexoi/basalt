@@ -159,7 +159,7 @@ export default function QuestionnaireForm() {
 
   }
   return (
-    <form action="submit" onSubmit={handleSubmit} className='flex flex-col gap-8'>
+    <form action="submit" onSubmit={handleSubmit} className='flex flex-col gap-8 p-2'>
 
     <h3 className='text-xl font-semibold'>Vos informations et caractéristiques du projet</h3>
 
@@ -280,7 +280,7 @@ export default function QuestionnaireForm() {
           />
         </div>
 
-        <div className='flex gap-4'>
+        <div className='flex flex-col md:flex-row gap-8 md:gap-4'>
           <div className='flex flex-1 flex-col gap-1'>
             <label htmlFor="yearOfConstruction">
               Année de construction
@@ -313,7 +313,7 @@ export default function QuestionnaireForm() {
           </div>
         </div>
 
-        <div className='flex gap-4'>
+        <div className='flex flex-col md:flex-row gap-8 md:gap-4'>
           <div className='flex flex-1 flex-col gap-1'>
             <label htmlFor="numberOfRoom">
               Nombre de pièces
@@ -841,7 +841,7 @@ export default function QuestionnaireForm() {
             name="prestations"
             value={prestation}
             onChange={handleChangePrestation}
-            className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367]"
+            className="bg-gray-100 p-2 border-b-2 border-[#3D6367] focus:bg-gray-200 focus:border-0 outline-2 outline-[#3D6367] w-full"
             required
           >
             <option value="Une planche d&apos;ambiance de votre pièce avec les matériaux, couleurs, mobilier et accessoires">Une planche d&apos;ambiance de votre pièce avec les matériaux, couleurs, mobilier et accessoires</option>
@@ -858,7 +858,7 @@ export default function QuestionnaireForm() {
         <legend className='px-2 font-medium text-lg'>Merci de joindre avec le questionnaire</legend>
         <div className='flex flex-col gap-4'>
         
-          <div className='flex flex-col gap-1'>
+          <div className='flex flex-col gap-2'>
             <label htmlFor='plan'>
               Un plan de/des espace(s) avec cotations (un plan à la main est suffisant)
             </label>
@@ -871,7 +871,7 @@ export default function QuestionnaireForm() {
             />
           </div>
 
-          <div className='flex flex-col gap-1'>
+          <div className='flex flex-col gap-2'>
             <label htmlFor='roomPicture'>
               Des photos des pièces à travailler
             </label>
@@ -884,7 +884,7 @@ export default function QuestionnaireForm() {
             />
           </div>
 
-          <div className='flex flex-col gap-1'>
+          <div className='flex flex-col gap-2'>
             <label htmlFor='likedMood'>
               Des images d&apos;inspiration d&apos;ambiance que vous aimez
             </label>
