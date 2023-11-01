@@ -45,9 +45,9 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <div className="lg:flex md:gap-2">
-        <div className="mb-4">
+    <form onSubmit={handleSubmit} className="">
+      <div className="md:flex md:gap-2">
+        <div className="md:flex-1 mb-4">
           <label htmlFor="lastName" className="block text-sm font-medium text-white">
             Nom
           </label>
@@ -65,7 +65,7 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="mb-4">
+        <div className="flex-1 mb-4">
           <label htmlFor="firstName" className="block text-sm font-medium text-white">
             Prénom
           </label>
@@ -85,9 +85,9 @@ export default function ContactForm() {
         </div>
       </div>
       
-      <div className="lg:flex md:gap-2">
+      <div className="md:flex md:gap-2">
 
-        <div className="mb-4">
+        <div className="md:flex-1 mb-4">
           <label htmlFor="email" className="block text-sm font-medium text-white ">
             Email
           </label>
@@ -104,7 +104,7 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="mb-4">
+        <div className="md:flex-1 mb-4">
           <label htmlFor="telephone" className="block text-sm font-medium text-white">
             Téléphone
           </label>
