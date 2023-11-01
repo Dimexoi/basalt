@@ -252,15 +252,13 @@ export const questionnaire = createSlice({
       state.isSubmitting = action.payload
     },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(getCarouselProjects.fulfilled, (state, action) => {
-  //       action.payload.forEach((carouselProject: CarouselProject) => {
-  //         state.carousel.projects.push(carouselProject.project)
-  //       })
-  //     })
+  extraReducers: (builder) => {
+    builder
+    .addCase(uploadImageToServer.fulfilled, (state, action) => {
       
-  // }
+    })
+      
+  }
 });
 
 export const {
@@ -296,17 +294,26 @@ export const {
 export const submitEmail = createAsyncThunk(
   'questionnaire/submitEmail',
   async (questionnaireForm: QuestionnaireState, thunkAPI) => {
-    let allFiles: File[] = []
+    let allFiles: {file: File, category: string}[] = []
     if (questionnaireForm.plans.length !== 0) {
-      allFiles = [...questionnaireForm.plans]
+      questionnaireForm.plans.forEach(plan => allFiles.push({
+        file: plan,
+        category: 'plan'
+      }))
     }
 
     if (questionnaireForm.photos.length !== 0) {
-      allFiles = [...allFiles, ...questionnaireForm.photos]
+      questionnaireForm.photos.forEach(photo => allFiles.push({
+        file: photo,
+        category: 'photo'
+      }))
     }
 
     if (questionnaireForm.imageExemples.length !== 0) {
-      allFiles = [...allFiles, ...questionnaireForm.imageExemples]
+      questionnaireForm.imageExemples.forEach(imageExemple => allFiles.push({
+        file: imageExemple,
+        category: 'exemple'
+      }))
     }
 
     const body = new FormData()
@@ -314,8 +321,9 @@ export const submitEmail = createAsyncThunk(
     body.set('form', JSON.stringify(questionnaireForm))
     
     if (allFiles.length !== 0) {
-      allFiles.forEach((file, i) => {
-        body.append(file.name, file)
+      allFiles.forEach((objFile, index) => {
+        body.append(`${objFile.file.name}-${index}`, objFile.file)
+        body.append(`category-${index}`, objFile.category)
       })
     }
     const project = await fetch('/api/send-email/questionnaire', {
@@ -324,6 +332,41 @@ export const submitEmail = createAsyncThunk(
     })
     // const project = await sendQuestionnaire(body)
     return project
+  }
+)
+
+export const uploadImageToServer = createAsyncThunk(
+  'questionnaire/uploadImageToServer',
+  async (image: File, thunkAPI) => {
+    const file = image
+    const filename = encodeURIComponent(file.name)
+    const fileType = encodeURIComponent(file.type)
+    const res = await fetch(
+      `/api/projectmanager/s3presign?file=${filename}&fileType=${fileType}`,
+    );
+
+    const { post } = await res.json()
+
+
+    const {url, fields } = post
+
+    const body = new FormData()
+    Object.entries({ ...fields, file }).forEach(([key, value]) => {
+      body.append(key, value as string);
+    })
+    const upload = await fetch(url, {
+      method: 'POST',
+      body,
+    })
+
+    if (upload.ok) {
+
+      const link = `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${file.name}`
+
+      return link
+    } else {
+      console.error('Upload failed.')
+    }
   }
 )
 

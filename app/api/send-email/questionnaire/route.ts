@@ -1,18 +1,48 @@
 import { NextResponse } from "next/server"
 import nodemailer from 'nodemailer'
 
+import prisma from "@/lib/prisma"
 
 export async function POST(req: Request) {
   try {
 
     const formData = await req.formData()
 
+    const form = formData.get('form')
+    const body = JSON.parse(form as string)
+
+    let modificationStr = ''
+    for(const modification in body.typeModification) {
+      if (modification) {
+        if (body.typeModification[modification].isChecked && modificationStr.length === 0) modificationStr += body.typeModification[modification].value
+        if (body.typeModification[modification].isChecked && modificationStr.length !== 0) modificationStr += ' / ' + body.typeModification[modification].value
+      }
+    }
+
+    let elementStr = ''
+    for(const element in body.elementAModifier) {
+      if(element) {
+        if (body.elementAModifier[element].isChecked && elementStr.length === 0) elementStr += body.elementAModifier[element].value
+        if (body.elementAModifier[element].isChecked && elementStr.length !== 0) elementStr += ' / ' + body.elementAModifier[element].value
+      }
+    }
+
+    let ambianceStr = ''
+    for(const ambiance in body.ambianceSouhaiter) {
+      if (ambiance) {
+        if (body.ambianceSouhaiter[ambiance].isChecked && ambianceStr.length === 0) ambianceStr += body.ambianceSouhaiter[ambiance].value
+        if (body.ambianceSouhaiter[ambiance].isChecked && ambianceStr.length !== 0) ambianceStr += ' / ' + body.ambianceSouhaiter[ambiance].value
+      }
+    }
+
     const formDataEntryValues = Array.from(formData.values())
 
     const bufferAttachments = []
+    const uploadedFiles: File[] = []
    
     for (const formDataEntryValue of formDataEntryValues) {
         if (typeof formDataEntryValue === "object" && "arrayBuffer" in formDataEntryValue) {
+          uploadedFiles.push(formDataEntryValue)
             const file = formDataEntryValue as unknown as Blob
             const buffer = Buffer.from(await file.arrayBuffer())
             bufferAttachments.push({
@@ -22,37 +52,59 @@ export async function POST(req: Request) {
         }
     }
 
-    const form = formData.get('form')
-    const body = JSON.parse(form as string)
-   
+    const fileAndCategory: {file: File, category: string}[] = []
 
+    uploadedFiles.forEach((file, index) => fileAndCategory.push({
+      file,
+      category: formData.get(`category-${index}`) as string
+    }))
 
-    let modificationStr = ''
-    for(const modification in body.typeModification) {
-        if (body.typeModification[modification].isChecked && modificationStr.length === 0) modificationStr += body.typeModification[modification].value
-        if (body.typeModification[modification].isChecked && modificationStr.length !== 0) modificationStr += ' / ' + body.typeModification[modification].value
-    }
-
-    let elementStr = ''
-    for(const element in body.elementAModifier) {
-        if (body.elementAModifier[element].isChecked && elementStr.length === 0) elementStr += body.elementAModifier[element].value
-        if (body.elementAModifier[element].isChecked && elementStr.length !== 0) elementStr += ' / ' + body.elementAModifier[element].value
-    }
-
-    let ambianceStr = ''
-    for(const ambiance in body.ambianceSouhaiter) {
-        if (body.ambianceSouhaiter[ambiance].isChecked && ambianceStr.length === 0) ambianceStr += body.ambianceSouhaiter[ambiance].value
-        if (body.ambianceSouhaiter[ambiance].isChecked && ambianceStr.length !== 0) ambianceStr += ' / ' + body.ambianceSouhaiter[ambiance].value
-    }
+    const results = await prisma.questionnaire.create({
+      data: {
+        nom : body.nom,
+        prenom : body.prenom,
+        email : body.email,
+        telephone : body.telephone,
+        typeProjet : body.typeProjet,
+        societe : body.societe,
+        anneeConstruction  : body.anneeConstruction,
+        surfaceTotale  : body.surfaceTotale,
+        nbPiece  : body.nbPiece,
+        orientation : body.orientation,
+        descriptionPieces : body.descriptionPieces,
+        typeModification : modificationStr,
+        autreModification : body.autreModification,
+        elementAModifier : elementStr,
+        autreElement : body.autreElement,
+        ambianceSouhaiter : ambianceStr,
+        autreAmbiance : body.autreAmbiance,
+        contraintes : body.contraintes,
+        aime : body.aime,
+        pasAime : body.pasAime,
+        budget : body.budget,
+        habitudesVie : body.habitudesVie,
+        prestation : body.prestation,
+        files: {
+          createMany: {
+            data: fileAndCategory.map((objFile: {file: File, category: string}) => (
+              {
+                category: objFile.category,
+                link: `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${objFile.file.name}`
+              }
+            ))
+          }
+        }
+      }
+    })
 
     const message = {
       from: body.email,
       to: process.env.RECEIVER_EMAIL_ADDR,
       subject: `Questionnaire site : ${body.nom} ${body.prenom} - ${body.societe}`,
       text: body.message,
-      attachments: bufferAttachments.map((bufferAttachment, index) => ({
-        filename: bufferAttachment.name,
-        content: bufferAttachment.buffer
+      attachments: uploadedFiles.map((file, index) => ({
+        filename: file.name,
+        href: `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${file.name}`
       })),
       html: `<div style="display: flex; flex-direction: column;">
 

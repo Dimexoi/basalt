@@ -162,7 +162,6 @@ export const project = createSlice({
       })
       .addCase(uploadImageToServer.fulfilled, (state, action) => {
         // state.projectForm.images[action.payload.index].link = action.payload.link
-
       })
       .addCase(addOneProject.fulfilled, (state, action) => {
         state.projects.push(action.payload.results)

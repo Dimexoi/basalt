@@ -2,10 +2,24 @@ import { error } from "console";
 import { NextResponse } from "next/server"
 import nodemailer from 'nodemailer'
 
+import prisma from "@/lib/prisma"
+
 
 export async function POST(req: Request) {
   try {
     const body = await req.json()
+
+    const results = await prisma.contact.create({
+      data: {
+        nom: body.nom,
+        prenom: body.prenom,
+        email: body.email,
+        telephone: body.telephone,
+        message: body.message,
+        societe: body.societe
+      }
+    })
+
     const message = {
       from: body.email,
       to: process.env.RECEIVER_EMAIL_ADDR,
