@@ -1,7 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react'
+import FacebookPixel from './components/FacebookPixel'
 
 import { Providers } from "@/redux/provider"
 import Footer from './components/Footer'
@@ -39,7 +40,8 @@ export default function RootLayout({
         </SessionProviders>
       </Providers>
       <Analytics />
-      </body>
+      <FacebookPixel />
+    </body>
   </html>
   )
 }
