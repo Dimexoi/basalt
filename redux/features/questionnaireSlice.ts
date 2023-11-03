@@ -294,24 +294,24 @@ export const {
 export const submitEmail = createAsyncThunk(
   'questionnaire/submitEmail',
   async (questionnaireForm: QuestionnaireState, thunkAPI) => {
-    let allFiles: {file: File, category: string}[] = []
+    let allFiles: {fileName: string, category: string}[] = []
     if (questionnaireForm.plans.length !== 0) {
       questionnaireForm.plans.forEach(plan => allFiles.push({
-        file: plan,
+        fileName: plan.name,
         category: 'plan'
       }))
     }
 
     if (questionnaireForm.photos.length !== 0) {
       questionnaireForm.photos.forEach(photo => allFiles.push({
-        file: photo,
+        fileName: photo.name,
         category: 'photo'
       }))
     }
 
     if (questionnaireForm.imageExemples.length !== 0) {
       questionnaireForm.imageExemples.forEach(imageExemple => allFiles.push({
-        file: imageExemple,
+        fileName: imageExemple.name,
         category: 'exemple'
       }))
     }
@@ -322,7 +322,7 @@ export const submitEmail = createAsyncThunk(
     
     if (allFiles.length !== 0) {
       allFiles.forEach((objFile, index) => {
-        body.append(`${objFile.file.name}-${index}`, objFile.file)
+        body.append(`${objFile.fileName}-${index}`, objFile.fileName)
         body.append(`category-${index}`, objFile.category)
       })
     }
