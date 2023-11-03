@@ -1,6 +1,16 @@
 import { sendQuestionnaire } from "@/app/actions/sendQuestionnaire"
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+interface FileData {
+  fileName: string
+  category: string
+}
+interface FileDataObj {
+  plans: FileData[]
+  photos: FileData[]
+  exemples: FileData[]
+}
+
 interface CheckBoxObj {
   isChecked: boolean
   value: string
@@ -295,22 +305,29 @@ export const submitEmail = createAsyncThunk(
   'questionnaire/submitEmail',
   async (questionnaireForm: QuestionnaireState, thunkAPI) => {
     let allFiles: {fileName: string, category: string}[] = []
+
+    const fileData : FileDataObj = {
+      plans: [],
+      photos: [],
+      exemples: []
+    }
+
     if (questionnaireForm.plans.length !== 0) {
-      questionnaireForm.plans.forEach(plan => allFiles.push({
+      questionnaireForm.plans.forEach(plan => fileData.plans.push({
         fileName: plan.name,
         category: 'plan'
       }))
     }
 
     if (questionnaireForm.photos.length !== 0) {
-      questionnaireForm.photos.forEach(photo => allFiles.push({
+      questionnaireForm.photos.forEach(photo => fileData.photos.push({
         fileName: photo.name,
         category: 'photo'
       }))
     }
 
     if (questionnaireForm.imageExemples.length !== 0) {
-      questionnaireForm.imageExemples.forEach(imageExemple => allFiles.push({
+      questionnaireForm.imageExemples.forEach(imageExemple => fileData.exemples.push({
         fileName: imageExemple.name,
         category: 'exemple'
       }))
@@ -319,13 +336,12 @@ export const submitEmail = createAsyncThunk(
     const body = new FormData()
 
     body.set('form', JSON.stringify(questionnaireForm))
-    
-    if (allFiles.length !== 0) {
-      allFiles.forEach((objFile, index) => {
-        body.append(`${objFile.fileName}-${index}`, objFile.fileName)
-        body.append(`category-${index}`, objFile.category)
-      })
-    }
+    body.set('fileData', JSON.stringify(fileData))
+    // if (allFiles.length !== 0) {
+    //   allFiles.forEach((objFile, index) => {
+    //     body.append(`${objFile.fileName}-${index}`, JSON.stringify(objFile))
+    //   })
+    // }
     const project = await fetch('/api/send-email/questionnaire', {
       method: 'POST',
       body
@@ -351,9 +367,11 @@ export const uploadImageToServer = createAsyncThunk(
     const {url, fields } = post
 
     const body = new FormData()
+
     Object.entries({ ...fields, file }).forEach(([key, value]) => {
       body.append(key, value as string);
     })
+
     const upload = await fetch(url, {
       method: 'POST',
       body,

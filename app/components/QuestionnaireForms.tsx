@@ -154,18 +154,22 @@ export default function QuestionnaireForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
     dispatch(setIsSubmitting(true))
+
     plans.forEach(async (plan, index) => {
       await dispatch(uploadImageToServer(plan)
     )})
+
     photos.forEach(async (photo, index) => {
       await dispatch(uploadImageToServer(photo))
     })
+
     imageExemples.forEach(async (imageExemple, index) => {
       await dispatch(uploadImageToServer(imageExemple))
     })
-    dispatch(submitEmail(questionnaire))
-
+    
+    await dispatch(submitEmail(questionnaire))
   }
   return (
     <form action="submit" onSubmit={handleSubmit} className='flex flex-col gap-8 p-2'>

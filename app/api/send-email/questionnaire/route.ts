@@ -9,7 +9,9 @@ export async function POST(req: Request) {
     const formData = await req.formData()
 
     const form = formData.get('form')
+    const fileDataStr = formData.get('fileData')
     const body = JSON.parse(form as string)
+    const fileData = JSON.parse(fileDataStr as string)
 
     let modificationStr = ''
     for(const modification in body.typeModification) {
@@ -38,26 +40,41 @@ export async function POST(req: Request) {
     const formDataEntryValues = Array.from(formData.values())
 
     const bufferAttachments = []
-    const uploadedFiles: File[] = []
+    const uploadedFiles: { fileName: string, category: string}[] = []
    
-    for (const formDataEntryValue of formDataEntryValues) {
-        if (typeof formDataEntryValue === "object" && "arrayBuffer" in formDataEntryValue) {
-          uploadedFiles.push(formDataEntryValue)
-            const file = formDataEntryValue as unknown as Blob
-            const buffer = Buffer.from(await file.arrayBuffer())
-            bufferAttachments.push({
-                buffer,
-                name: file.name
-            })
-        }
+    // for (const formDataEntryValue of formDataEntryValues) {
+    //   console.log(formDataEntryValue);
+    //     if (typeof formDataEntryValue === "object" && "arrayBuffer" in formDataEntryValue) {
+    //       console.log('///////////////');
+    //       console.log('la dedans');
+    //       console.log('////////////////');
+    //       uploadedFiles.push(formDataEntryValue)
+    //         const file = formDataEntryValue as unknown as Blob
+    //         const buffer = Buffer.from(await file.arrayBuffer())
+    //         bufferAttachments.push({
+    //             buffer,
+    //             name: file.name
+    //         })
+    //     }
+    // }
+    if (fileData.plans.length !== 0) {
+      fileData.plans.forEach((plan : { fileName: string, category: string}) => uploadedFiles.push(plan))
     }
 
-    const fileAndCategory: {file: File, category: string}[] = []
+    if (fileData.photos.length !== 0) {
+      fileData.photos.forEach((photo : { fileName: string, category: string}) => uploadedFiles.push(photo))
+    }
 
-    uploadedFiles.forEach((file, index) => fileAndCategory.push({
-      file,
-      category: formData.get(`category-${index}`) as string
-    }))
+    if (fileData.exemples.length !== 0) {
+      fileData.exemples.forEach((exemple : { fileName: string, category: string}) => uploadedFiles.push(exemple))
+    }
+
+    // const fileAndCategory: {file: File, category: string}[] = []
+
+    // uploadedFiles.forEach((file, index) => fileAndCategory.push({
+    //   file,
+    //   category: formData.get(`category-${index}`) as string
+    // }))
 
     const results = await prisma.questionnaire.create({
       data: {
@@ -86,10 +103,10 @@ export async function POST(req: Request) {
         prestation : body.prestation,
         files: {
           createMany: {
-            data: fileAndCategory.map((objFile: {file: File, category: string}) => (
+            data: uploadedFiles.map((objFile: {fileName: string, category: string}) => (
               {
                 category: objFile.category,
-                link: `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${objFile.file.name}`
+                link: `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${objFile.fileName}`
               }
             ))
           }
@@ -103,8 +120,8 @@ export async function POST(req: Request) {
       subject: `Questionnaire site : ${body.nom} ${body.prenom} - ${body.societe}`,
       text: body.message,
       attachments: uploadedFiles.map((file, index) => ({
-        filename: file.name,
-        href: `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${file.name}`
+        filename: file.fileName,
+        href: `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${file.fileName}`
       })),
       html: `<div style="display: flex; flex-direction: column;">
 
