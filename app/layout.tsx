@@ -39,7 +39,9 @@ export default function RootLayout({
           </div>
         </SessionProviders>
       </Providers>
+
       <Analytics />
+      
       <FacebookPixel />
     </body>
   </html>
