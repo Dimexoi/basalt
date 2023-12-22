@@ -26,7 +26,10 @@ export async function generateMetadata(
   } else {
     const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
       method: 'POST',
-      body: JSON.stringify({id})
+      body: JSON.stringify({id}),
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
     const result = await response.json()
 
@@ -45,7 +48,10 @@ async function getCategory({ params }: { params: { id: string, slug: string} }) 
     const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
       method: 'POST',
       body: JSON.stringify({id: params.id}),
-      cache: 'no-store'
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
     const result = await response.json()
     return result
@@ -57,7 +63,10 @@ async function getProjects({ params }: { params: { id: string, slug: string} }) 
   if (params.id == '6') {
     const res = await fetch(`${process.env.BASE_URL}api/project/findAll`, {
       method: 'POST',
-      cache: 'no-store'
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
     const test = await res.json()
     return test
@@ -65,7 +74,10 @@ async function getProjects({ params }: { params: { id: string, slug: string} }) 
     const response = await fetch(`${process.env.BASE_URL}api/project`, {
       method: 'POST',
       body: JSON.stringify({id: params.id}),
-      cache: 'no-store'
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
     const result = await response.json()
     return result
