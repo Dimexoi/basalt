@@ -24,12 +24,15 @@ export async function generateMetadata(
       description: `Basalt Mobilier PRO vous propose ici d'accéder à tous les projets que nous avons référencés sur notre site`
     }
   } else {
+    const body = JSON.stringify({id})
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(body).toString()
+    }
     const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
       method: 'POST',
       body: JSON.stringify({id}),
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: headers
     })
     const result = await response.json()
 
@@ -64,24 +67,36 @@ async function getCategory({ params }: { params: { id: string, slug: string} }) 
 async function getProjects({ params }: { params: { id: string, slug: string} }) {
 
   if (params.id == '6') {
-    const res = await fetch(`${process.env.BASE_URL}api/project/findAll`, {
+
+    const body = JSON.stringify({})
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(body).toString()
+    }
+
+    const response = await fetch(`${process.env.BASE_URL}api/project/findAll`, {
       method: 'POST',
       cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: headers,
       body: JSON.stringify({})
     })
-    const test = await res.json()
-    return test
+
+    const result = await response.json()
+    return result
+
   } else {
+
+    const body = JSON.stringify({id: params.id})
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(body).toString()
+    }
+
     const response = await fetch(`${process.env.BASE_URL}api/project`, {
       method: 'POST',
       body: JSON.stringify({id: params.id}),
       cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: headers
     })
     const result = await response.json()
     return result
