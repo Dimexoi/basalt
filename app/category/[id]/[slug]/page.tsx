@@ -33,6 +33,10 @@ export async function generateMetadata(
     })
     const result = await response.json()
 
+    console.log('-- IN dans le fetch metadata');
+    console.log(result);
+    console.log('-- OUT dans le fetch metadata');
+
     return {
       title: `${result.name} - Basalt Mobilier PRO`,
       description: `Les projets de ${result.name} réalisés par Basalt mobilier PRO. Du mobilier professionnel spécialement pour ${result.name} installé principalement à La Réunion. Décoration d'intérieur personnalisé spécielement pour ${result.name}.`
@@ -54,6 +58,10 @@ async function getCategory({ params }: { params: { id: string, slug: string} }) 
       },
     })
     const result = await response.json()
+    console.log('-- IN dans le fetch catégory');
+    console.log(result);
+    console.log('-- OUT dans le fetch catégory');
+
     return result
   }
 }
