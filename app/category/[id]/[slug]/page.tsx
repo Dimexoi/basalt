@@ -6,44 +6,44 @@ import Header from '@/app/components/Header'
 
 import { ProjectType } from "@/redux/features/projectSlice"
 
-type Props = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+// type Props = {
+//   params: { id: string }
+//   searchParams: { [key: string]: string | string[] | undefined }
+// }
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // read route params
-  const id = params.id
+// export async function generateMetadata(
+//   { params, searchParams }: Props,
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   // read route params
+//   const id = params.id
 
-  if (Number(id) == 6) {
-    return {
-      title: 'Tous nos projets - Basalt Mobilier PRO',
-      description: `Basalt Mobilier PRO vous propose ici d'accéder à tous les projets que nous avons référencés sur notre site`
-    }
-  } else {
-    const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
-      method: 'POST',
-      body: JSON.stringify({id}),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    const result = await response.json()
+//   if (Number(id) == 6) {
+//     return {
+//       title: 'Tous nos projets - Basalt Mobilier PRO',
+//       description: `Basalt Mobilier PRO vous propose ici d'accéder à tous les projets que nous avons référencés sur notre site`
+//     }
+//   } else {
+//     const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
+//       method: 'POST',
+//       body: JSON.stringify({id}),
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//     })
+//     const result = await response.json()
 
-    console.log('-- IN dans le fetch metadata');
-    console.log(result);
-    console.log('-- OUT dans le fetch metadata');
+//     console.log('-- IN dans le fetch metadata');
+//     console.log(result);
+//     console.log('-- OUT dans le fetch metadata');
 
-    return {
-      title: `${result.name} - Basalt Mobilier PRO`,
-      description: `Les projets de ${result.name} réalisés par Basalt mobilier PRO. Du mobilier professionnel spécialement pour ${result.name} installé principalement à La Réunion. Décoration d'intérieur personnalisé spécielement pour ${result.name}.`
-    }
+//     return {
+//       title: `${result.name} - Basalt Mobilier PRO`,
+//       description: `Les projets de ${result.name} réalisés par Basalt mobilier PRO. Du mobilier professionnel spécialement pour ${result.name} installé principalement à La Réunion. Décoration d'intérieur personnalisé spécielement pour ${result.name}.`
+//     }
 
-  }
-}
+//   }
+// }
 
 async function getCategory({ params }: { params: { id: string, slug: string} }) {
   if (params.id == '6') {
