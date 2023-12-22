@@ -45,13 +45,16 @@ async function getCategory({ params }: { params: { id: string, slug: string} }) 
   if (params.id == '6') {
     return
   } else {
+    const body = JSON.stringify({id: params.id})
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(body).toString()
+    }
     const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
       method: 'POST',
       body: JSON.stringify({id: params.id}),
       cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: headers
     })
     const result = await response.json()
     return result
@@ -67,6 +70,7 @@ async function getProjects({ params }: { params: { id: string, slug: string} }) 
       headers: {
         'Content-Type': 'application/json'
       },
+      body: JSON.stringify({})
     })
     const test = await res.json()
     return test
