@@ -5,10 +5,12 @@ import prisma from "@/lib/prisma"
 
 export async function POST(req: Request) {
   try {
-    const categoryId = await req.json()
-    const images = await prisma.category.findUnique({
+    const body = await req.json()
+    const {id} = body
+
+    const category = await prisma.category.findUnique({
       where: {
-        id: Number(categoryId)
+        id: Number(id)
       },
       include: {
         projects: {
@@ -19,8 +21,10 @@ export async function POST(req: Request) {
       }
     });
 
+
+
     
-    return NextResponse.json(images)
+    return NextResponse.json(category)
 
   } catch (err) {
     console.log(err);

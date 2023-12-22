@@ -6,7 +6,8 @@ export const revalidate = 0
 
 export async function POST(req: Request) {
   try {
-    const id = await req.json()
+    const body = await req.json()
+    const {id} = body
     const results = await prisma.project.findMany({
       where: {
         categoryId: Number(id)

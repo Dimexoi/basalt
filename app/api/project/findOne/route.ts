@@ -5,7 +5,8 @@ import prisma from "@/lib/prisma"
 
 export async function POST(req: Request) {
   try {
-    const id = await req.json()
+    const body = await req.json()
+    const {id} = body
     const results = await prisma.project.findUnique({
       where: {
         id: Number(id)

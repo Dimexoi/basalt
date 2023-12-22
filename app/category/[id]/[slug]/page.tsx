@@ -26,7 +26,7 @@ export async function generateMetadata(
   } else {
     const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
       method: 'POST',
-      body: JSON.stringify(String(params.id))
+      body: JSON.stringify({id})
     })
     const result = await response.json()
 
@@ -38,21 +38,23 @@ export async function generateMetadata(
   }
 }
 
-async function getCategory({ params }: { params: { id: number, slug: string} }) {
-  if (params.id == 6) {
+async function getCategory({ params }: { params: { id: string, slug: string} }) {
+  if (params.id == '6') {
     return
   } else {
-    const res = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
+    const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
       method: 'POST',
-      body: JSON.stringify(String(params.id))
+      body: JSON.stringify({id: params.id}),
+      cache: 'no-store'
     })
-    return res.json()
+    const result = await response.json()
+    return result
   }
 }
 
-async function getProjects({ params }: { params: { id: number, slug: string} }) {
+async function getProjects({ params }: { params: { id: string, slug: string} }) {
 
-  if (params.id == 6) {
+  if (params.id == '6') {
     const res = await fetch(`${process.env.BASE_URL}api/project/findAll`, {
       method: 'POST',
       cache: 'no-store'
@@ -60,25 +62,26 @@ async function getProjects({ params }: { params: { id: number, slug: string} }) 
     const test = await res.json()
     return test
   } else {
-    const res = await fetch(`${process.env.BASE_URL}api/project`, {
+    const response = await fetch(`${process.env.BASE_URL}api/project`, {
       method: 'POST',
-      body: JSON.stringify(params.id),
+      body: JSON.stringify({id: params.id}),
       cache: 'no-store'
     })
-    return await res.json()
+    const result = await response.json()
+    return result
   }
 
 }
 
-export default async function Category({ params }: { params: { id: number, slug: string} }) {
+export default async function Category({ params }: { params: { id: string, slug: string} }) {
 
-  const category = params.id == 6 ? 'Tout voir' : await getCategory({params})
+  const category = params.id == '6' ? 'Tout voir' : await getCategory({params})
   const projects = await getProjects({ params })
   return (
     <main className="mb-8">
       <Header welcome={false}/>
       <div className='md:px-10 lg:w-[80%] lg:mx-auto'>
-      <h1 className='font-bold text-center text-3xl text-[#3D6367] mb-4 p-3'>{params.id == 6 ? 'Découvrez tous nos projets' : `Découvrez nos projets ${category.name}`}</h1>
+      <h1 className='font-bold text-center text-3xl text-[#3D6367] mb-4 p-3'>{params.id == '6' ? 'Découvrez tous nos projets' : `Découvrez nos projets ${category.name}`}</h1>
         <div className='flex flex-col md:grid md:grid-cols-2 md:gap-5 lg:grid xl:grid-cols-3 gap-4 px-4 w-full'>
           {projects.map((project: ProjectType) => (
             <CardProject project={project} key={project.id}/>
