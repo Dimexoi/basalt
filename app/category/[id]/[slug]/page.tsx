@@ -24,15 +24,12 @@ export async function generateMetadata(
       description: `Basalt Mobilier PRO vous propose ici d'accéder à tous les projets que nous avons référencés sur notre site`
     }
   } else {
-    const body = JSON.stringify({id})
-    const headers = {
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(body).toString()
-    }
     const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
       method: 'POST',
       body: JSON.stringify({id}),
-      headers: headers
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
     const result = await response.json()
 
@@ -48,16 +45,13 @@ async function getCategory({ params }: { params: { id: string, slug: string} }) 
   if (params.id == '6') {
     return
   } else {
-    const body = JSON.stringify({id: params.id})
-    const headers = {
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(body).toString()
-    }
     const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
       method: 'POST',
       body: JSON.stringify({id: params.id}),
       cache: 'no-store',
-      headers: headers
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
     const result = await response.json()
     return result
@@ -67,36 +61,23 @@ async function getCategory({ params }: { params: { id: string, slug: string} }) 
 async function getProjects({ params }: { params: { id: string, slug: string} }) {
 
   if (params.id == '6') {
-
-    const body = JSON.stringify({})
-    const headers = {
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(body).toString()
-    }
-
-    const response = await fetch(`${process.env.BASE_URL}api/project/findAll`, {
+    const res = await fetch(`${process.env.BASE_URL}api/project/findAll`, {
       method: 'POST',
       cache: 'no-store',
-      headers: headers,
-      body: JSON.stringify({})
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
-
-    const result = await response.json()
-    return result
-
+    const test = await res.json()
+    return test
   } else {
-
-    const body = JSON.stringify({id: params.id})
-    const headers = {
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(body).toString()
-    }
-
     const response = await fetch(`${process.env.BASE_URL}api/project`, {
       method: 'POST',
       body: JSON.stringify({id: params.id}),
       cache: 'no-store',
-      headers: headers
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
     const result = await response.json()
     return result
