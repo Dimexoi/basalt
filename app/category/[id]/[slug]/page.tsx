@@ -1,13 +1,42 @@
 
-import { Metadata } from "next"
-import { useEffect } from 'react'
+import type { Metadata, ResolvingMetadata } from 'next'
 
 import CardProject from '@/app/components/CardProject'
 import Header from '@/app/components/Header'
-import categories from '@/public/data/categories.json'
-import CategoryPage from "@/app/components/CategoryPage"
 
 import { ProjectType } from "@/redux/features/projectSlice"
+
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const id = params.id
+
+  if (Number(id) == 6) {
+    return {
+      title: 'Tous nos projets - Basalt Mobilier PRO',
+      description: `Basalt Mobilier PRO vous propose ici d'accéder à tous les projets que nous avons référencés sur notre site`
+    }
+  } else {
+    const response = await fetch(`${process.env.BASE_URL}api/category/findOne`, {
+      method: 'POST',
+      body: JSON.stringify(String(params.id))
+    })
+    const result = await response.json()
+
+    return {
+      title: `${result.name} - Basalt Mobilier PRO`,
+      description: `Les projets de ${result.name} réalisés par Basalt mobilier PRO. Du mobilier professionnel spécialement pour ${result.name} installé principalement à La Réunion. Décoration d'intérieur personnalisé spécielement pour ${result.name}.`
+    }
+
+  }
+}
 
 async function getCategory({ params }: { params: { id: number, slug: string} }) {
   if (params.id == 6) {
@@ -19,13 +48,6 @@ async function getCategory({ params }: { params: { id: number, slug: string} }) 
     })
     return res.json()
   }
-  // console.log('-------------**-----------**-------');
-  // console.log(res);
-  // console.log('-------------**-----------**-------');
-
-  // if (res.ok) {
-  //   throw new Error('Failed to fetch data')
-  // }
 }
 
 async function getProjects({ params }: { params: { id: number, slug: string} }) {
@@ -45,14 +67,6 @@ async function getProjects({ params }: { params: { id: number, slug: string} }) 
     })
     return res.json()
   }
-  
-  // console.log('-------------**-----------**-------');
-  // console.log(res);
-  // console.log('-------------**-----------**-------');
-
-  // if (res.ok) {
-  //   throw new Error('Failed to fetch data')
-  // }
 
 }
 
