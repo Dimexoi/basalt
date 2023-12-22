@@ -3,7 +3,6 @@ import type { Metadata, ResolvingMetadata } from 'next'
 
 import CardProject from '@/app/components/CardProject'
 import Header from '@/app/components/Header'
-
 import { ProjectType } from "@/redux/features/projectSlice"
 
 // type Props = {
