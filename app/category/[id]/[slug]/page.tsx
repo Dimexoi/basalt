@@ -30,11 +30,8 @@ export async function generateMetadata(
         'Content-Type': 'application/json'
       },
     })
-    const result = await response.json()
 
-    console.log('-- IN dans le fetch metadata');
-    console.log(result);
-    console.log('-- OUT dans le fetch metadata');
+    const result = await response.json()
 
     return {
       title: `${result.name} - Basalt Mobilier PRO`,
@@ -56,10 +53,8 @@ async function getCategory({ params }: { params: { id: string, slug: string} }) 
         'Content-Type': 'application/json'
       },
     })
+
     const result = await response.json()
-    console.log('-- IN dans le fetch catégory');
-    console.log(result);
-    console.log('-- OUT dans le fetch catégory');
 
     return result
   }
