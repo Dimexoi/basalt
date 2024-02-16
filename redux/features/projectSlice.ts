@@ -176,6 +176,7 @@ export const project = createSlice({
         state.result.message = action.payload.message
       })
       .addCase(uploadImageToVercelBlob.fulfilled, (state, action) => {
+        console.log(action.payload)
         state.projectForm.images[action.payload.index].link = action.payload.link
       })
       
