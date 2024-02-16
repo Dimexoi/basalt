@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { type PutBlobResult } from '@vercel/blob';
+import { upload } from '@vercel/blob/client';
 
 export type ProjectType = {
   id: number
@@ -147,6 +149,9 @@ export const project = createSlice({
    },
    removeImageFromProjectForm(state, action) {
     state.projectForm.images = action.payload
+   },
+   updateImageUrl(state, action) {
+    state.projectForm.images[action.payload.index].link = action.payload.link
    }
   },
   extraReducers: (builder) => {
@@ -170,6 +175,9 @@ export const project = createSlice({
         state.result.success = action.payload.success
         state.result.message = action.payload.message
       })
+      .addCase(uploadImageToVercelBlob.fulfilled, (state, action) => {
+        state.projectForm.images[action.payload.index].link = action.payload.link
+      })
       
   }
 });
@@ -187,7 +195,8 @@ export const {
   setProjectFormImageName,
   setProjectImageLink,
   removeImageFromProjectForm,
-  setProjectForm
+  setProjectForm,
+  updateImageUrl
 } = project.actions
 
 export const getProjects = createAsyncThunk(
@@ -266,6 +275,28 @@ export const uploadImageToServer = createAsyncThunk(
     // return {link, index: imageObj.index}
   }
 )
+
+export const uploadImageToVercelBlob = createAsyncThunk(
+  'project/uploadImageToVercelBlob',
+  async (imageObj: {image: ProjectForm['images'][0], index: number}, thunkAPI) => {
+    const file = imageObj.image.file
+    const newBlob = await upload(file.name, file, {
+      access: 'public',
+      handleUploadUrl: '/api/image/upload',
+    });
+
+    console.log('---------');
+    console.log(newBlob);
+
+    console.log('---------');
+
+
+
+    return {link: newBlob.url, index: imageObj.index}
+  
+  }
+)
+
 
 export const addOneProject = createAsyncThunk(
   'project/addOneProject',

@@ -16,7 +16,7 @@ export default function CardProject({project}: PropsType) {
       href={`/project/${project.id}/${project.slug}`}
     >     
       <Image
-        src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${project.coverImage}`}
+        src={`${project.images[0].link ? project.images[0].link : `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${project.coverImage}`} `}
         alt={`Image ${project.name}`}
         fill
         style={{objectFit:"cover"}}

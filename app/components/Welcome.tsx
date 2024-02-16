@@ -30,14 +30,14 @@ export default function Welcome() {
 
           <div className="flex-1 h-full flex flex-col p-4 mt-14 md:p-10 z-40">
 
-            <h1 className="font-semibold text-xl mb-4 mt-4 md:text-3xl text-center">Basalt Mobilier PRO : Mobilier Professionnel et Aménagement à La Réunion</h1>
+            <h1 className="font-semibold text-xl mb-4 mt-4 md:text-3xl text-center"><span className="lg:text-4xl font-extrabold ">Basalt Mobilier PRO</span> : Mobilier Professionnel et Aménagement à La Réunion</h1>
 
             <div className="flex lg:items-center h-full flex-col">
               <div className="flex h-full lg:h-auto lg:gap-10 xl:w-[70%] lg:mx-auto flex-col lg:flex-row justify-around flex-1">
 
                 <div className="flex justify-around items-center md:flex-1">
 
-                  <p className="md:text-xl md:tracking-wide md:leading-8 text-justify">
+                  <p className="leading-7 md:text-xl md:tracking-wide md:leading-8 lg:leading-10 text-justify">
                     Bienvenue chez Basalt Mobilier PRO, spécialiste du <strong>mobilier professionnel</strong> à La Réunion. Nous vous accompagnons dans la conception, l&apos;équipement, et l&apos;ameublement de votre projet en <em>teck de qualité</em>. Experts en aménagement d&apos;intérieur, nous créons des espaces exceptionnels pour <strong>restaurants</strong>, <strong>boutiques</strong>, ou <strong>tiny houses</strong>. Basalt Mobilier PRO à Saint-Pierre est votre concepteur de rêves, offrant une expérience complète pour faire de votre établissement un lieu exceptionnel.
                   </p>
                   

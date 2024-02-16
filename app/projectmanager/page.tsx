@@ -14,7 +14,9 @@ import { setProjectFormName,
   addOneProject,
   setProjectFormImageName,
   setProjectImageLink,
-  uploadImageToServer
+  uploadImageToServer,
+  uploadImageToVercelBlob,
+  updateImageUrl
 } from '@/redux/features/projectSlice'
 // import { setShowMessageModal } from '@/redux/actions/conf'
 
@@ -236,19 +238,35 @@ const ProjectManager = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    let index = 0
+    for (const image of images) {
+
+      const newImage = await dispatch(uploadImageToVercelBlob({image, index}))
+      index++
+    }
     
-    images.forEach(async (image, index) => {
-      await dispatch(uploadImageToServer({image, index}))
-      // const newBlob: {url: string}|void = await upload(image.coverImage, image.file, {
-      //   access: 'public',
-      //   handleUploadUrl: '/api/image/upload',
-      // }).then(async ()=> {
+    // images.forEach(async (image, index) => {
+    //   const newImage = await dispatch(uploadImageToVercelBlob({image, index}))
 
-      //   await dispatch(setProjectImageLink({index, link: newBlob!.url}))
-      // });
+    //   if (newImage.payload) {
+    //     console.log('*******');
+    //     console.log(newImage.payload);
+    //     console.log('*******');
+
+    //     dispatch(updateImageUrl({index: newImage.payload.index, link: newImage.payload.link}))
+    //   }
+
+    //   // const newBlob: {url: string}|void = await upload(image.coverImage, image.file, {
+    //   //   access: 'public',
+    //   //   handleUploadUrl: '/api/image/upload',
+    //   // }).then(async ()=> {
+
+    //   //   await dispatch(setProjectImageLink({index, link: newBlob!.url}))
+    //   // });
 
 
-    })
+    // })
     
     // await images.forEach(async (image, index) => {
     //   const bucketimage = await uploadToServer(image.file!, slug, image.coverImage)

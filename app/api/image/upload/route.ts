@@ -9,25 +9,19 @@ export async function POST(request: Request): Promise<NextResponse> {
       body,
       request,
       onBeforeGenerateToken: async (
-        pathname: string,
-        /* clientPayload?: string, */
+        pathname,
+        /* clientPayload */
       ) => {
         // Generate a client token for the browser to upload the file
- 
-        // ⚠️ Authenticate users before generating the token.
+        // ⚠️ Authenticate and authorize users before generating the token.
         // Otherwise, you're allowing anonymous uploads.
-        // const { user } = await auth(request);
-        // const userCanUpload = canUpload(user, pathname);
-        // if (!userCanUpload) {
-        //   throw new Error('Not authorized');
-        // }
  
         return {
           allowedContentTypes: ['image/jpeg', 'image/png', 'image/gif'],
-          // tokenPayload: JSON.stringify({
-          //   // optional, sent to your server on upload completion
-          //   userId: user.id,
-          // }),
+          tokenPayload: JSON.stringify({
+            // optional, sent to your server on upload completion
+            // you could pass a user id from auth, or a value from clientPayload
+          }),
         };
       },
       onUploadCompleted: async ({ blob, tokenPayload }) => {

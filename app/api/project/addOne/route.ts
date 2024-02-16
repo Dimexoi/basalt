@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
-
 import { getServerSession } from "next-auth/next"
+import slugify from "slugify"
+
 import { authOptions } from "@/lib/auth"
 
 import prisma from "@/lib/prisma"
@@ -19,11 +20,16 @@ export async function POST(req: Request) {
     if (session) {
 
         const body = await req.json()
+
+        // console.log(body);
+
         const results = await prisma.project.create({
           data: {
             name: body.name,
             description: body.description,
-            slug: body.slug,
+            slug: slugify(body.name, {
+              lower: true
+            }),
             coverImage: body.images[0].coverImage,
             categoryId: Number(body.categoryId),
             images: {
@@ -32,7 +38,9 @@ export async function POST(req: Request) {
                   {
                     name: image.name,
                     description: image.description,
-                    slug: image.slug,
+                    slug: slugify(image.name, {
+                      lower: true
+                    }),
                     coverImage: image.coverImage,
                     link: image.link
                   }
