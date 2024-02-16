@@ -38,13 +38,14 @@ export default function Welcome() {
                 <div className="flex justify-around items-center md:flex-1">
 
                   <p className="md:text-xl md:tracking-wide md:leading-8 text-justify">
-                    Bienvenue chez Basalt Mobilier PRO, spécialiste du <strong>mobilier professionnel</strong> à La Réunion. Nous vous accompagnons dans la conception, l&apos;équipement, et l&apos;ameublement de votre projet en <em>teck de qualité supérieure</em>. Experts en aménagement d&apos;intérieur, nous créons des espaces exceptionnels pour <strong>restaurants</strong>, <strong>boutiques</strong>, ou <strong>tiny houses</strong>. Basalt Mobilier PRO à Saint-Pierre est votre concepteur de rêves, offrant une expérience complète pour faire de votre établissement un lieu exceptionnel.
+                    Bienvenue chez Basalt Mobilier PRO, spécialiste du <strong>mobilier professionnel</strong> à La Réunion. Nous vous accompagnons dans la conception, l&apos;équipement, et l&apos;ameublement de votre projet en <em>teck de qualité</em>. Experts en aménagement d&apos;intérieur, nous créons des espaces exceptionnels pour <strong>restaurants</strong>, <strong>boutiques</strong>, ou <strong>tiny houses</strong>. Basalt Mobilier PRO à Saint-Pierre est votre concepteur de rêves, offrant une expérience complète pour faire de votre établissement un lieu exceptionnel.
                   </p>
                   
                 </div>
 
-                <div className="flex-1 flex items-center justify-center">
-                  <div className="border w-full h-[70%] md:h-full lg:h-[70%]">
+                <div className=" flex lg:flex-1 items-center justify-center">
+                  <div className="border w-full aspect-video">
+
                     <Carousel/>
                   </div>
                 </div>

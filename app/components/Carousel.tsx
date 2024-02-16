@@ -33,8 +33,8 @@ const Carousel: React.FC = () => {
   };
 
   const getImage = (index: number) => {
-    if (index === 0) return img1
-    else if (index === 1) return img2
+    if (index === 0) return img2
+    else if (index === 1) return img1
     else if (index === 2) return img3
     else return img1
   }
@@ -51,16 +51,19 @@ const Carousel: React.FC = () => {
             index === currentIndex ? 'block opacity-100' : 'hidden opacity-0'
           }`}
         >
-
+        <div className=' relative w-full aspect-video'>
           <Image
             src={getImage(index)}
             alt={`Image de ${project.name}`}
-            sizes={'100vw'}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             fill
             style={{objectFit:"cover"}}
             priority
           />
+
           <p className='absolute bottom-0 bg-gradient-to-t from-black/100 to-black/1 w-full text-center p-4 text-xl'>{project.name}</p>
+        </div>
+
         </Link>
       ))}
       <div onClick={handlePrevSlide} className="flex items-center justify-start absolute left-0 h-full w-[15%] top-0 transition duration-1000 hover:cursor-pointer hover:bg-gradient-to-r hover:from-black/40 hover:to-black/0 ">
