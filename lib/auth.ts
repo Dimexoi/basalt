@@ -11,7 +11,6 @@ export const authOptions: NextAuthOptions  = {
       },
       async authorize (credentials, req) {
         if (typeof credentials !== "undefined") {
-
           const res = await fetch(process.env.NEXTAUTH_URL!+'/api/login', {
             method: 'POST',
             headers: {
@@ -22,8 +21,6 @@ export const authOptions: NextAuthOptions  = {
               password: credentials?.password
             })
           })
-
-          console.error(res);
 
           const user = await res.json();
 
