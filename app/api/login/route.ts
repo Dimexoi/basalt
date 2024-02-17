@@ -10,7 +10,7 @@ interface RequestBody {
 export async function POST(request:Request){
   const body:RequestBody = await request.json();
 
-  console.error('body', body);
+  console.error(body);
 
   const user = await prisma.user.findFirst({
     where:{
@@ -18,7 +18,7 @@ export async function POST(request:Request){
     }
   })
 
-  console.error('user', user);
+  console.error(user);
 
   
   if(user && (await bcrypt.compare(body.password, user.password))){
