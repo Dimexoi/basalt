@@ -9,12 +9,15 @@ interface RequestBody {
 
 export async function POST(request:Request){
   const body:RequestBody = await request.json();
+  console.error(body);
 
   const user = await prisma.user.findFirst({
     where:{
       userName:body.username
     }
   })
+
+  console.error(user);
   
   if(user && (await bcrypt.compare(body.password, user.password))){
     const {password, ... userWithoutPass} = user
