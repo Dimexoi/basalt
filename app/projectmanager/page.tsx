@@ -1,8 +1,5 @@
 'use client'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { type PutBlobResult } from '@vercel/blob'
-import { upload } from '@vercel/blob/client'
 import { setProjectFormName,
   setProjectFormDesc,
   setProjectFormSlug,
@@ -13,20 +10,14 @@ import { setProjectFormName,
   setProjectFormImageSlug,
   addOneProject,
   setProjectFormImageName,
-  uploadImageToServer,
   uploadImageToVercelBlob,
   toggleSendProject,
 } from '@/redux/features/projectSlice'
-// import { setShowMessageModal } from '@/redux/actions/conf'
 
-import styles from './ManageProject.module.scss'
 import Image from 'next/image'
 
-import arrowSvg from '@/public/icons/arrow.svg'
-
-// import ModalMessage from '../ModalMessage'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { setShowMessageModal } from '@/redux/features/displaySlice'
+import { setShowMessageModal, setStatusMessage, toggleStatusMessage } from '@/redux/features/displaySlice'
 import ModalMessage from '../components/ModalMessage'
 import { useEffect } from 'react'
 
@@ -38,13 +29,13 @@ const ProjectManager = () => {
   const {showMessageModal} = useAppSelector(state => state.display.project)
 
   const { name, description, slug, coverImage, categoryId, images, dragIndex  } = projectForm
-  //  const showMessageModal = useSelector(state => state.conf.showMessageModal)
 
   useEffect(() => {
     const fetchAddProject = async () => {
+      dispatch(setStatusMessage('Enregistrement du projet'))
       await dispatch(addOneProject(projectForm))
       dispatch(toggleSendProject())
-      dispatch(setShowMessageModal(true))
+      dispatch(setStatusMessage(null))
     }
 
     if (sendProject) {
@@ -235,7 +226,11 @@ const ProjectManager = () => {
     e.preventDefault()
 
     let index = 0
+
+    dispatch(setShowMessageModal(true))
+
     for (const image of images) {
+      dispatch(setStatusMessage(`Envoie photo ${index + 1} / ${images.length}`))
 
       await dispatch(uploadImageToVercelBlob({image, index}))
       index++
@@ -279,8 +274,6 @@ const ProjectManager = () => {
         </label>
 
         <button type="submit" className=" bg-[#94ccb8] p-2 duration-300 hover:bg-[#5b9782]">Enregistrer</button>
-
-          
 
       </div>
 

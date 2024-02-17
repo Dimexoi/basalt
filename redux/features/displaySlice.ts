@@ -23,7 +23,9 @@ type DisplayState = {
   },
   project: {
     showMessageModal: boolean,
-    showErrorModal: boolean
+    showErrorModal: boolean,
+    statusMessage: null | string
+    showStatusMessage: boolean
   },
   general: {
     currentDate: Date | null
@@ -40,7 +42,9 @@ const initialState = {
   },
   project: {
     showMessageModal: false,
-    showErrorModal: false
+    showErrorModal: false,
+    statusMessage: null,
+    showStatusMessage: false
   },
   general: {
     currentDate: null
@@ -74,6 +78,12 @@ export const display = createSlice({
     },
     setCurrentDate (state, action) {
       state.general.currentDate = action.payload
+    },
+    toggleStatusMessage(state) {
+      state.project.showStatusMessage = !state.project.showStatusMessage
+    },
+    setStatusMessage(state, action) {
+      state.project.statusMessage = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -95,7 +105,9 @@ export const {
   setShowMessageModal,
   setCarouselProjects,
   setCurrentDate,
-  setShowErrorModal
+  setShowErrorModal,
+  setStatusMessage,
+  toggleStatusMessage
 } = display.actions
 
 export const getCarouselProjects = createAsyncThunk(

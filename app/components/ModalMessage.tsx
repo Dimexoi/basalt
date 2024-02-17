@@ -12,6 +12,7 @@ const ModalMessage = ({crudAction} : {crudAction: String}) => {
   const { projectForm } = useAppSelector(state => state.project)
   const { name, description, slug, coverImage, categoryId, images, dragIndex, id  } = projectForm
   const { projects } = useAppSelector(state => state.project)
+  const { statusMessage } = useAppSelector(state => state.display.project)
   const lastProject = projects[projects.length -  1]
 
 
@@ -32,8 +33,12 @@ const ModalMessage = ({crudAction} : {crudAction: String}) => {
             <span> X </span>
             <span>Fermer</span>
           </div>
-          
-          <div className='flex flex-col gap-1 items-center'>
+
+          {statusMessage ? 
+            <p>{statusMessage}</p>
+            :
+            <div>
+              <div className='flex flex-col gap-1 items-center'>
             <span>
               Projet ajouté avec succès
             </span>
@@ -61,6 +66,10 @@ const ModalMessage = ({crudAction} : {crudAction: String}) => {
               Cliquer ici pour voir le nouveau projet
             </span>
           </Link>
+            </div>
+          }
+          
+          
         </div>
       }
 
