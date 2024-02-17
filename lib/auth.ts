@@ -23,17 +23,7 @@ export const authOptions: NextAuthOptions  = {
             })
           })
 
-          console.log('----');
-
-          console.error(res);
-          console.log('----');
-
-
           const user = await res.json();
-          console.log('****');
-          console.error(user);
-          console.log('****');
-
 
           if (typeof user !== "undefined") {
             return user
