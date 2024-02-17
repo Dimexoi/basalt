@@ -164,7 +164,7 @@ const UpdateProject = () => {
             <div className='mb-4 bg-gray-300 p-4 border border-gray-200' key={image.id}>
 
               <Image
-                src={`https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${image.coverImage}`}
+                src={`${image.link ? image.link : `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${image.coverImage}`}`}
                 alt={`Photo ${image.name} de ${projectForm.name}`}
                 sizes='100vw'
                 width={0}

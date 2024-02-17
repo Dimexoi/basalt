@@ -67,11 +67,13 @@ type ProjectState = {
   project: ProjectType
   projectForm: ProjectForm
   result: Result
+  sendProject: boolean
 }
 
 
 const initialState = {
   projects: [],
+  sendProject: false,
   project: {
     id: 0,
     name: '',
@@ -114,45 +116,42 @@ export const project = createSlice({
     setProject(state, action) {
       state.project = action.payload
     },
-   setProjectFormName(state, action) {
-    state.projectForm.name = action.payload
-   },
-   setProjectFormDesc(state, action) {
-    state.projectForm.description = action.payload
-   },
-   setProjectFormSlug(state, action) {
-    state.projectForm.slug = action.payload
-   },
-   setProjectFormCategoryId(state, action) {
-    state.projectForm.categoryId = action.payload
-   },
-   setProjectFormImages(state, action) {
-    state.projectForm.images = action.payload
-   },
-   setProjectFormImageName(state, action) {
-    state.projectForm.images[action.payload.index].name = action.payload.value
-   },
-   setProjectFormImageDesc(state, action) {
-    state.projectForm.images[action.payload.index].description = action.payload.value
-   },
-   setProjectFormImageSlug(state, action) {
-    state.projectForm.images[action.payload.index].slug = action.payload.value
-   },
-   setProjectFormDragIndex(state, action) {
-    state.projectForm.dragIndex = action.payload
-   },
-   setProjectForm(state, action) {
-    state.projectForm = action.payload
-   },
-   setProjectImageLink(state, action) {
-    state.projectForm.images[action.payload.index].link = action.payload.link
-   },
-   removeImageFromProjectForm(state, action) {
-    state.projectForm.images = action.payload
-   },
-   updateImageUrl(state, action) {
-    state.projectForm.images[action.payload.index].link = action.payload.link
-   }
+    setProjectFormName(state, action) {
+      state.projectForm.name = action.payload
+    },
+    setProjectFormDesc(state, action) {
+      state.projectForm.description = action.payload
+    },
+    setProjectFormSlug(state, action) {
+      state.projectForm.slug = action.payload
+    },
+    setProjectFormCategoryId(state, action) {
+      state.projectForm.categoryId = action.payload
+    },
+    setProjectFormImages(state, action) {
+      state.projectForm.images = action.payload
+    },
+    setProjectFormImageName(state, action) {
+      state.projectForm.images[action.payload.index].name = action.payload.value
+    },
+    setProjectFormImageDesc(state, action) {
+      state.projectForm.images[action.payload.index].description = action.payload.value
+    },
+    setProjectFormImageSlug(state, action) {
+      state.projectForm.images[action.payload.index].slug = action.payload.value
+    },
+    setProjectFormDragIndex(state, action) {
+      state.projectForm.dragIndex = action.payload
+    },
+    setProjectForm(state, action) {
+      state.projectForm = action.payload
+    },
+    removeImageFromProjectForm(state, action) {
+      state.projectForm.images = action.payload
+    },
+    toggleSendProject(state) {
+      state.sendProject = !state.sendProject
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -176,8 +175,7 @@ export const project = createSlice({
         state.result.message = action.payload.message
       })
       .addCase(uploadImageToVercelBlob.fulfilled, (state, action) => {
-        console.log(action.payload)
-        state.projectForm.images[action.payload.index].link = action.payload.link
+        state.projectForm.images[action.payload.index] = {...state.projectForm.images[action.payload.index], link: action.payload.link}
       })
       
   }
@@ -194,10 +192,9 @@ export const {
   setProjectFormImageDesc,
   setProjectFormImageSlug,
   setProjectFormImageName,
-  setProjectImageLink,
   removeImageFromProjectForm,
   setProjectForm,
-  updateImageUrl
+  toggleSendProject
 } = project.actions
 
 export const getProjects = createAsyncThunk(
@@ -284,14 +281,7 @@ export const uploadImageToVercelBlob = createAsyncThunk(
     const newBlob = await upload(file.name, file, {
       access: 'public',
       handleUploadUrl: '/api/image/upload',
-    });
-
-    console.log('---------');
-    console.log(newBlob);
-
-    console.log('---------');
-
-
+    })
 
     return {link: newBlob.url, index: imageObj.index}
   

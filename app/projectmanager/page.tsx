@@ -13,10 +13,9 @@ import { setProjectFormName,
   setProjectFormImageSlug,
   addOneProject,
   setProjectFormImageName,
-  setProjectImageLink,
   uploadImageToServer,
   uploadImageToVercelBlob,
-  updateImageUrl
+  toggleSendProject,
 } from '@/redux/features/projectSlice'
 // import { setShowMessageModal } from '@/redux/actions/conf'
 
@@ -29,16 +28,30 @@ import arrowSvg from '@/public/icons/arrow.svg'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setShowMessageModal } from '@/redux/features/displaySlice'
 import ModalMessage from '../components/ModalMessage'
+import { useEffect } from 'react'
 
 const ProjectManager = () => {
 
   const dispatch = useAppDispatch()
 
-  const {projectForm} = useAppSelector(state => state.project)
+  const {projectForm, sendProject} = useAppSelector(state => state.project)
   const {showMessageModal} = useAppSelector(state => state.display.project)
 
   const { name, description, slug, coverImage, categoryId, images, dragIndex  } = projectForm
   //  const showMessageModal = useSelector(state => state.conf.showMessageModal)
+
+  useEffect(() => {
+    const fetchAddProject = async () => {
+      await dispatch(addOneProject(projectForm))
+      dispatch(toggleSendProject())
+      dispatch(setShowMessageModal(true))
+    }
+
+    if (sendProject) {
+      fetchAddProject()
+    }
+
+  }, [dispatch, sendProject, projectForm])
 
   const handleInputChangeName = (e: React.FormEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget
@@ -67,7 +80,7 @@ const ProjectManager = () => {
     dispatch(setProjectFormImageDesc({index, value}))
   }
 
-  const handleInputChangeImgName = (e: React.FormEvent<HTMLInputElement>, index: number) => {
+  const handleInputChangeImgName = (e: React.FormEvent<HTMLTextAreaElement>, index: number) => {
     const { name, value } = e.currentTarget
     let newSlug = value.toLowerCase().replace(/ /g, '-')
     dispatch(setProjectFormImageName({index, value}))
@@ -190,7 +203,7 @@ const ProjectManager = () => {
     e.currentTarget.classList.remove('dragging') 
   }
 
-  const handleClickArrow = (e: React.MouseEvent<HTMLDivElement>, index: string, sens: string) => {
+  const handleClickArrow = (e: React.MouseEvent<HTMLSpanElement>, index: string, sens: string) => {
     e.preventDefault()
     const newPhotos = [...images]
     const dragPhoto = newPhotos[Number(index)]
@@ -218,180 +231,109 @@ const ProjectManager = () => {
     dispatch(setProjectFormImages(newPhotos))
   }
 
-  // const uploadToServer = async (image: File, slug: string, name: string) => {  
-  //   const body = new FormData()
-  //   body.set("file", image)
-  //   body.set("slug", slug)
-  //   body.set("name", name)
-
-  //   const response = await fetch("/api/projectmanager/tobucket", {
-  //     method: "POST",
-  //     body
-  //   })
-
-  //   return response.json()
-  // }
-
-  // const updateImageLink = async (indexNumber: number, fileName: string) => {
-  //   await dispatch(setProjectImageLink({index: indexNumber, link : `https://dimexoi-basalt.s3.eu-west-3.amazonaws.com/${fileName}`}))
-  // }
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     let index = 0
     for (const image of images) {
 
-      const newImage = await dispatch(uploadImageToVercelBlob({image, index}))
+      await dispatch(uploadImageToVercelBlob({image, index}))
       index++
+
     }
     
-    // images.forEach(async (image, index) => {
-    //   const newImage = await dispatch(uploadImageToVercelBlob({image, index}))
-
-    //   if (newImage.payload) {
-    //     console.log('*******');
-    //     console.log(newImage.payload);
-    //     console.log('*******');
-
-    //     dispatch(updateImageUrl({index: newImage.payload.index, link: newImage.payload.link}))
-    //   }
-
-    //   // const newBlob: {url: string}|void = await upload(image.coverImage, image.file, {
-    //   //   access: 'public',
-    //   //   handleUploadUrl: '/api/image/upload',
-    //   // }).then(async ()=> {
-
-    //   //   await dispatch(setProjectImageLink({index, link: newBlob!.url}))
-    //   // });
-
-
-    // })
-    
-    // await images.forEach(async (image, index) => {
-    //   const bucketimage = await uploadToServer(image.file!, slug, image.coverImage)
-    //   await updateImageLink(index, bucketimage.fileName)
-    // })
-    await dispatch(addOneProject(projectForm))
-    dispatch(setShowMessageModal(true))
+    dispatch(toggleSendProject())
   }
 
   return (
-    <form className={styles.manageproject} onSubmit={handleSubmit}>
+    <form className= "flex flex-col lg:flex-row p-2 md:p-4 lg:p-8 lg:h-screen " onSubmit={handleSubmit}>
 
-      <div className={styles.manageproject__firstrow}>
-        <div className={styles.manageproject__firstrow__container}>
+      <div className="flex-1 p-2">
+  
+        <h2 className=" mb-2 text-xl text-center">
+          Informations du projet
+        </h2>
+        <label className="mb-2 hover:cursor-pointer">
+          Catégorie:
+          <select name="category_id" value={categoryId} className='bg-[#94ccb8] border-none border-b w-full p-2 hover:cursor-pointer' onChange={handleInputChangeCategoryId} required>
+            <option value="">-- Choisissez une catégorie --</option>
+            <option value="1">Restaurant</option>
+            <option value="2">Hotel</option>
+            <option value="3">Locations saisonnières</option>
+            <option value="5">Moodboards</option>
+          </select>
+        </label>
+        <label className="mb-2">
+          Nom du projet:
+          <input name="name" type="text" value={name} placeholder='Nom du projet - Obligatoire' className='bg-[#94ccb8] border-none border-b w-full p-2' onChange={handleInputChangeName} required/>
+        </label>
 
-          <div className={styles.manageproject__firstrow__inputs}>
-            <h2 className={styles.manageproject__h2}>
-              Informations du projet
-            </h2>
-            <label className={styles.manageproject__firstrow__inputs__label}>
-              Catégorie:
-              <select name="category_id" value={categoryId} onChange={handleInputChangeCategoryId} required>
-                <option value="">-- Choisissez une catégorie --</option>
-                <option value="1">Restaurant</option>
-                <option value="2">Hotel</option>
-                <option value="3">Locations saisonnières</option>
-                <option value="5">Moodboards</option>
-              </select>
-            </label>
-            <label className={styles.manageproject__firstrow__inputs__label}>
-              Nom du projet:
-              <input name="name" type="text" value={name} placeholder='Nom du projet - Obligatoire' onChange={handleInputChangeName} required/>
-            </label>
+        <label className="mb-2">
+          Description du projet:
+          <textarea name="description" value={description} className='bg-[#94ccb8] border-none border-b w-full p-2' placeholder="Description du projet" onChange={handleInputChangeDesc} rows={10} required/>
+        </label>
 
-            <label className={styles.manageproject__firstrow__inputs__label}>
-              Description du projet:
-              <textarea name="description" value={description} placeholder="Description du projet" onChange={handleInputChangeDesc} rows={10} required/>
-            </label>
+        <label className="flex gap-2 items-center mb-2 bg-[#94ccb8] border-none border-b w-full p-2">
+          Photos:
+          <input name="images" type="file" className='' multiple onChange={handlePhotoUpload} required/>
+        </label>
 
-            <label className={styles.manageproject__firstrow__inputs__label}>
-              Photos:
-              <input name="images" type="file" multiple onChange={handlePhotoUpload} required/>
-            </label>
+        <button type="submit" className=" bg-[#94ccb8] p-2 duration-300 hover:bg-[#5b9782]">Enregistrer</button>
 
-            <button type="submit" className={styles.manageproject__firstrow__inputs__button}>Enregistrer</button>
-          </div>
-
-          <div className={styles.manageproject__firstrow__side}>
-            <h2 className={styles.manageproject__h2}>Image de couverture</h2>
-            <div className={styles.manageproject__firstrow__side__covercontainer}>
-              {images[0] &&
-                <Image
-                height="0"
-                width="0"
-                sizes="100vw"
-                style={{ height: "100%", width: 'auto'}}
-                src={URL.createObjectURL(images[0].file!)}
-                alt={`Photo ${images[0].file!.name}`}
-                />
-              }
-            </div>
-          </div>
           
-        </div>
+
       </div>
 
-      <div className={styles.manageproject__secondrow}>
+      <div className=" flex-1 flex flex-col gap-8 overflow-y-scroll">
         {images.map((image, index) => (
-          <div className={styles.manageproject__secondrow__thumbnailcontainer} key={index}>
-            <Image
-              className={`
-                ${styles.manageproject__secondrow__thumbnailcontainer__arrow}
-              `}
-              alt='arrow icon'
-              src={arrowSvg}
-              width={50}
-              height={50}
-              onClick={(e) => handleClickArrow(e, String(index), 'pos')}
-            />
-            
-            <div className={styles.manageproject__secondrow__thumbnailcontainer__imgcontainer}>
-
-              <div
-                className={`${styles.manageproject__secondrow__thumbnailcontainer__thumbnail} ${dragIndex === index ? styles.manageproject__secondrow__thumbnailcontainer__dragging : ''} `}
-                key={image.id}
-                draggable
-                onDragStart={(e) => handlePhotoDragStart(e, String(index))}
-                onDrop={(e) => handlePhotoDrop(e, String(index))}
-                onDragOver={handlePhotoDragOver}
-                onTouchStart={(e) => handleTouchStart(e, String(index))}
-                onTouchMove={(e) =>handleTouchMove(e, String(index))}
-                onTouchEnd={(e) => handleTouchEnd(e, String(index))}
-              >
-                <Image
-                  className={styles.manageproject__secondrow__thumbnailcontainer__thumbnail__img}
-                  height="0"
-                  width="0"
-                  sizes="100vw"
-                  
-                  src={URL.createObjectURL(image.file!)}
-                  alt={`Photo ${index}`}
-                />
-              </div>
-              <p onClick={(e) => handleClickDelete(e, String(index))} className='text-center text-red-500 border border-red-500 p-1'>Supprimer photo</p>
-
-              <div className='w-full'>
-                <input name="imagetitle" type="text" value={image.name} placeholder="Titre de la photo - obligatoire" onChange={(e) => handleInputChangeImgName(e, index)} className='w-full p-2 text-black' required/>
+          <div className={ ` w-full  p-2 ${index === 0 ? 'bg-blue-400' : 'bg-blue-200' }`} key={index}>
+            {index === 0 ? <p className='text-lg text-center border mb-2 bg-violet-600 text-white p-2'>Image de couverture</p> : null}
+            <div className="flex flex-col md:flex-row w-full mb-2 ">
+              <div className='w-full md:w-3/6 mb-2'>
+                <div
+                  className=' relative w-full aspect-square mb-2'
+                  key={image.id}
+                >
+                  <Image         
+                    src={URL.createObjectURL(image.file!)}
+                    alt={`Photo ${index}`}
+                    fill
+                    style={{'objectFit':'cover'}}
+                  />
+                </div>
+                <p
+                  onClick={(e) => handleClickDelete(e, String(index))}
+                  className='text-center text-red-500 border border-red-500 bg-red-300 p-1 hover:font-semibold hover:cursor-pointer duration-300'
+                >
+                  Supprimer photo
+                </p>
               </div>
 
-              <div className='w-full'>
-                <textarea name="imagedesc" value={image.description} placeholder="Description de la photo - facultatif" onChange={(e) => handleInputChangeImgDesc(e, index)} rows={10} className='w-full p-2 text-black'/>
+              <div className='w-full md:w-3/6 p-2'>
+
+                <div className='w-full mb-2'>
+                  <textarea name="imagetitle" value={image.name} placeholder="Texte de la photo - obligatoire" onChange={(e) => handleInputChangeImgName(e, index)} className='w-full p-2 text-black border bg-gray-200' required/>
+                </div>
+
+                <div className='flex gap-2 md:gap-3 lg:gap-4'>
+                  <div onClick={(e) => handleClickArrow(e, String(index), 'pos')} className='flex-1 flex flex-col border border-dashed border-black items-center hover:cursor-pointer hover:bg-black/50 duration-400'>
+                    <span className='text-lg'>⬇️</span>
+                    <span className='text-center'>Déplacer image vers le bas</span>
+                  </div>
+                  <div onClick={(e) => handleClickArrow(e, String(index), 'neg')} className='flex-1 flex flex-col border border-dashed border-black items-center hover:cursor-pointer hover:bg-black/50 duration-400'>
+                    <span className='text-lg'>⬆️</span>
+                    <span className='text-center'>Déplacer image vers le haut</span>
+                  </div>
+
+     
+
+                </div>
+
               </div>
+
           
             </div>
-            <Image
-              className={`
-                ${styles.manageproject__secondrow__thumbnailcontainer__arrow}
-                ${styles.manageproject__secondrow__thumbnailcontainer__lastarrow}
-              `}
-              alt= 'arrow icon'
-              src={arrowSvg}
-              width={50}
-              height={50}
-              onClick={(e) => handleClickArrow(e, String(index), 'neg')}
-            />
+            
           </div>
         ))}
       </div>
