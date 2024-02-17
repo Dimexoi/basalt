@@ -11,9 +11,6 @@ export const authOptions: NextAuthOptions  = {
       },
       async authorize (credentials, req) {
         if (typeof credentials !== "undefined") {
-          console.error(process.env.NEXTAUTH_URL)
-          console.error('username', credentials?.username,)
-          console.error('userpass', credentials?.password,)
 
           const res = await fetch(process.env.NEXTAUTH_URL!+'/api/login', {
             method: 'POST',
@@ -26,9 +23,17 @@ export const authOptions: NextAuthOptions  = {
             })
           })
 
-          console.warn(res);
+          console.log('----');
+
+          console.error(res);
+          console.log('----');
+
 
           const user = await res.json();
+          console.log('****');
+          console.error(user);
+          console.log('****');
+
 
           if (typeof user !== "undefined") {
             return user
