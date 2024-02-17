@@ -144,7 +144,6 @@ const ProjectManager = () => {
       newPhotos[Number(index)].originY = touch.clientY
       newPhotos[Number(index)].currentY = touch.clientY
       
-
       return newPhotos
     }
     
