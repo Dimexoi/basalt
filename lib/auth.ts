@@ -23,6 +23,8 @@ export const authOptions: NextAuthOptions  = {
             })
           })
 
+          console.error(res);
+
           const user = await res.json();
 
           if (typeof user !== "undefined") {
