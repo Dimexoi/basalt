@@ -51,7 +51,6 @@ export async function POST(req: Request) {
     } else {
       return NextResponse.json({ error: "Not signed in"}, {status: 401});
     }
-    
 
   } catch (err) {
     console.log(err)
